@@ -221,10 +221,199 @@
   .add-widget-btn .plus { font-size: 2rem; line-height: 1; }
   .add-widget-btn .label { font-size: 0.8rem; }
 
+  /* ── GolfBooker Form ── */
+  .gb-form-group { margin-bottom: 16px; }
+  .gb-form-group label {
+    display: block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .gb-input, .gb-select {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 0.85rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .gb-input:focus, .gb-select:focus { border-color: var(--accent); }
+  .gb-input::placeholder { color: var(--muted); }
+  .gb-select option { background: var(--surface); color: var(--text); }
+  .gb-drop-info {
+    margin-top: 6px;
+    font-size: 0.78rem;
+    color: var(--cyan);
+    padding: 8px 12px;
+    background: rgba(6,182,212,0.08);
+    border-radius: 6px;
+    display: none;
+  }
+  .gb-drop-info.visible { display: block; }
+  .gb-foursome {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .gb-foursome-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .gb-foursome-title { font-size: 0.82rem; font-weight: 600; }
+  .gb-foursome-remove {
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 0.85rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: all 0.15s;
+    font-family: inherit;
+  }
+  .gb-foursome-remove:hover { color: var(--red); background: rgba(239,68,68,0.1); }
+  .gb-foursome-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .gb-time-presets { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .gb-time-preset {
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--muted);
+    font-size: 0.72rem;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .gb-time-preset:hover { border-color: var(--accent); color: var(--text); }
+  .gb-time-preset.active { border-color: var(--accent); background: rgba(59,130,246,0.12); color: var(--accent); }
+  .gb-player-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 8px;
+    min-height: 24px;
+  }
+  .gb-player-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    background: rgba(59,130,246,0.12);
+    color: var(--accent);
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  .gb-player-tag button {
+    background: none; border: none; color: var(--accent);
+    cursor: pointer; font-size: 0.8rem; padding: 0 2px; line-height: 1;
+  }
+  .gb-player-tag button:hover { color: var(--red); }
+  .gb-autocomplete-wrap { position: relative; }
+  .gb-autocomplete-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    max-height: 180px;
+    overflow-y: auto;
+    z-index: 50;
+    display: none;
+    margin-top: 2px;
+  }
+  .gb-autocomplete-list.open { display: block; }
+  .gb-autocomplete-item {
+    padding: 8px 12px;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  .gb-autocomplete-item:hover,
+  .gb-autocomplete-item.highlighted { background: rgba(59,130,246,0.1); color: var(--accent); }
+  .gb-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .gb-btn-primary { background: var(--accent); color: #fff; }
+  .gb-btn-primary:hover { background: #2563eb; }
+  .gb-btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+  .gb-btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--text); }
+  .gb-btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+  .gb-btn-danger {
+    background: transparent;
+    border: 1px solid rgba(239,68,68,0.3);
+    color: var(--red);
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+  .gb-btn-danger:hover { background: rgba(239,68,68,0.1); }
+  .gb-booking-item {
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background: var(--surface);
+  }
+  .gb-booking-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .gb-booking-date { font-weight: 600; font-size: 0.9rem; }
+  .gb-booking-foursome-detail {
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.78rem;
+  }
+  .gb-booking-foursome-detail:last-child { border-bottom: none; }
+  .gb-auth-banner {
+    padding: 12px 16px;
+    background: rgba(234,179,8,0.08);
+    border: 1px solid rgba(234,179,8,0.2);
+    border-radius: 8px;
+    color: var(--yellow);
+    font-size: 0.82rem;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .gb-empty {
+    text-align: center;
+    padding: 24px;
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
   @media (max-width: 700px) {
     .grid, .widget-grid { grid-template-columns: 1fr; }
     .card.span2, .card.wide { grid-column: 1; }
     .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .gb-foursome-row { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -545,11 +734,26 @@
     </div>
 
     <div class="card">
-      <h2>🖥️ Host</h2>
+      <h2>🖥️ Host & Updates</h2>
       <div class="stat-row"><span class="stat-label">Machine</span><span class="stat-value">Mac Studio (arm64)</span></div>
       <div class="stat-row"><span class="stat-label">macOS</span><span class="stat-value">26.2</span></div>
       <div class="stat-row"><span class="stat-label">Node</span><span class="stat-value">25.6.1</span></div>
-      <div class="stat-row"><span class="stat-label">OpenClaw</span><span class="stat-value">2026.2.23 <span class="pill pill-warn">→ 2.26</span></span></div>
+      <div style="margin-top:16px; padding:14px; background:rgba(234,179,8,0.06); border:1px solid rgba(234,179,8,0.2); border-radius:8px;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+          <span style="font-size:1.1rem;">⬆️</span>
+          <span style="font-weight:700; font-size:0.9rem;">Update Available</span>
+          <span class="pill pill-warn">new</span>
+        </div>
+        <div class="stat-row"><span class="stat-label">Current</span><span class="stat-value">2026.2.26</span></div>
+        <div class="stat-row"><span class="stat-label">Latest</span><span class="stat-value" style="color:var(--green);">2026.3.1</span></div>
+        <div class="stat-row"><span class="stat-label">Channel</span><span class="stat-value">stable</span></div>
+        <div class="stat-row"><span class="stat-label">Versions since</span><span class="stat-value">2026.3.1-beta.1 → 2026.3.1</span></div>
+        <div style="margin-top:12px; display:flex; gap:8px;">
+          <button onclick="triggerUpdate()" id="update-btn" style="flex:1; padding:10px; background:var(--green); color:#000; border:none; border-radius:8px; font-size:0.82rem; font-weight:600; cursor:pointer; font-family:inherit; transition:all 0.15s;">🚀 Update Now</button>
+          <button onclick="viewChangelog()" style="flex:1; padding:10px; background:rgba(255,255,255,0.06); color:var(--text); border:1px solid var(--border); border-radius:8px; font-size:0.82rem; cursor:pointer; font-family:inherit;">📋 Changelog</button>
+        </div>
+        <div id="update-status" style="margin-top:10px; font-size:0.72rem; color:var(--muted); display:none;"></div>
+      </div>
     </div>
 
     <div class="card">
@@ -761,6 +965,39 @@ daily.forEach(d => {
 
 // ── Init Home ──
 renderHome();
+
+function triggerUpdate() {
+  const btn = document.getElementById("update-btn");
+  const status = document.getElementById("update-status");
+  btn.disabled = true;
+  btn.style.opacity = "0.5";
+  btn.textContent = "⏳ Updating...";
+  status.style.display = "block";
+  status.innerHTML = "Sending update command to OpenClaw gateway...";
+  
+  /* Call the local OpenClaw webhook on the Mac Studio */
+  fetch("https://ryandauzet.com/api/update", { method: "POST", credentials: "same-origin" })
+    .then(r => r.json())
+    .then(d => {
+      if (d.ok) {
+        btn.style.background = "var(--green)";
+        btn.textContent = "✅ Update triggered!";
+        status.innerHTML = "Update command sent. OpenClaw will restart automatically. Check back in ~30s.";
+      } else {
+        throw new Error(d.error || "Unknown error");
+      }
+    })
+    .catch(e => {
+      btn.textContent = "❌ Failed";
+      btn.style.background = "var(--red)";
+      status.innerHTML = "Could not reach gateway: " + e.message + "<br>Run manually: <code>npm update -g openclaw \&\& openclaw gateway restart</code>";
+      setTimeout(() => { btn.disabled = false; btn.style.opacity = "1"; btn.textContent = "🚀 Update Now"; btn.style.background = "var(--green)"; }, 5000);
+    });
+}
+
+function viewChangelog() {
+  window.open("https://github.com/openclaw/openclaw/releases", "_blank");
+}
 </script>
 </body>
 </html>
