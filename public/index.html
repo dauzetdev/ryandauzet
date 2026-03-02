@@ -690,6 +690,16 @@
       </div>
     </div>
 
+    <div class="card wide">
+      <h2>🔴 Live Sessions <span id="session-status" class="pill pill-idle">loading...</span> <button onclick="fetchSessions()" style="margin-left:auto;background:none;border:1px solid var(--border);color:var(--muted);padding:3px 10px;border-radius:6px;font-size:0.68rem;cursor:pointer;font-family:inherit;">↻ Refresh</button></h2>
+      <div id="sessions-list" style="font-size:0.8rem; color:var(--muted);">Connecting to gateway...</div>
+      <div style="margin-top:12px; padding:12px; background:rgba(255,255,255,0.02); border-radius:8px;" id="reboot-check">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span id="reboot-icon" style="font-size:1.2rem;">⏳</span>
+          <span id="reboot-text" style="font-size:0.82rem; font-weight:600;">Checking if safe to reboot...</span>
+        </div>
+      </div>
+    </div>
     <div class="card">
       <h2>📡 Channels</h2>
       <div class="row-item"><div class="dot dot-green"></div><span style="font-size:0.82rem;">Discord</span><span class="pill pill-ok" style="margin-left:auto;">OK</span></div>
@@ -947,6 +957,63 @@ daily.forEach(d => {
 
 // ── Init Home ──
 renderHome();
+
+async function fetchSessions() {
+  const list = document.getElementById("sessions-list");
+  const status = document.getElementById("session-status");
+  const icon = document.getElementById("reboot-icon");
+  const text = document.getElementById("reboot-text");
+  try {
+    const res = await fetch("/api/sessions", { credentials: "same-origin" });
+    if (!res.ok) throw new Error("API " + res.status);
+    const data = await res.json();
+    const sessions = data.sessions || data || [];
+    const active = Array.isArray(sessions) ? sessions : [];
+    const now = Date.now();
+    const recent = active.filter(s => (now - (s.updatedAt || 0)) < 300000);
+    
+    if (recent.length === 0) {
+      list.innerHTML = "<div style=\"color:var(--muted);padding:8px 0;\">No active sessions in the last 5 minutes</div>";
+      status.className = "pill pill-idle";
+      status.textContent = "quiet";
+      icon.textContent = "✅";
+      text.textContent = "Safe to reboot — no active sessions";
+      text.style.color = "var(--green)";
+    } else {
+      status.className = "pill pill-ok";
+      status.textContent = recent.length + " active";
+      let html = "";
+      recent.forEach(s => {
+        const name = s.displayName || s.key || "unknown";
+        const tokens = s.totalTokens ? (s.totalTokens/1000).toFixed(0) + "k" : "—";
+        const model = s.model || "—";
+        const ago = Math.round((now - s.updatedAt) / 60000);
+        html += "<div class=\"row-item\"><div class=\"dot dot-green\"></div>";
+        html += "<span style=\"font-size:0.8rem;\">" + name + "</span>";
+        html += "<span class=\"stat-label\" style=\"margin-left:auto;\">" + model + " · " + tokens + " tokens · " + ago + "m ago</span></div>";
+      });
+      list.innerHTML = html;
+      icon.textContent = "⚠️";
+      text.textContent = "Reboot would interrupt " + recent.length + " active session(s)";
+      text.style.color = "var(--yellow)";
+    }
+  } catch (e) {
+    list.innerHTML = "<div style=\"color:var(--red);\">Could not reach gateway: " + e.message + "</div>";
+    status.className = "pill pill-error";
+    status.textContent = "offline";
+    icon.textContent = "❓";
+    text.textContent = "Cannot determine — gateway unreachable";
+    text.style.color = "var(--muted)";
+  }
+}
+
+// Auto-fetch sessions when OpenClaw tab is shown
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    if (btn.dataset.tab === "openclaw") setTimeout(fetchSessions, 100);
+  });
+});
+
 
 function triggerUpdate() {
   const btn = document.getElementById("update-btn");
