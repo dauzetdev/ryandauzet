@@ -553,56 +553,38 @@
 <!-- ════════════════════════════════════════════════ -->
 <div class="page" id="page-golfbooker">
   <h1 style="font-size:1.3rem; margin-bottom:4px;">📅 GolfBooker</h1>
-  <div style="font-size:0.78rem; color:var(--muted); margin-bottom:20px;">Automated tee-time booking — browser automation</div>
+  <div style="font-size:0.78rem; color:var(--muted); margin-bottom:20px;">Automated tee-time booking manager</div>
+
+  <div id="gb-auth-banner" class="gb-auth-banner" style="display:none;">Connecting to Firebase...</div>
 
   <div class="grid">
-    <div class="card">
-      <h2>🖥️ App Info</h2>
-      <div class="stat-row"><span class="stat-label">App</span><span class="stat-value">/Applications/GolfBooker.app</span></div>
-      <div class="stat-row"><span class="stat-label">Source</span><span class="stat-value">/Users/dauzet/GolfBooker</span></div>
-      <div class="stat-row"><span class="stat-label">Core</span><span class="stat-value">Swift + BrowserService.swift</span></div>
-      <div class="stat-row"><span class="stat-label">Migration</span><span class="stat-value"><span class="pill pill-warn">planned → Chrome automation</span></span></div>
+    <!-- ── Booking Request Form ── -->
+    <div class="card span2">
+      <h2>🆕 New Booking Request</h2>
+      <form id="gb-form" autocomplete="off">
+        <div class="gb-form-group">
+          <label for="gb-target-date">Target Play Date</label>
+          <input type="date" id="gb-target-date" class="gb-input" />
+          <div id="gb-drop-info" class="gb-drop-info"></div>
+        </div>
+
+        <div class="gb-form-group">
+          <label>Foursomes</label>
+          <div id="gb-foursomes"></div>
+          <button type="button" id="gb-add-foursome" class="gb-btn gb-btn-secondary" style="margin-top:8px;">+ Add Foursome</button>
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:20px;">
+          <button type="submit" id="gb-submit" class="gb-btn gb-btn-primary" disabled>Schedule Booking</button>
+        </div>
+      </form>
     </div>
-    <div class="card">
-      <h2>🎯 Active Bookings</h2>
-      <div class="stat-row">
-        <span class="stat-label">Delilah Las Vegas</span>
-        <span class="stat-value"><span class="pill pill-blue">Aug 8, 2026</span></span>
-      </div>
-      <div class="cron-detail" style="padding:8px 0;">
-        6 PM, party of 4 · SevenRooms · ~63-day rolling window<br>
-        Drop time: ~5:30–6:00 AM PT · Closed Mondays & Sundays
-      </div>
-      <div class="stat-row">
-        <span class="stat-label">Din Tai Fung</span>
-        <span class="stat-value"><span class="pill pill-purple">Mar 29, 2026</span></span>
-      </div>
-      <div class="cron-detail" style="padding:8px 0;">
-        6 PM, party of 2 · Yelp Reservations · ~30-day window
-      </div>
-    </div>
-    <div class="card">
-      <h2>⏰ Booking Crons</h2>
-      <div class="cron-item">
-        <div style="display:flex; gap:8px; align-items:center;">
-          <span class="cron-name">delilah-recon</span>
-          <span class="pill pill-ok">ok</span>
-        </div>
-        <div class="cron-detail">Every 6h · Monitors SevenRooms availability</div>
-      </div>
-      <div class="cron-item">
-        <div style="display:flex; gap:8px; align-items:center;">
-          <span class="cron-name">dtf-drop-time-detector</span>
-          <span class="pill pill-ok">ok</span>
-        </div>
-        <div class="cron-detail">Every 2h · Scouts Yelp for new availability</div>
-      </div>
-      <div class="cron-item">
-        <div style="display:flex; gap:8px; align-items:center;">
-          <span class="cron-name">dtf-march29-monitor</span>
-          <span class="pill pill-ok">ok</span>
-        </div>
-        <div class="cron-detail">Every 6h · Watches for March 29 opening</div>
+
+    <!-- ── Booking Requests List ── -->
+    <div class="card span2">
+      <h2>📋 Booking Requests</h2>
+      <div id="gb-bookings-list">
+        <div class="gb-empty">Sign in to view bookings</div>
       </div>
     </div>
   </div>
@@ -997,6 +979,369 @@ function triggerUpdate() {
 
 function viewChangelog() {
   window.open("https://github.com/openclaw/openclaw/releases", "_blank");
+}
+</script>
+
+<!-- ── Firebase SDK ── -->
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, onSnapshot, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+
+// ── Firebase Config ──
+const app = initializeApp({
+  apiKey: 'AIzaSyD_oA0v7g750449MFwd-ygfMSYTDtQtLb8',
+  authDomain: 'golfbooker-6f274.firebaseapp.com',
+  projectId: 'golfbooker-6f274',
+  storageBucket: 'golfbooker-6f274.firebasestorage.app',
+  appId: '1:1:web:1'
+});
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// ── Player Roster ──
+const PLAYERS = [
+  'Adrian Sosa','Alan Kirchick','Ali Miri','Andrew Buchanan','Anthony McGrogan',
+  'Ashton Dauzet','Ben Stein','Brian Kenyon','Cary Law','Casey Dauzet',
+  'Chris DelVillaggio','Clay Johnson','Edward Sramaty','Eric Kirchick','Jeff Ramirez',
+  'Jerry Chi','John Clark','John Domingue','Katrine Davie','Kennedy Dauzet',
+  'Kim D\'Angelo','Michael Gilley','Michael Trudeau','Mike Saviage','Oliver Landine',
+  'Paul Ludgate','Peter Contini','Peter Davie','Randy Zimmer','Ryan Dauzet',
+  'Ryan Faries','Sean Meeks','Tim D\'Angelo','Tony Cannestra'
+];
+
+// ── Accounts ──
+const ACCOUNTS = [
+  { value: 'rdauzet', label: 'Ryan (rdauzet)' },
+  { value: 'jerrychi', label: 'Jerry (jerrychi)' },
+  { value: '00452', label: 'Ben (00452)' },
+  { value: 'cdauzet', label: 'Casey (cdauzet)' }
+];
+
+const TIME_PRESETS = ['8:10 AM','8:20 AM','8:30 AM','9:30 AM','9:40 AM'];
+
+// ── State ──
+let currentUser = null;
+let foursomes = [];
+let unsubBookings = null;
+
+// ── DOM refs ──
+const authBanner = document.getElementById('gb-auth-banner');
+const form = document.getElementById('gb-form');
+const submitBtn = document.getElementById('gb-submit');
+const dateInput = document.getElementById('gb-target-date');
+const dropInfo = document.getElementById('gb-drop-info');
+const foursomesContainer = document.getElementById('gb-foursomes');
+const addFoursomeBtn = document.getElementById('gb-add-foursome');
+const bookingsList = document.getElementById('gb-bookings-list');
+
+// ── Auth ──
+onAuthStateChanged(auth, user => {
+  if (user) {
+    currentUser = user;
+    authBanner.style.display = 'none';
+    submitBtn.disabled = false;
+    listenBookings();
+  } else {
+    authBanner.textContent = 'Signing in...';
+    authBanner.style.display = 'block';
+    signInWithEmailAndPassword(auth, 'rdauzet@gmail.com', 'F@1rn3ss')
+      .catch(err => {
+        authBanner.textContent = 'Auth failed: ' + err.message;
+      });
+  }
+});
+
+// ── Drop Date Calculation ──
+dateInput.addEventListener('change', () => {
+  const val = dateInput.value;
+  if (!val) { dropInfo.classList.remove('visible'); return; }
+  const target = new Date(val + 'T00:00:00');
+  const drop = new Date(target);
+  drop.setDate(drop.getDate() - 8);
+  const dropStr = drop.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+  dropInfo.textContent = 'Drop: ' + dropStr + ' at 7:00 PM PST';
+  dropInfo.classList.add('visible');
+});
+
+// ── Foursome Management ──
+function addFoursome() {
+  if (foursomes.length >= 4) return;
+  const id = Date.now();
+  foursomes.push({ id, account: 'rdauzet', targetTime: '8:10 AM', customTime: '', players: [] });
+  renderFoursomes();
+}
+
+function removeFoursome(id) {
+  foursomes = foursomes.filter(f => f.id !== id);
+  renderFoursomes();
+}
+
+function renderFoursomes() {
+  foursomesContainer.innerHTML = '';
+  addFoursomeBtn.style.display = foursomes.length >= 4 ? 'none' : '';
+  foursomes.forEach((fs, idx) => {
+    const el = document.createElement('div');
+    el.className = 'gb-foursome';
+    el.innerHTML = `
+      <div class="gb-foursome-header">
+        <span class="gb-foursome-title">Foursome ${idx + 1}</span>
+        ${foursomes.length > 1 ? `<button type="button" class="gb-foursome-remove" data-id="${fs.id}">Remove</button>` : ''}
+      </div>
+      <div class="gb-foursome-row">
+        <div class="gb-form-group" style="margin-bottom:0;">
+          <label>Account</label>
+          <select class="gb-select gb-account-select" data-id="${fs.id}">
+            ${ACCOUNTS.map(a => `<option value="${a.value}" ${a.value === fs.account ? 'selected' : ''}>${a.label}</option>`).join('')}
+          </select>
+        </div>
+        <div class="gb-form-group" style="margin-bottom:0;">
+          <label>Target Time</label>
+          <input type="text" class="gb-input gb-time-input" data-id="${fs.id}" value="${fs.targetTime}" placeholder="e.g. 8:10 AM" />
+          <div class="gb-time-presets">
+            ${TIME_PRESETS.map(t => `<button type="button" class="gb-time-preset ${t === fs.targetTime ? 'active' : ''}" data-id="${fs.id}" data-time="${t}">${t}</button>`).join('')}
+          </div>
+        </div>
+      </div>
+      <div class="gb-form-group" style="margin-bottom:0;">
+        <label>Players (up to 4)</label>
+        <div class="gb-player-tags" data-id="${fs.id}">
+          ${fs.players.map(p => `<span class="gb-player-tag">${p}<button type="button" data-id="${fs.id}" data-player="${p}">&times;</button></span>`).join('')}
+        </div>
+        ${fs.players.length < 4 ? `
+          <div class="gb-autocomplete-wrap">
+            <input type="text" class="gb-input gb-player-input" data-id="${fs.id}" placeholder="Search players..." />
+            <div class="gb-autocomplete-list" data-id="${fs.id}"></div>
+          </div>
+        ` : ''}
+      </div>
+    `;
+    foursomesContainer.appendChild(el);
+  });
+  bindFoursomeEvents();
+}
+
+function bindFoursomeEvents() {
+  // Remove foursome
+  document.querySelectorAll('.gb-foursome-remove').forEach(btn => {
+    btn.addEventListener('click', () => removeFoursome(Number(btn.dataset.id)));
+  });
+  // Account select
+  document.querySelectorAll('.gb-account-select').forEach(sel => {
+    sel.addEventListener('change', () => {
+      const fs = foursomes.find(f => f.id === Number(sel.dataset.id));
+      if (fs) fs.account = sel.value;
+    });
+  });
+  // Time input
+  document.querySelectorAll('.gb-time-input').forEach(inp => {
+    inp.addEventListener('input', () => {
+      const fs = foursomes.find(f => f.id === Number(inp.dataset.id));
+      if (fs) {
+        fs.targetTime = inp.value;
+        // Clear active presets for this foursome
+        inp.closest('.gb-form-group').querySelectorAll('.gb-time-preset').forEach(p => p.classList.remove('active'));
+        const match = inp.closest('.gb-form-group').querySelector(`.gb-time-preset[data-time="${inp.value}"]`);
+        if (match) match.classList.add('active');
+      }
+    });
+  });
+  // Time presets
+  document.querySelectorAll('.gb-time-preset').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const fs = foursomes.find(f => f.id === Number(btn.dataset.id));
+      if (fs) {
+        fs.targetTime = btn.dataset.time;
+        const input = btn.closest('.gb-form-group').querySelector('.gb-time-input');
+        input.value = btn.dataset.time;
+        btn.closest('.gb-time-presets').querySelectorAll('.gb-time-preset').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+      }
+    });
+  });
+  // Remove player
+  document.querySelectorAll('.gb-player-tag button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const fs = foursomes.find(f => f.id === Number(btn.dataset.id));
+      if (fs) {
+        fs.players = fs.players.filter(p => p !== btn.dataset.player);
+        renderFoursomes();
+      }
+    });
+  });
+  // Player autocomplete
+  document.querySelectorAll('.gb-player-input').forEach(inp => {
+    const fsId = Number(inp.dataset.id);
+    const list = inp.parentElement.querySelector('.gb-autocomplete-list');
+    let hlIdx = -1;
+
+    inp.addEventListener('input', () => {
+      const val = inp.value.toLowerCase().trim();
+      const fs = foursomes.find(f => f.id === fsId);
+      if (!val || !fs) { list.classList.remove('open'); return; }
+      const allSelected = foursomes.flatMap(f => f.players);
+      const matches = PLAYERS.filter(p => !allSelected.includes(p) && p.toLowerCase().includes(val));
+      if (!matches.length) { list.classList.remove('open'); return; }
+      hlIdx = -1;
+      list.innerHTML = matches.map((p, i) => `<div class="gb-autocomplete-item" data-player="${p}" data-idx="${i}">${p}</div>`).join('');
+      list.classList.add('open');
+      list.querySelectorAll('.gb-autocomplete-item').forEach(item => {
+        item.addEventListener('click', () => selectPlayer(fsId, item.dataset.player));
+        item.addEventListener('mouseenter', () => {
+          hlIdx = Number(item.dataset.idx);
+          highlightItem(list, hlIdx);
+        });
+      });
+    });
+
+    inp.addEventListener('keydown', e => {
+      const items = list.querySelectorAll('.gb-autocomplete-item');
+      if (!items.length) return;
+      if (e.key === 'ArrowDown') { e.preventDefault(); hlIdx = Math.min(hlIdx + 1, items.length - 1); highlightItem(list, hlIdx); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); hlIdx = Math.max(hlIdx - 1, 0); highlightItem(list, hlIdx); }
+      else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (hlIdx >= 0 && items[hlIdx]) selectPlayer(fsId, items[hlIdx].dataset.player);
+      }
+      else if (e.key === 'Escape') { list.classList.remove('open'); }
+    });
+
+    inp.addEventListener('blur', () => { setTimeout(() => list.classList.remove('open'), 150); });
+  });
+}
+
+function highlightItem(list, idx) {
+  list.querySelectorAll('.gb-autocomplete-item').forEach((el, i) => {
+    el.classList.toggle('highlighted', i === idx);
+    if (i === idx) el.scrollIntoView({ block: 'nearest' });
+  });
+}
+
+function selectPlayer(fsId, playerName) {
+  const fs = foursomes.find(f => f.id === fsId);
+  if (fs && fs.players.length < 4 && !fs.players.includes(playerName)) {
+    fs.players.push(playerName);
+    renderFoursomes();
+  }
+}
+
+addFoursomeBtn.addEventListener('click', addFoursome);
+
+// Start with one foursome
+addFoursome();
+
+// ── Form Submit ──
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  if (!currentUser || !dateInput.value || !foursomes.length) return;
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Saving...';
+
+  const target = new Date(dateInput.value + 'T00:00:00');
+  const drop = new Date(target);
+  drop.setDate(drop.getDate() - 8);
+
+  const ownerMap = { rdauzet: 'Ryan', jerrychi: 'Jerry', '00452': 'Ben', cdauzet: 'Casey' };
+
+  const docData = {
+    userId: currentUser.uid,
+    targetDate: dateInput.value,
+    dropDate: drop.toISOString().split('T')[0],
+    dropTime: '19:00',
+    status: 'scheduled',
+    foursomes: foursomes.map(fs => ({
+      account: fs.account,
+      accountOwner: ownerMap[fs.account] || fs.account,
+      targetTime: fs.targetTime,
+      players: [...fs.players]
+    })),
+    results: [],
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp()
+  };
+
+  try {
+    await addDoc(collection(db, 'bookingRequests'), docData);
+    // Reset form
+    dateInput.value = '';
+    dropInfo.classList.remove('visible');
+    foursomes = [];
+    addFoursome();
+    submitBtn.textContent = 'Schedule Booking';
+    submitBtn.disabled = false;
+  } catch (err) {
+    alert('Error saving booking: ' + err.message);
+    submitBtn.textContent = 'Schedule Booking';
+    submitBtn.disabled = false;
+  }
+});
+
+// ── Listen for Bookings ──
+function listenBookings() {
+  if (unsubBookings) unsubBookings();
+  const q = query(collection(db, 'bookingRequests'), orderBy('createdAt', 'desc'));
+  unsubBookings = onSnapshot(q, snapshot => {
+    renderBookings(snapshot.docs.map(d => ({ id: d.id, ...d.data() })));
+  }, err => {
+    bookingsList.innerHTML = `<div class="gb-empty">Error loading bookings: ${err.message}</div>`;
+  });
+}
+
+function renderBookings(bookings) {
+  if (!bookings.length) {
+    bookingsList.innerHTML = '<div class="gb-empty">No booking requests yet. Create one above!</div>';
+    return;
+  }
+
+  const statusOrder = { in_progress: 0, scheduled: 1, completed: 2, failed: 3 };
+  bookings.sort((a, b) => (statusOrder[a.status] ?? 9) - (statusOrder[b.status] ?? 9));
+
+  bookingsList.innerHTML = bookings.map(b => {
+    const targetDate = b.targetDate ? new Date(b.targetDate + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }) : '—';
+    const dropDate = b.dropDate ? new Date(b.dropDate + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) : '—';
+    const statusPill = {
+      scheduled: '<span class="pill pill-blue">scheduled</span>',
+      in_progress: '<span class="pill pill-warn">in progress</span>',
+      completed: '<span class="pill pill-ok">completed</span>',
+      failed: '<span class="pill pill-error">failed</span>'
+    }[b.status] || `<span class="pill pill-idle">${b.status}</span>`;
+
+    const foursomeHtml = (b.foursomes || []).map(fs =>
+      `<div class="gb-booking-foursome-detail">
+        <strong>${fs.accountOwner}</strong> (${fs.account}) at <strong>${fs.targetTime}</strong>
+        — ${fs.players.length ? fs.players.join(', ') : '<em>no players</em>'}
+      </div>`
+    ).join('');
+
+    return `<div class="gb-booking-item">
+      <div class="gb-booking-header">
+        <div>
+          <span class="gb-booking-date">${targetDate}</span>
+          ${statusPill}
+        </div>
+        ${b.status === 'scheduled' ? `<button class="gb-btn gb-btn-danger gb-cancel-btn" data-id="${b.id}">Cancel</button>` : ''}
+      </div>
+      <div style="font-size:0.72rem; color:var(--muted); margin-bottom:8px;">Drop: ${dropDate} at 7:00 PM PST</div>
+      ${foursomeHtml}
+    </div>`;
+  }).join('');
+
+  // Bind cancel buttons
+  document.querySelectorAll('.gb-cancel-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      if (!confirm('Cancel this booking request?')) return;
+      btn.textContent = '...';
+      btn.disabled = true;
+      try {
+        await deleteDoc(doc(db, 'bookingRequests', btn.dataset.id));
+      } catch (err) {
+        alert('Error canceling: ' + err.message);
+        btn.textContent = 'Cancel';
+        btn.disabled = false;
+      }
+    });
+  });
 }
 </script>
 </body>
