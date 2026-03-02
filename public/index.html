@@ -570,10 +570,15 @@
 
         <div class="gb-form-group">
           <label for="gb-exec-time">Execution Time</label>
-          <div style="display:flex; gap:8px; align-items:center;">
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
             <input type="time" id="gb-exec-time" class="gb-input" value="18:55" style="max-width:140px;" />
-            <span style="font-size:0.78rem; color:var(--muted);">PST — when to start the booking attempt (default: 6:55 PM, 5 min before drop)</span>
+            <span style="font-size:0.78rem; color:var(--muted);" id="gb-exec-hint">PST — when to start the booking attempt (default: 6:55 PM, 5 min before drop)</span>
           </div>
+          <label style="display:flex; align-items:center; gap:6px; margin-top:8px; cursor:pointer; font-size:0.82rem;">
+            <input type="checkbox" id="gb-book-now" style="width:16px; height:16px; accent-color:var(--accent); cursor:pointer;" />
+            <span>Book Now</span>
+            <span style="font-size:0.72rem; color:var(--muted);">— skip scheduling, run immediately</span>
+          </label>
         </div>
 
         <div class="gb-form-group">
@@ -1110,6 +1115,29 @@ const foursomesContainer = document.getElementById('gb-foursomes');
 const addFoursomeBtn = document.getElementById('gb-add-foursome');
 const bookingsList = document.getElementById('gb-bookings-list');
 const execTimeInput = document.getElementById('gb-exec-time');
+const bookNowCheckbox = document.getElementById('gb-book-now');
+const execHint = document.getElementById('gb-exec-hint');
+
+bookNowCheckbox.addEventListener('change', () => {
+  if (bookNowCheckbox.checked) {
+    execTimeInput.disabled = true;
+    execTimeInput.style.opacity = '0.3';
+    execHint.textContent = 'Booking will start immediately upon submission';
+    execHint.style.color = 'var(--green)';
+    submitBtn.textContent = 'Book Now';
+  } else {
+    execTimeInput.disabled = false;
+    execTimeInput.style.opacity = '1';
+    execHint.textContent = 'PST — when to start the booking attempt (default: 6:55 PM, 5 min before drop)';
+    execHint.style.color = 'var(--muted)';
+    submitBtn.textContent = 'Schedule Booking';
+    bookNowCheckbox.checked = false;
+    execTimeInput.disabled = false;
+    execTimeInput.style.opacity = '1';
+    execHint.textContent = 'PST — when to start the booking attempt (default: 6:55 PM, 5 min before drop)';
+    execHint.style.color = 'var(--muted)';
+  }
+});
 
 // ── Auth ──
 onAuthStateChanged(auth, user => {
@@ -1333,8 +1361,8 @@ form.addEventListener('submit', async e => {
     userId: currentUser.uid,
     targetDate: dateInput.value,
     dropDate: drop.toISOString().split('T')[0],
-    dropTime: execTimeInput.value || '18:55',
-    status: 'scheduled',
+    dropTime: bookNowCheckbox.checked ? 'now' : (execTimeInput.value || '18:55'),
+    status: bookNowCheckbox.checked ? 'in_progress' : 'scheduled',
     foursomes: foursomes.map(fs => ({
       account: fs.account,
       accountOwner: ownerMap[fs.account] || fs.account,
@@ -1354,10 +1382,20 @@ form.addEventListener('submit', async e => {
     foursomes = [];
     addFoursome();
     submitBtn.textContent = 'Schedule Booking';
+    bookNowCheckbox.checked = false;
+    execTimeInput.disabled = false;
+    execTimeInput.style.opacity = '1';
+    execHint.textContent = 'PST — when to start the booking attempt (default: 6:55 PM, 5 min before drop)';
+    execHint.style.color = 'var(--muted)';
     submitBtn.disabled = false;
   } catch (err) {
     alert('Error saving booking: ' + err.message);
     submitBtn.textContent = 'Schedule Booking';
+    bookNowCheckbox.checked = false;
+    execTimeInput.disabled = false;
+    execTimeInput.style.opacity = '1';
+    execHint.textContent = 'PST — when to start the booking attempt (default: 6:55 PM, 5 min before drop)';
+    execHint.style.color = 'var(--muted)';
     submitBtn.disabled = false;
   }
 });
