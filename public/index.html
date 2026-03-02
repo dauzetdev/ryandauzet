@@ -1098,9 +1098,10 @@ const app = initializeApp({
   authDomain: 'golfbooker-6f274.firebaseapp.com',
   projectId: 'golfbooker-6f274',
   storageBucket: 'golfbooker-6f274.firebasestorage.app',
-  appId: '1:1:web:1'
+  messagingSenderId: '524210219463',
+  appId: '1:524210219463:ios:7c7c34ba9daf6b0f3b91e2'
 });
-const auth = getAuth(app);
+console.log('Firebase initialized'); const auth = getAuth(app);
 const db = getFirestore(app);
 
 // ── Player Roster ──
@@ -1166,7 +1167,7 @@ bookNowCheckbox.addEventListener('change', () => {
 // ── Auth ──
 onAuthStateChanged(auth, user => {
   if (user) {
-    currentUser = user;
+    currentUser = user; console.log('Auth OK:', user.uid);
     authBanner.style.display = 'none';
     submitBtn.disabled = false;
     listenBookings();
@@ -1175,7 +1176,7 @@ onAuthStateChanged(auth, user => {
     authBanner.style.display = 'block';
     signInWithEmailAndPassword(auth, 'rdauzet@gmail.com', 'F@1rn3ss')
       .catch(err => {
-        authBanner.textContent = 'Auth failed: ' + err.message;
+        authBanner.textContent = 'Auth failed: ' + err.message; console.error('Auth failed:', err);
       });
   }
 });
