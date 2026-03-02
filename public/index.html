@@ -569,6 +569,14 @@
         </div>
 
         <div class="gb-form-group">
+          <label for="gb-exec-time">Execution Time</label>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <input type="time" id="gb-exec-time" class="gb-input" value="18:55" style="max-width:140px;" />
+            <span style="font-size:0.78rem; color:var(--muted);">PST — when to start the booking attempt (default: 6:55 PM, 5 min before drop)</span>
+          </div>
+        </div>
+
+        <div class="gb-form-group">
           <label>Foursomes</label>
           <div id="gb-foursomes"></div>
           <button type="button" id="gb-add-foursome" class="gb-btn gb-btn-secondary" style="margin-top:8px;">+ Add Foursome</button>
@@ -1101,6 +1109,7 @@ const dropInfo = document.getElementById('gb-drop-info');
 const foursomesContainer = document.getElementById('gb-foursomes');
 const addFoursomeBtn = document.getElementById('gb-add-foursome');
 const bookingsList = document.getElementById('gb-bookings-list');
+const execTimeInput = document.getElementById('gb-exec-time');
 
 // ── Auth ──
 onAuthStateChanged(auth, user => {
@@ -1127,8 +1136,17 @@ dateInput.addEventListener('change', () => {
   const drop = new Date(target);
   drop.setDate(drop.getDate() - 8);
   const dropStr = drop.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
-  dropInfo.textContent = 'Drop: ' + dropStr + ' at 7:00 PM PST';
+  const execTime = execTimeInput.value || '18:55';
+  const [eh, em] = execTime.split(':').map(Number);
+  const execAmPm = eh >= 12 ? 'PM' : 'AM';
+  const execH12 = eh > 12 ? eh - 12 : (eh === 0 ? 12 : eh);
+  const execLabel = execH12 + ':' + String(em).padStart(2,'0') + ' ' + execAmPm;
+  dropInfo.textContent = 'Drop: ' + dropStr + ' — execution at ' + execLabel + ' PST';
   dropInfo.classList.add('visible');
+});
+
+execTimeInput.addEventListener('change', () => {
+  dateInput.dispatchEvent(new Event('change'));
 });
 
 // ── Foursome Management ──
@@ -1315,7 +1333,7 @@ form.addEventListener('submit', async e => {
     userId: currentUser.uid,
     targetDate: dateInput.value,
     dropDate: drop.toISOString().split('T')[0],
-    dropTime: '19:00',
+    dropTime: execTimeInput.value || '18:55',
     status: 'scheduled',
     foursomes: foursomes.map(fs => ({
       account: fs.account,
@@ -1389,7 +1407,7 @@ function renderBookings(bookings) {
         </div>
         ${b.status === 'scheduled' ? `<button class="gb-btn gb-btn-danger gb-cancel-btn" data-id="${b.id}">Cancel</button>` : ''}
       </div>
-      <div style="font-size:0.72rem; color:var(--muted); margin-bottom:8px;">Drop: ${dropDate} at 7:00 PM PST</div>
+      <div style="font-size:0.72rem; color:var(--muted); margin-bottom:8px;">Drop: ${dropDate} — exec at ${(() => { const [h,m] = (b.dropTime||'18:55').split(':').map(Number); const ap = h>=12?'PM':'AM'; return (h>12?h-12:(h===0?12:h))+':'+String(m).padStart(2,'0')+' '+ap; })()} PST</div>
       ${foursomeHtml}
     </div>`;
   }).join('');
