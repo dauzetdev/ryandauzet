@@ -246,6 +246,30 @@
   .gb-input:focus, .gb-select:focus { border-color: var(--accent); }
   .gb-input::placeholder { color: var(--muted); }
   .gb-select option { background: var(--surface); color: var(--text); }
+  .gb-log-viewer {
+    margin-top: 8px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+    font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+    font-size: 0.7rem;
+    line-height: 1.6;
+    padding: 8px 10px;
+  }
+  .gb-log-viewer:empty { display: none; }
+  .gb-log-entry { color: var(--muted); white-space: pre-wrap; word-break: break-word; }
+  .gb-log-entry .log-time { color: var(--accent); }
+  .gb-log-entry.log-success { color: var(--green); }
+  .gb-log-entry.log-error { color: var(--red); }
+  .gb-log-entry.log-warning { color: var(--yellow); }
+  .gb-log-entry.log-info { color: var(--text); }
+  .gb-log-toggle {
+    background: none; border: none; color: var(--accent); font-size: 0.72rem;
+    cursor: pointer; padding: 2px 0; margin-top: 4px;
+  }
+  .gb-log-toggle:hover { text-decoration: underline; }
   .gb-drop-info {
     margin-top: 6px;
     font-size: 0.78rem;
@@ -1447,6 +1471,10 @@ function renderBookings(bookings) {
       </div>
       <div style="font-size:0.72rem; color:var(--muted); margin-bottom:8px;">Drop: ${dropDate} — exec at ${(() => { const [h,m] = (b.dropTime||'18:55').split(':').map(Number); const ap = h>=12?'PM':'AM'; return (h>12?h-12:(h===0?12:h))+':'+String(m).padStart(2,'0')+' '+ap; })()} PST</div>
       ${foursomeHtml}
+      ${(b.status === 'in_progress' || b.status === 'completed' || b.status === 'failed') ? `
+        <button class="gb-log-toggle" data-booking-id="${b.id}" data-expanded="false">▶ Show Logs</button>
+        <div class="gb-log-viewer" id="gb-logs-${b.id}"></div>
+      ` : ''}
     </div>`;
   }).join('');
 
@@ -1464,6 +1492,53 @@ function renderBookings(bookings) {
         btn.disabled = false;
       }
     });
+  });
+
+  // Bind log toggle buttons
+  document.querySelectorAll('.gb-log-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const bookingId = btn.dataset.bookingId;
+      const expanded = btn.dataset.expanded === 'true';
+      const logDiv = document.getElementById('gb-logs-' + bookingId);
+      if (expanded) {
+        btn.dataset.expanded = 'false';
+        btn.textContent = '▶ Show Logs';
+        logDiv.innerHTML = '';
+        // Unsubscribe if we have a listener
+        if (logDiv._unsub) { logDiv._unsub(); logDiv._unsub = null; }
+      } else {
+        btn.dataset.expanded = 'true';
+        btn.textContent = '▼ Hide Logs';
+        logDiv.innerHTML = '<div class="gb-log-entry" style="color:var(--muted);">Loading logs...</div>';
+        // Subscribe to real-time logs
+        const logsRef = collection(db, 'bookingRequests', bookingId, 'logs');
+        const logsQuery = query(logsRef, orderBy('timestamp', 'asc'));
+        const unsub = onSnapshot(logsQuery, (snap) => {
+          if (snap.empty) {
+            logDiv.innerHTML = '<div class="gb-log-entry" style="color:var(--muted);">No logs yet — waiting for execution...</div>';
+            return;
+          }
+          logDiv.innerHTML = snap.docs.map(d => {
+            const log = d.data();
+            const ts = log.timestamp ? new Date(log.timestamp.seconds ? log.timestamp.seconds * 1000 : log.timestamp).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', second: '2-digit' }) : '';
+            const level = log.level || 'info';
+            const levelClass = level === 'success' ? 'log-success' : level === 'error' ? 'log-error' : level === 'warning' ? 'log-warning' : 'log-info';
+            return `<div class="gb-log-entry ${levelClass}"><span class="log-time">[${ts}]</span> ${log.message || ''}</div>`;
+          }).join('');
+          logDiv.scrollTop = logDiv.scrollHeight;
+        }, (err) => {
+          logDiv.innerHTML = `<div class="gb-log-entry log-error">Error loading logs: ${err.message}</div>`;
+        });
+        logDiv._unsub = unsub;
+      }
+    });
+
+    // Auto-expand logs for in_progress bookings
+    const bookingId = btn.dataset.bookingId;
+    const card = btn.closest('.gb-booking-item');
+    if (card && card.innerHTML.includes('in progress')) {
+      btn.click();
+    }
   });
 }
 </script>
