@@ -1129,6 +1129,7 @@ const TIME_PRESETS = ['8:10 AM','8:20 AM','8:30 AM','9:30 AM','9:40 AM'];
 let currentUser = null;
 let foursomes = [];
 let unsubBookings = null;
+let editingBookingId = null;
 
 // ── DOM refs ──
 const authBanner = document.getElementById('gb-auth-banner');
@@ -1400,12 +1401,21 @@ form.addEventListener('submit', async e => {
   };
 
   try {
-    await addDoc(collection(db, 'bookingRequests'), docData);
+    if (editingBookingId) {
+      // Update existing booking
+      docData.updatedAt = serverTimestamp();
+      delete docData.createdAt;
+      await updateDoc(doc(db, 'bookingRequests', editingBookingId), docData);
+      editingBookingId = null;
+    } else {
+      await addDoc(collection(db, 'bookingRequests'), docData);
+    }
     // Reset form
     dateInput.value = '';
     dropInfo.classList.remove('visible');
     foursomes = [];
     addFoursome();
+    editingBookingId = null;
     submitBtn.textContent = 'Schedule Booking';
     bookNowCheckbox.checked = false;
     execTimeInput.disabled = false;
@@ -1469,7 +1479,10 @@ function renderBookings(bookings) {
           <span class="gb-booking-date">${targetDate}</span>
           ${statusPill}
         </div>
-        ${(b.status === 'scheduled' || b.status === 'in_progress') ? `<button class="gb-btn gb-btn-danger gb-cancel-btn" data-id="${b.id}" data-status="${b.status}">Cancel</button>` : ''}
+        <div style="display:flex; gap:6px;">
+          ${(b.status === 'scheduled' || b.status === 'in_progress') ? `<button class="gb-btn gb-btn-secondary gb-edit-btn" data-id="${b.id}" data-booking='${JSON.stringify(b).replace(/'/g,"&#39;")}'>Edit</button>` : ''}
+          ${(b.status === 'scheduled' || b.status === 'in_progress') ? `<button class="gb-btn gb-btn-danger gb-cancel-btn" data-id="${b.id}" data-status="${b.status}">Cancel</button>` : ''}
+        </div>
       </div>
       <div style="font-size:0.72rem; color:var(--muted); margin-bottom:8px;">Drop: ${dropDate} — exec at ${(() => { const [h,m] = (b.dropTime||'18:55').split(':').map(Number); const ap = h>=12?'PM':'AM'; return (h>12?h-12:(h===0?12:h))+':'+String(m).padStart(2,'0')+' '+ap; })()} PST</div>
       ${foursomeHtml}
@@ -1505,6 +1518,46 @@ function renderBookings(bookings) {
         btn.textContent = 'Cancel';
         btn.disabled = false;
       }
+    });
+  });
+
+  // Bind edit buttons
+  document.querySelectorAll('.gb-edit-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const booking = JSON.parse(btn.dataset.booking);
+      editingBookingId = booking.id;
+
+      // Fill form with booking data
+      dateInput.value = booking.targetDate || '';
+      dateInput.dispatchEvent(new Event('change'));
+
+      // Set exec time
+      if (booking.dropTime === 'now') {
+        bookNowCheckbox.checked = true;
+        bookNowCheckbox.dispatchEvent(new Event('change'));
+      } else {
+        bookNowCheckbox.checked = false;
+        bookNowCheckbox.dispatchEvent(new Event('change'));
+        execTimeInput.value = booking.dropTime || '18:55';
+      }
+
+      // Set foursomes
+      foursomes = (booking.foursomes || []).map(fs => ({
+        id: Date.now() + Math.random(),
+        account: fs.account,
+        targetTime: fs.targetTime,
+        customTime: '',
+        players: [...(fs.players || [])]
+      }));
+      if (!foursomes.length) { foursomes = []; addFoursome(); }
+      renderFoursomes();
+
+      // Change button text
+      submitBtn.textContent = 'Update Booking';
+      submitBtn.disabled = false;
+
+      // Scroll to form
+      form.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
 
