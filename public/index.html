@@ -1090,7 +1090,7 @@ function viewChangelog() {
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, onSnapshot, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, updateDoc, doc, query, orderBy, onSnapshot, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
 
 // ── Firebase Config ──
 const app = initializeApp({
@@ -1452,7 +1452,8 @@ function renderBookings(bookings) {
       scheduled: '<span class="pill pill-blue">scheduled</span>',
       in_progress: '<span class="pill pill-warn">in progress</span>',
       completed: '<span class="pill pill-ok">completed</span>',
-      failed: '<span class="pill pill-error">failed</span>'
+      failed: '<span class="pill pill-error">failed</span>',
+      cancelled: '<span class="pill pill-error">cancelled</span>'
     }[b.status] || `<span class="pill pill-idle">${b.status}</span>`;
 
     const foursomeHtml = (b.foursomes || []).map(fs =>
@@ -1468,7 +1469,7 @@ function renderBookings(bookings) {
           <span class="gb-booking-date">${targetDate}</span>
           ${statusPill}
         </div>
-        ${b.status === 'scheduled' ? `<button class="gb-btn gb-btn-danger gb-cancel-btn" data-id="${b.id}">Cancel</button>` : ''}
+        ${(b.status === 'scheduled' || b.status === 'in_progress') ? `<button class="gb-btn gb-btn-danger gb-cancel-btn" data-id="${b.id}" data-status="${b.status}">Cancel</button>` : ''}
       </div>
       <div style="font-size:0.72rem; color:var(--muted); margin-bottom:8px;">Drop: ${dropDate} — exec at ${(() => { const [h,m] = (b.dropTime||'18:55').split(':').map(Number); const ap = h>=12?'PM':'AM'; return (h>12?h-12:(h===0?12:h))+':'+String(m).padStart(2,'0')+' '+ap; })()} PST</div>
       ${foursomeHtml}
@@ -1482,11 +1483,23 @@ function renderBookings(bookings) {
   // Bind cancel buttons
   document.querySelectorAll('.gb-cancel-btn').forEach(btn => {
     btn.addEventListener('click', async () => {
-      if (!confirm('Cancel this booking request?')) return;
+      const status = btn.dataset.status;
+      const msg = status === 'in_progress'
+        ? 'This booking is currently running. Cancel and stop execution?'
+        : 'Cancel this booking request?';
+      if (!confirm(msg)) return;
       btn.textContent = '...';
       btn.disabled = true;
       try {
-        await deleteDoc(doc(db, 'bookingRequests', btn.dataset.id));
+        if (status === 'in_progress') {
+          // Set to cancelled so the cron detects and stops
+          await updateDoc(doc(db, 'bookingRequests', btn.dataset.id), {
+            status: 'cancelled',
+            updatedAt: serverTimestamp()
+          });
+        } else {
+          await deleteDoc(doc(db, 'bookingRequests', btn.dataset.id));
+        }
       } catch (err) {
         alert('Error canceling: ' + err.message);
         btn.textContent = 'Cancel';
