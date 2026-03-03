@@ -713,6 +713,21 @@
       <div class="stat-row"><span class="stat-label">Geoff agent</span><span class="stat-value">claude-sonnet-4-6</span></div>
       <div class="stat-row"><span class="stat-label">Cron overrides</span><span class="stat-value">Sonnet for recon jobs</span></div>
     </div>
+
+    <div class="card span2">
+      <h2>🖥️ Local vs Cloud LLM Usage (Output Tokens)</h2>
+      <div style="display:flex; gap:24px; margin-bottom:16px; flex-wrap:wrap;">
+        <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:3px;background:var(--accent);"></div><span style="font-size:0.75rem; color:var(--muted);">Cloud (Anthropic)</span></div>
+        <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:3px;background:var(--green);"></div><span style="font-size:0.75rem; color:var(--muted);">Local (Ollama)</span></div>
+      </div>
+      <div id="llmChart" style="display:flex; align-items:flex-end; gap:6px; height:120px; margin-bottom:4px;"></div>
+      <div id="llmLabels" style="display:flex; gap:6px; margin-top:4px;"></div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-top:16px; padding-top:14px; border-top:1px solid var(--border);">
+        <div style="text-align:center;"><div style="font-size:1.4rem; font-weight:700; color:var(--accent);">971.6K</div><div style="font-size:0.65rem; color:var(--muted);">Cloud Tokens</div></div>
+        <div style="text-align:center;"><div style="font-size:1.4rem; font-weight:700; color:var(--green);">12.2K</div><div style="font-size:0.65rem; color:var(--muted);">Local Tokens</div></div>
+        <div style="text-align:center;"><div style="font-size:1.4rem; font-weight:700; color:var(--muted);">98.8%</div><div style="font-size:0.65rem; color:var(--muted);">Cloud Share</div></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1065,6 +1080,59 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
     }
   });
 });
+
+
+// ── Local vs Cloud Chart ──
+const llmData = [
+  {l:'2/19', cloud:1328,   local:0},
+  {l:'2/20', cloud:12723,  local:0},
+  {l:'2/22', cloud:2111,   local:0},
+  {l:'2/25', cloud:124805, local:0},
+  {l:'2/26', cloud:55870,  local:0},
+  {l:'2/27', cloud:59081,  local:0},
+  {l:'2/28', cloud:52020,  local:0},
+  {l:'3/1',  cloud:274565, local:0},
+  {l:'3/2',  cloud:210863, local:0},
+  {l:'3/3',  cloud:166730, local:12227}
+];
+(function() {
+  const chart = document.getElementById('llmChart');
+  const labels = document.getElementById('llmLabels');
+  if (!chart) return;
+  const maxVal = Math.max(...llmData.map(d => d.cloud + d.local));
+  llmData.forEach(d => {
+    const colWrap = document.createElement('div');
+    colWrap.style.cssText = 'flex:1; display:flex; flex-direction:column; align-items:center; gap:1px; height:100%;';
+
+    const cloudPct = (d.cloud / maxVal) * 100;
+    const localPct = (d.local / maxVal) * 100;
+    const totalPct = cloudPct + localPct;
+
+    // Stacked bar wrapper
+    const barWrap = document.createElement('div');
+    barWrap.style.cssText = `display:flex; flex-direction:column-reverse; height:100%; width:100%; gap:1px;`;
+    barWrap.title = `${d.l}: Cloud ${(d.cloud/1000).toFixed(1)}K + Local ${(d.local/1000).toFixed(1)}K tokens`;
+
+    if (d.cloud > 0) {
+      const cBar = document.createElement('div');
+      cBar.style.cssText = `height:${Math.max(cloudPct, 1)}%; background:var(--accent); border-radius:2px 2px 0 0; min-width:8px;`;
+      barWrap.appendChild(cBar);
+    }
+    if (d.local > 0) {
+      const lBar = document.createElement('div');
+      lBar.style.cssText = `height:${Math.max(localPct, 2)}%; background:var(--green); border-radius:2px 2px 0 0; min-width:8px;`;
+      barWrap.appendChild(lBar);
+    }
+
+    colWrap.appendChild(barWrap);
+    chart.appendChild(colWrap);
+
+    const lbl = document.createElement('span');
+    lbl.style.cssText = 'flex:1; text-align:center; font-size:0.55rem; color:var(--muted); white-space:nowrap;';
+    lbl.textContent = d.l;
+    labels.appendChild(lbl);
+  });
+})();
 
 // ── Init Home ──
 renderHome();
