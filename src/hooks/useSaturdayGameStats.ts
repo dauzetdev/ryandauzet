@@ -6,24 +6,30 @@ import { saturdayGameApp } from "../lib/firebase";
 interface SaturdayGameStats {
   users: number;
   rounds: number;
+  tournaments: number;
+  groups: number;
 }
 
 async function fetchStats(): Promise<SaturdayGameStats> {
   if (!saturdayGameApp) throw new Error("VITE_SG_FIREBASE_API_KEY not set");
 
-  // Anonymous auth for Firestore access
+  // Anonymous auth satisfies isSignedIn() in Firestore rules
   const auth = getAuth(saturdayGameApp);
   if (!auth.currentUser) await signInAnonymously(auth);
 
   const db = getFirestore(saturdayGameApp);
-  const [usersSnap, roundsSnap] = await Promise.all([
+  const [usersSnap, roundsSnap, tournamentsSnap, groupsSnap] = await Promise.all([
     getCountFromServer(collection(db, "users")),
-    getCountFromServer(collection(db, "rounds")),
+    getCountFromServer(collection(db, "scoreSessions")),
+    getCountFromServer(collection(db, "tournaments")),
+    getCountFromServer(collection(db, "groups")),
   ]);
 
   return {
     users: usersSnap.data().count,
     rounds: roundsSnap.data().count,
+    tournaments: tournamentsSnap.data().count,
+    groups: groupsSnap.data().count,
   };
 }
 

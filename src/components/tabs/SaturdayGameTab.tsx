@@ -24,11 +24,19 @@ export function SaturdayGameTab() {
             },
             {
               value: isLoading ? "…" : error || !configured ? "—" : String(data?.rounds ?? "—"),
-              label: "Rounds Logged",
+              label: "Score Sessions",
               color: "green",
             },
-            { value: "—", label: "App Store Rating", color: "purple" },
-            { value: "—", label: "DAU", color: "yellow" },
+            {
+              value: isLoading ? "…" : error || !configured ? "—" : String(data?.tournaments ?? "—"),
+              label: "Tournaments",
+              color: "purple",
+            },
+            {
+              value: isLoading ? "…" : error || !configured ? "—" : String(data?.groups ?? "—"),
+              label: "Groups",
+              color: "yellow",
+            },
           ]}
         />
       </div>
@@ -66,10 +74,10 @@ export function SaturdayGameTab() {
             </div>
           ) : (
             <>
-              <StatRow label="Total users">{data?.users ?? "—"}</StatRow>
-              <StatRow label="Total rounds">{data?.rounds ?? "—"}</StatRow>
-              <StatRow label="App Store Rating">— (connect API)</StatRow>
-              <StatRow label="DAU">— (connect API)</StatRow>
+              <StatRow label="Users">{data?.users ?? "—"}</StatRow>
+              <StatRow label="Score sessions">{data?.rounds ?? "—"}</StatRow>
+              <StatRow label="Tournaments">{data?.tournaments ?? "—"}</StatRow>
+              <StatRow label="Groups">{data?.groups ?? "—"}</StatRow>
             </>
           )}
         </Card>
