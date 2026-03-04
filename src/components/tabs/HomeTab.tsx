@@ -104,12 +104,12 @@ export function HomeTab() {
             <div
               key={`${id}-${idx}`}
               draggable
-              className={`bg-card border border-border rounded-2xl p-4 max-md:p-3 cursor-grab select-none transition-all duration-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_4px_24px_rgba(0,0,0,0.5)] ${
+              className={`bg-white/[0.07] backdrop-blur-md border border-white/[0.10] rounded-2xl p-4 max-md:p-3 cursor-grab select-none transition-all duration-200 shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.08)] ${
                 dragIdx === idx ? "opacity-50 scale-[0.97]" : ""
               } ${
                 dragOverIdx === idx
-                  ? "!border-accent shadow-[0_0_0_2px_rgba(59,130,246,0.25)]"
-                  : "hover:-translate-y-0.5 hover:border-border-hover hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.10),0_8px_32px_rgba(0,0,0,0.6)]"
+                  ? "!border-accent/60"
+                  : "hover:-translate-y-0.5 hover:bg-white/[0.10] hover:border-white/[0.18]"
               }`}
               onDragStart={(e) => {
                 e.dataTransfer.setData("text/plain", String(idx));
@@ -136,7 +136,7 @@ export function HomeTab() {
                   {w.name}
                 </h3>
                 <div className="flex gap-1.5 items-center">
-                  <span className="text-xs text-muted/60 px-1.5 py-0.5 bg-white/[0.04] rounded-md border border-border">
+                  <span className="text-xs text-white/30 px-1.5 py-0.5 bg-white/[0.04] rounded-md border border-white/[0.08]">
                     {w.source}
                   </span>
                   <button
@@ -151,7 +151,7 @@ export function HomeTab() {
                   </button>
                 </div>
               </div>
-              <div className="mb-3 border-b border-border" />
+              <div className="mb-3 border-b border-white/[0.07]" />
               <WidgetContent id={id} />
             </div>
           );
@@ -160,7 +160,7 @@ export function HomeTab() {
         {/* Add widget button */}
         <div
           onClick={() => setModalOpen(true)}
-          className="border border-dashed border-border rounded-2xl py-10 px-5 flex flex-col items-center justify-center gap-2 text-muted cursor-pointer transition-all duration-200 min-h-[120px] hover:border-accent/50 hover:text-accent hover:bg-accent/[0.03]"
+          className="border border-dashed border-white/[0.10] rounded-2xl py-10 px-5 flex flex-col items-center justify-center gap-2 text-white/30 cursor-pointer transition-all duration-200 min-h-[120px] hover:border-accent/40 hover:text-accent/60 hover:bg-accent/[0.04]"
         >
           <div className="text-2xl leading-none opacity-50">+</div>
           <div className="text-xs uppercase tracking-widest opacity-60">Add Widget</div>
@@ -408,7 +408,7 @@ function DotRow({
         ? "bg-warn"
         : "bg-danger";
   return (
-    <div className="flex items-center gap-2.5 py-2 border-b border-border last:border-b-0 text-sm">
+    <div className="flex items-center gap-2.5 py-2 border-b border-white/[0.07] last:border-b-0 text-sm text-white/75">
       <div className={`w-2 h-2 rounded-full shrink-0 ${dotColor}`} />
       <span>{text}</span>
       {pill && (

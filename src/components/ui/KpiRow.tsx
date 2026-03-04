@@ -17,23 +17,21 @@ const colorMap: Record<string, string> = {
   cyan: "text-cyan",
   yellow: "text-warn",
   orange: "text-orange",
-  muted: "text-muted",
+  muted: "text-white/40",
 };
 
 export function KpiRow({ items }: KpiRowProps) {
   return (
-    <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] gap-3 max-md:grid-cols-2">
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(110px,1fr))] gap-3 max-md:grid-cols-2">
       {items.map((kpi) => (
         <div
           key={kpi.label}
-          className="py-5 px-3 bg-white/[0.03] rounded-xl border border-border text-center"
+          className="py-4 px-3 bg-white/[0.05] backdrop-blur-sm rounded-xl border border-white/[0.08] text-center"
         >
-          <div
-            className={`text-3xl font-bold leading-none tracking-tight ${colorMap[kpi.color ?? ""] ?? "text-text"}`}
-          >
+          <div className={`text-3xl font-bold leading-none tracking-tight ${colorMap[kpi.color ?? ""] ?? "text-white/90"}`}>
             {kpi.value}
           </div>
-          <div className="text-xs text-muted mt-1.5 font-medium uppercase tracking-wider">{kpi.label}</div>
+          <div className="text-[0.65rem] text-white/40 mt-1.5 font-medium uppercase tracking-wider">{kpi.label}</div>
         </div>
       ))}
     </div>
