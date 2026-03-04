@@ -1,5 +1,6 @@
 import { Card } from "../ui/Card";
 import { KpiRow } from "../ui/KpiRow";
+import { PageHeader } from "../ui/PageHeader";
 import { Pill } from "../ui/Pill";
 import { StatRow } from "../ui/StatRow";
 import { useHitThePinStats } from "../../hooks/useHitThePinStats";
@@ -13,10 +14,7 @@ export function HitThePinTab() {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold mb-1">⛳ HitThePin</h1>
-      <div className="text-sm text-muted mb-5">
-        hitthepin.com — AI golf course reviews
-      </div>
+      <PageHeader title="⛳ HitThePin" subtitle="hitthepin.com — AI golf course reviews" />
 
       <div className="mb-4">
         <KpiRow
@@ -98,10 +96,10 @@ export function HitThePinTab() {
 
       <Card title="Todos" icon="📋" wide>
         <StatRow label="✅ Sitemap.xml">
-          <span className="text-muted">Done</span>
+          <span className="text-white/40">Done</span>
         </StatRow>
         <StatRow label="✅ Google Search Console">
-          <span className="text-muted">Configured</span>
+          <span className="text-white/40">Configured</span>
         </StatRow>
         <StatRow label="🟡 Facebook Page">
           Retry creation (rate limited)
@@ -133,10 +131,10 @@ function RowItem({
         ? "bg-warn"
         : "bg-danger";
   return (
-    <div className="flex items-center gap-2.5 py-2 border-b border-border last:border-b-0">
+    <div className="flex items-center gap-2.5 py-2 border-b border-white/[0.07] last:border-b-0">
       <div className={`w-2 h-2 rounded-full shrink-0 ${dotColor}`} />
-      <span className="text-sm">{name}</span>
-      <span className="text-muted text-xs ml-auto">{detail}</span>
+      <span className="text-sm text-white/80">{name}</span>
+      <span className="text-white/40 text-xs ml-auto">{detail}</span>
     </div>
   );
 }

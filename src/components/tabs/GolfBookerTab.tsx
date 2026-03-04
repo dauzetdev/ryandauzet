@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Card } from "../ui/Card";
+import { PageHeader } from "../ui/PageHeader";
 import { BookingForm } from "../golfbooker/BookingForm";
 import { BookingItem } from "../golfbooker/BookingItem";
 import { useGolfBookerAuth, useBookings } from "../../hooks/useGolfBooker";
@@ -24,10 +25,7 @@ export function GolfBookerTab() {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold mb-1">📅 GolfBooker</h1>
-      <div className="text-sm text-muted mb-5">
-        Automated tee-time booking manager
-      </div>
+      <PageHeader title="📅 GolfBooker" subtitle="Automated tee-time booking manager" />
 
       {/* Auth status banner */}
       {status === "loading" && (

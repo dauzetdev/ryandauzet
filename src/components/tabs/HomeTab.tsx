@@ -89,11 +89,9 @@ export function HomeTab() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
-        <div>
-          <h1 className="text-2xl font-semibold">{greeting}</h1>
-          <div className="text-sm text-muted mt-0.5">{dateStr}</div>
-        </div>
+      <div className="mb-8 pb-6 border-b border-white/[0.07]">
+        <h1 className="text-3xl font-bold tracking-tight mb-1.5">{greeting}</h1>
+        <p className="text-sm text-white/40">{dateStr}</p>
       </div>
 
       <div className="grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] max-md:grid-cols-1 gap-4">

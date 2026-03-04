@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Card } from "../ui/Card";
+import { PageHeader } from "../ui/PageHeader";
 import { KpiRow } from "../ui/KpiRow";
 import { Pill } from "../ui/Pill";
 import { StatRow } from "../ui/StatRow";
@@ -22,10 +23,7 @@ export function OpenClawTab() {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold mb-1">🦞 OpenClaw</h1>
-      <div className="text-sm text-muted mb-5">
-        System status & infrastructure
-      </div>
+      <PageHeader title="🦞 OpenClaw" subtitle="System status &amp; infrastructure" />
 
       <div className="mb-4">
         <KpiRow
@@ -107,11 +105,11 @@ export function OpenClawTab() {
                 return (
                   <div
                     key={i}
-                    className="flex items-center gap-2.5 py-2 border-b border-border last:border-b-0"
+                    className="flex items-center gap-2.5 py-2 border-b border-white/[0.07] last:border-b-0"
                   >
                     <div className="w-2 h-2 rounded-full bg-success shrink-0" />
                     <span className="text-sm">{name}</span>
-                    <span className="text-muted text-xs ml-auto">
+                    <span className="text-white/40 text-xs ml-auto">
                       {s.model ?? "—"} · {tokens} tokens
                       {ago !== null ? ` · ${ago}m ago` : ""}
                     </span>
@@ -228,7 +226,7 @@ export function OpenClawTab() {
               ["get_on_page_seo_guide", "On-page SEO"],
             ]}
           />
-          <div className="mt-4 pt-4 border-t border-border">
+          <div className="mt-4 pt-4 border-t border-white/[0.07]">
             <McpServer
               name="ClawFu Skills"
               desc="Marketing methodology library — positioning, copy, funnels, branding"
@@ -358,7 +356,7 @@ function AgentRow({
   detail: string;
 }) {
   return (
-    <div className="flex items-center gap-2.5 py-2.5 border-b border-border last:border-b-0">
+    <div className="flex items-center gap-2.5 py-2.5 border-b border-white/[0.07] last:border-b-0">
       <div
         className={`w-9 h-9 rounded-full flex items-center justify-center text-lg shrink-0 ${bgColor}`}
       >
@@ -368,7 +366,7 @@ function AgentRow({
         <div className="font-semibold text-sm flex items-center gap-1.5">
           {name} <Pill variant={pillVariant}>{pillText}</Pill>
         </div>
-        <div className="text-muted text-xs mt-0.5 truncate">{detail}</div>
+        <div className="text-white/40 text-xs mt-0.5 truncate">{detail}</div>
       </div>
     </div>
   );
@@ -376,7 +374,7 @@ function AgentRow({
 
 function ChannelRow({ name, ok = true }: { name: string; ok?: boolean }) {
   return (
-    <div className="flex items-center gap-2.5 py-2 border-b border-border last:border-b-0">
+    <div className="flex items-center gap-2.5 py-2 border-b border-white/[0.07] last:border-b-0">
       <div className={`w-2 h-2 rounded-full shrink-0 ${ok ? "bg-success" : "bg-danger"}`} />
       <span className="text-sm">{name}</span>
       <Pill variant={ok ? "ok" : "error"} className="ml-auto">
@@ -396,12 +394,12 @@ function CronItem({
   detail: string;
 }) {
   return (
-    <div className="py-2.5 border-b border-border last:border-b-0">
+    <div className="py-2.5 border-b border-white/[0.07] last:border-b-0">
       <div className="flex items-center gap-2 mb-0.5">
         <span className="font-semibold text-sm">{name}</span>
         <Pill variant={variant}>{variant}</Pill>
       </div>
-      <div className="text-muted text-xs leading-relaxed">{detail}</div>
+      <div className="text-white/40 text-xs leading-relaxed">{detail}</div>
     </div>
   );
 }

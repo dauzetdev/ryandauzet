@@ -6,6 +6,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { Card } from "../ui/Card";
+import { PageHeader } from "../ui/PageHeader";
 import { KpiRow } from "../ui/KpiRow";
 import { BarProgress } from "../ui/BarProgress";
 import { StatRow } from "../ui/StatRow";
@@ -46,10 +47,7 @@ export function ClaudeTab() {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold mb-1">🤖 Claude Usage</h1>
-      <div className="text-sm text-muted mb-5">
-        API cost & token consumption
-      </div>
+      <PageHeader title="🤖 Claude Usage" subtitle="API cost & token consumption" />
 
       {error && (
         <div className="mb-4 px-4 py-3 bg-danger/10 border border-danger/20 rounded-xl text-sm text-danger">

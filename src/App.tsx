@@ -17,15 +17,15 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen overflow-y-auto">
+    <div className="min-h-screen">
       <Header activeTab={activeTab} onTabChange={setActiveTab} onRefresh={handleRefresh} />
       <main className="pt-[54px]">
-        <TabPanel active={activeTab === "home"}><HomeTab /></TabPanel>
-        <TabPanel active={activeTab === "hitthepin"}><HitThePinTab /></TabPanel>
-        <TabPanel active={activeTab === "saturdaygame"}><SaturdayGameTab /></TabPanel>
-        <TabPanel active={activeTab === "golfbooker"}><GolfBookerTab /></TabPanel>
-        <TabPanel active={activeTab === "claude"}><ClaudeTab /></TabPanel>
-        <TabPanel active={activeTab === "openclaw"}><OpenClawTab /></TabPanel>
+        <TabPanel key={activeTab} active={activeTab === "home"}><HomeTab /></TabPanel>
+        <TabPanel key={activeTab + "h"} active={activeTab === "hitthepin"}><HitThePinTab /></TabPanel>
+        <TabPanel key={activeTab + "s"} active={activeTab === "saturdaygame"}><SaturdayGameTab /></TabPanel>
+        <TabPanel key={activeTab + "g"} active={activeTab === "golfbooker"}><GolfBookerTab /></TabPanel>
+        <TabPanel key={activeTab + "c"} active={activeTab === "claude"}><ClaudeTab /></TabPanel>
+        <TabPanel key={activeTab + "o"} active={activeTab === "openclaw"}><OpenClawTab /></TabPanel>
       </main>
     </div>
   );

@@ -1,5 +1,6 @@
 import { Card } from "../ui/Card";
 import { KpiRow } from "../ui/KpiRow";
+import { PageHeader } from "../ui/PageHeader";
 import { StatRow } from "../ui/StatRow";
 import { useSaturdayGameStats } from "../../hooks/useSaturdayGameStats";
 
@@ -8,10 +9,7 @@ export function SaturdayGameTab() {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold mb-1">🏌️ SaturdayGame</h1>
-      <div className="text-sm text-muted mb-5">
-        iOS/macOS golf app — Firebase backend
-      </div>
+      <PageHeader title="🏌️ SaturdayGame" subtitle="iOS/macOS golf app — Firebase backend" />
 
       <div className="mb-4">
         <KpiRow
