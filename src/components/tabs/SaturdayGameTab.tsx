@@ -5,7 +5,6 @@ import { useSaturdayGameStats } from "../../hooks/useSaturdayGameStats";
 
 export function SaturdayGameTab() {
   const { data, isLoading, error } = useSaturdayGameStats();
-  const configured = !!import.meta.env.VITE_SG_FIREBASE_API_KEY;
 
   return (
     <div>
@@ -17,37 +16,15 @@ export function SaturdayGameTab() {
       <div className="mb-4">
         <KpiRow
           items={[
-            {
-              value: isLoading ? "…" : error || !configured ? "—" : String(data?.users ?? "—"),
-              label: "Users",
-              color: "accent",
-            },
-            {
-              value: isLoading ? "…" : error || !configured ? "—" : String(data?.rounds ?? "—"),
-              label: "Score Sessions",
-              color: "green",
-            },
-            {
-              value: isLoading ? "…" : error || !configured ? "—" : String(data?.tournaments ?? "—"),
-              label: "Tournaments",
-              color: "purple",
-            },
-            {
-              value: isLoading ? "…" : error || !configured ? "—" : String(data?.groups ?? "—"),
-              label: "Groups",
-              color: "yellow",
-            },
+            { value: isLoading ? "…" : error ? "—" : String(data?.users ?? "—"), label: "Users", color: "accent" },
+            { value: isLoading ? "…" : error ? "—" : String(data?.rounds ?? "—"), label: "Score Sessions", color: "green" },
+            { value: isLoading ? "…" : error ? "—" : String(data?.tournaments ?? "—"), label: "Tournaments", color: "purple" },
+            { value: isLoading ? "…" : error ? "—" : String(data?.groups ?? "—"), label: "Groups", color: "yellow" },
           ]}
         />
       </div>
 
-      {!configured && (
-        <div className="mb-4 px-4 py-3 bg-warn/10 border border-warn/20 rounded-xl text-sm text-warn">
-          Add <code className="font-mono bg-black/20 px-1 rounded">VITE_SG_FIREBASE_API_KEY</code> to connect live Firebase data.
-        </div>
-      )}
-
-      {configured && error && (
+      {error && (
         <div className="mb-4 px-4 py-3 bg-danger/10 border border-danger/20 rounded-xl text-sm text-danger">
           Firebase error: {(error as Error).message}
         </div>
@@ -62,11 +39,7 @@ export function SaturdayGameTab() {
         </Card>
 
         <Card title="Analytics" icon="📊">
-          {!configured ? (
-            <div className="text-muted text-sm py-5 text-center">
-              Configure <code className="font-mono text-xs bg-white/5 px-1 rounded">VITE_SG_FIREBASE_API_KEY</code> to see live data
-            </div>
-          ) : isLoading ? (
+          {isLoading ? (
             <div className="text-muted text-sm py-5 text-center">Loading…</div>
           ) : error ? (
             <div className="text-danger text-sm py-5 text-center">
