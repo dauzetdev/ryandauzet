@@ -24,7 +24,7 @@ export function GolfBookerTab() {
 
   return (
     <div>
-      <h1 className="text-xl font-bold mb-1">📅 GolfBooker</h1>
+      <h1 className="text-2xl font-semibold mb-1">📅 GolfBooker</h1>
       <div className="text-sm text-muted mb-5">
         Automated tee-time booking manager
       </div>

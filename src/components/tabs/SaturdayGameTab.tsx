@@ -8,7 +8,7 @@ export function SaturdayGameTab() {
 
   return (
     <div>
-      <h1 className="text-xl font-bold mb-1">🏌️ SaturdayGame</h1>
+      <h1 className="text-2xl font-semibold mb-1">🏌️ SaturdayGame</h1>
       <div className="text-sm text-muted mb-5">
         iOS/macOS golf app — Firebase backend
       </div>

@@ -13,12 +13,12 @@ import { useClaudeUsage } from "../../hooks/useClaudeUsage";
 
 const tooltipStyle = {
   contentStyle: {
-    background: "#1a1d27",
-    border: "1px solid #2a2d3a",
-    borderRadius: "8px",
+    background: "#1e2130",
+    border: "1px solid rgba(255,255,255,0.08)",
+    borderRadius: "10px",
     fontSize: "0.75rem",
     padding: "6px 10px",
-    color: "#e4e4e7",
+    color: "#f1f1f3",
   },
   cursor: { fill: "rgba(255,255,255,0.04)" },
 };
@@ -46,7 +46,7 @@ export function ClaudeTab() {
 
   return (
     <div>
-      <h1 className="text-xl font-bold mb-1">🤖 Claude Usage</h1>
+      <h1 className="text-2xl font-semibold mb-1">🤖 Claude Usage</h1>
       <div className="text-sm text-muted mb-5">
         API cost & token consumption
       </div>

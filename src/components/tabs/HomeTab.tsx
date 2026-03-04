@@ -89,10 +89,10 @@ export function HomeTab() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-5">
+      <div className="flex justify-between items-center mb-6">
         <div>
-          <h1 className="text-[1.4rem] max-md:text-[1.1rem]">{greeting}</h1>
-          <div className="text-[0.8rem] text-muted">{dateStr}</div>
+          <h1 className="text-2xl font-semibold">{greeting}</h1>
+          <div className="text-sm text-muted mt-0.5">{dateStr}</div>
         </div>
       </div>
 
@@ -104,12 +104,12 @@ export function HomeTab() {
             <div
               key={`${id}-${idx}`}
               draggable
-              className={`bg-card border border-border rounded-xl p-4 max-md:p-3 cursor-grab select-none transition-[transform,box-shadow] duration-100 ${
+              className={`bg-card border border-border rounded-2xl p-4 max-md:p-3 cursor-grab select-none transition-all duration-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_4px_24px_rgba(0,0,0,0.5)] ${
                 dragIdx === idx ? "opacity-50 scale-[0.97]" : ""
               } ${
                 dragOverIdx === idx
-                  ? "border-accent shadow-[0_0_0_2px_rgba(59,130,246,0.3)]"
-                  : ""
+                  ? "!border-accent shadow-[0_0_0_2px_rgba(59,130,246,0.25)]"
+                  : "hover:-translate-y-0.5 hover:border-border-hover hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.10),0_8px_32px_rgba(0,0,0,0.6)]"
               }`}
               onDragStart={(e) => {
                 e.dataTransfer.setData("text/plain", String(idx));
@@ -131,12 +131,12 @@ export function HomeTab() {
                 handleDrop(from, idx);
               }}
             >
-              <div className="flex justify-between items-center mb-2.5">
-                <h3 className="text-[0.78rem] max-md:text-[0.72rem] font-semibold">
+              <div className="flex justify-between items-center mb-3">
+                <h3 className="text-xs font-semibold uppercase tracking-widest text-muted">
                   {w.name}
                 </h3>
-                <div className="flex gap-1 items-center">
-                  <span className="text-[0.6rem] text-muted px-1.5 py-0.5 bg-white/[0.04] rounded">
+                <div className="flex gap-1.5 items-center">
+                  <span className="text-xs text-muted/60 px-1.5 py-0.5 bg-white/[0.04] rounded-md border border-border">
                     {w.source}
                   </span>
                   <button
@@ -144,13 +144,14 @@ export function HomeTab() {
                       e.stopPropagation();
                       removeWidget(idx);
                     }}
-                    className="bg-transparent border-none text-muted cursor-pointer text-[0.9rem] px-1.5 py-0.5 rounded transition-all duration-150 hover:text-danger hover:bg-danger/10"
+                    className="bg-transparent border-none text-muted/40 cursor-pointer text-sm px-1 py-0.5 rounded transition-all duration-150 hover:text-danger hover:bg-danger/10"
                     title="Remove"
                   >
                     &times;
                   </button>
                 </div>
               </div>
+              <div className="mb-3 border-b border-border" />
               <WidgetContent id={id} />
             </div>
           );
@@ -159,10 +160,10 @@ export function HomeTab() {
         {/* Add widget button */}
         <div
           onClick={() => setModalOpen(true)}
-          className="border-2 border-dashed border-border rounded-xl py-10 px-5 max-md:py-6 max-md:px-4 max-md:min-h-[120px] flex flex-col items-center justify-center gap-2 text-muted cursor-pointer transition-all duration-200 min-h-[160px] hover:border-accent hover:text-accent hover:bg-accent/[0.03]"
+          className="border border-dashed border-border rounded-2xl py-10 px-5 flex flex-col items-center justify-center gap-2 text-muted cursor-pointer transition-all duration-200 min-h-[120px] hover:border-accent/50 hover:text-accent hover:bg-accent/[0.03]"
         >
-          <div className="text-3xl leading-none">+</div>
-          <div className="text-[0.8rem]">Add Widget</div>
+          <div className="text-2xl leading-none opacity-50">+</div>
+          <div className="text-xs uppercase tracking-widest opacity-60">Add Widget</div>
         </div>
       </div>
 
@@ -182,7 +183,7 @@ export function HomeTab() {
           }, {}),
         ).map(([source, widgets]) => (
           <div key={source}>
-            <div className="text-[0.72rem] text-muted uppercase tracking-[1px] my-3 pt-2 border-t border-border first:border-t-0 first:mt-0">
+            <div className="text-xs text-muted uppercase tracking-widest my-3 pt-2 border-t border-border first:border-t-0 first:mt-0">
               {source}
             </div>
             {widgets.map((w) => {
@@ -193,13 +194,13 @@ export function HomeTab() {
                   onClick={() => {
                     if (!added) addWidget(w.id);
                   }}
-                  className={`flex items-center justify-between p-3 border border-border rounded-lg mb-2 cursor-pointer transition-all duration-150 hover:border-accent hover:bg-accent/[0.04] ${
+                  className={`flex items-center justify-between p-3 border border-border rounded-xl mb-2 cursor-pointer transition-all duration-150 hover:border-accent hover:bg-accent/[0.04] ${
                     added ? "opacity-40 pointer-events-none" : ""
                   }`}
                 >
                   <div className="flex flex-col gap-0.5">
-                    <div className="text-[0.85rem] font-semibold">{w.name}</div>
-                    <div className="text-[0.7rem] text-muted">{w.desc}</div>
+                    <div className="text-sm font-semibold">{w.name}</div>
+                    <div className="text-xs text-muted">{w.desc}</div>
                   </div>
                   <div className="text-xl text-accent">
                     {added ? "\u2713" : "+"}
@@ -303,10 +304,10 @@ function WidgetContent({ id }: { id: string }) {
     case "claude-cost":
       return (
         <div className="text-center">
-          <div className="text-[2.4rem] max-md:text-[1.8rem] font-bold leading-none text-danger">
+          <div className="text-3xl font-bold leading-none text-danger">
             {claude ? `$${claude.totalCost.toFixed(2)}` : claudeLoading ? "…" : "—"}
           </div>
-          <div className="text-muted text-[0.72rem] mt-1">
+          <div className="text-xs text-muted mt-2">
             {claude ? `${(claude.totalTokens / 1_000_000).toFixed(1)}M tokens · ${claude.cacheHitRate}% cache hit` : "\u00A0"}
           </div>
         </div>
@@ -387,7 +388,7 @@ function WidgetContent({ id }: { id: string }) {
         </>
       );
     default:
-      return <div className="text-muted text-[0.8rem]">Unknown widget</div>;
+      return <div className="text-muted text-xs">Unknown widget</div>;
   }
 }
 
@@ -407,7 +408,7 @@ function DotRow({
         ? "bg-warn"
         : "bg-danger";
   return (
-    <div className="flex items-center gap-2.5 py-2 border-b border-border last:border-b-0 text-[0.82rem]">
+    <div className="flex items-center gap-2.5 py-2 border-b border-border last:border-b-0 text-sm">
       <div className={`w-2 h-2 rounded-full shrink-0 ${dotColor}`} />
       <span>{text}</span>
       {pill && (
@@ -454,7 +455,7 @@ function MiniChart({ data }: { data?: { label: string; cost: number }[] }) {
               style={{ height: `${Math.max(pct, 2)}%` }}
               title={`$${d.cost.toFixed(2)}`}
             >
-              <div className="hidden group-hover:block absolute bottom-[calc(100%+4px)] left-1/2 -translate-x-1/2 bg-black text-white py-0.5 px-1.5 rounded text-[0.62rem] whitespace-nowrap z-10">
+              <div className="hidden group-hover:block absolute bottom-[calc(100%+4px)] left-1/2 -translate-x-1/2 bg-black text-white py-0.5 px-1.5 rounded text-xs whitespace-nowrap z-10">
                 ${d.cost.toFixed(2)}
               </div>
             </div>
@@ -465,7 +466,7 @@ function MiniChart({ data }: { data?: { label: string; cost: number }[] }) {
         {chartData.map((d) => (
           <span
             key={d.label}
-            className="flex-1 text-center text-[0.55rem] text-muted"
+            className="flex-1 text-center text-xs text-muted"
           >
             {d.label}
           </span>

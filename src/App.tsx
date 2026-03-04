@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { TabId } from "./types";
-import { TopBar } from "./components/layout/TopBar";
+import { Sidebar } from "./components/layout/Sidebar";
 import { TabPanel } from "./components/layout/TabPanel";
 import { HomeTab } from "./components/tabs/HomeTab";
 import { HitThePinTab } from "./components/tabs/HitThePinTab";
@@ -17,30 +17,28 @@ export default function App() {
   };
 
   return (
-    <>
-      <TopBar
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-        onRefresh={handleRefresh}
-      />
-      <TabPanel active={activeTab === "home"}>
-        <HomeTab />
-      </TabPanel>
-      <TabPanel active={activeTab === "hitthepin"}>
-        <HitThePinTab />
-      </TabPanel>
-      <TabPanel active={activeTab === "saturdaygame"}>
-        <SaturdayGameTab />
-      </TabPanel>
-      <TabPanel active={activeTab === "golfbooker"}>
-        <GolfBookerTab />
-      </TabPanel>
-      <TabPanel active={activeTab === "claude"}>
-        <ClaudeTab />
-      </TabPanel>
-      <TabPanel active={activeTab === "openclaw"}>
-        <OpenClawTab />
-      </TabPanel>
-    </>
+    <div className="flex h-screen overflow-hidden bg-bg">
+      <Sidebar activeTab={activeTab} onTabChange={setActiveTab} onRefresh={handleRefresh} />
+      <main className="flex-1 overflow-y-auto">
+        <TabPanel active={activeTab === "home"}>
+          <HomeTab />
+        </TabPanel>
+        <TabPanel active={activeTab === "hitthepin"}>
+          <HitThePinTab />
+        </TabPanel>
+        <TabPanel active={activeTab === "saturdaygame"}>
+          <SaturdayGameTab />
+        </TabPanel>
+        <TabPanel active={activeTab === "golfbooker"}>
+          <GolfBookerTab />
+        </TabPanel>
+        <TabPanel active={activeTab === "claude"}>
+          <ClaudeTab />
+        </TabPanel>
+        <TabPanel active={activeTab === "openclaw"}>
+          <OpenClawTab />
+        </TabPanel>
+      </main>
+    </div>
   );
 }

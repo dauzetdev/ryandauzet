@@ -18,20 +18,24 @@ export function Card({
   noHover = false,
 }: CardProps) {
   const base =
-    "bg-card border border-border rounded-xl p-5 transition-all duration-200";
+    "bg-card border border-border rounded-2xl p-5 transition-all duration-200 " +
+    "shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_4px_24px_rgba(0,0,0,0.5)]";
   const hover = noHover
     ? ""
-    : "hover:border-border-hover hover:shadow-lg hover:shadow-black/20 hover:-translate-y-px";
+    : "hover:-translate-y-0.5 hover:border-border-hover hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.10),0_8px_32px_rgba(0,0,0,0.6)]";
   const wideCls = wide ? " col-span-full" : "";
   const span2Cls = span2 ? " col-span-2 max-md:col-span-1" : "";
 
   return (
     <div className={`${base} ${hover}${wideCls}${span2Cls} ${className}`}>
       {title && (
-        <h2 className="text-xs uppercase tracking-[1.5px] text-muted mb-3 flex items-center gap-1.5 font-semibold">
-          {icon && <span>{icon}</span>}
-          {title}
-        </h2>
+        <>
+          <h2 className="text-xs font-semibold uppercase tracking-widest text-muted flex items-center gap-1.5">
+            {icon && <span>{icon}</span>}
+            {title}
+          </h2>
+          <div className="mt-3 mb-4 border-b border-border" />
+        </>
       )}
       {children}
     </div>

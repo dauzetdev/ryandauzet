@@ -26,14 +26,14 @@ export function KpiRow({ items }: KpiRowProps) {
       {items.map((kpi) => (
         <div
           key={kpi.label}
-          className="text-center py-4 px-2 bg-white/[0.025] rounded-xl border border-border/50"
+          className="py-5 px-3 bg-white/[0.03] rounded-xl border border-border text-center"
         >
           <div
-            className={`text-[2rem] max-md:text-[1.5rem] font-bold leading-none tracking-tight ${colorMap[kpi.color ?? ""] ?? "text-text"}`}
+            className={`text-3xl font-bold leading-none tracking-tight ${colorMap[kpi.color ?? ""] ?? "text-text"}`}
           >
             {kpi.value}
           </div>
-          <div className="text-xs text-muted mt-1.5 font-medium">{kpi.label}</div>
+          <div className="text-xs text-muted mt-1.5 font-medium uppercase tracking-wider">{kpi.label}</div>
         </div>
       ))}
     </div>

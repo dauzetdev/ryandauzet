@@ -22,7 +22,7 @@ export function OpenClawTab() {
 
   return (
     <div>
-      <h1 className="text-xl font-bold mb-1">🦞 OpenClaw</h1>
+      <h1 className="text-2xl font-semibold mb-1">🦞 OpenClaw</h1>
       <div className="text-sm text-muted mb-5">
         System status & infrastructure
       </div>

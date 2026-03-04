@@ -13,7 +13,7 @@ export function HitThePinTab() {
 
   return (
     <div>
-      <h1 className="text-xl font-bold mb-1">⛳ HitThePin</h1>
+      <h1 className="text-2xl font-semibold mb-1">⛳ HitThePin</h1>
       <div className="text-sm text-muted mb-5">
         hitthepin.com — AI golf course reviews
       </div>
