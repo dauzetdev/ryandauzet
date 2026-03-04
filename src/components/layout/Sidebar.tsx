@@ -87,9 +87,7 @@ export function Sidebar({ activeTab, onTabChange, onRefresh, lastUpdated }: Side
         >
           ↻ Refresh
         </button>
-        <div className="text-[0.6rem] text-muted/40 tabular-nums">
-          built {new Date(__BUILD_TIME__).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}
-        </div>
+        <div className="text-[0.6rem] text-muted/40 tabular-nums">v2.1 · Mar 4</div>
       </div>
     </div>
   );
