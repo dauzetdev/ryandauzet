@@ -20,9 +20,9 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen p-4 md:p-6">
       <Header view={view} onBack={handleBack} onRefresh={handleRefresh} />
-      <main className="pt-[54px]">
+      <main>
         {view.mode === "dashboard" ? (
           <DashboardView onSelect={handleSelect} />
         ) : (

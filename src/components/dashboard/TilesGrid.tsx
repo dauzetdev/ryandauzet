@@ -8,7 +8,7 @@ interface TilesGridProps {
 
 export function TilesGrid({ onSelect }: TilesGridProps) {
   return (
-    <div className="tiles-grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+    <div className="tiles-grid grid grid-cols-[repeat(auto-fill,minmax(min(100%,320px),1fr))] gap-6">
       {PROJECTS.map((project) => (
         <ProjectTile
           key={project.id}

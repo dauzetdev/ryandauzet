@@ -8,7 +8,7 @@ interface DashboardViewProps {
 
 export function DashboardView({ onSelect }: DashboardViewProps) {
   return (
-    <div className="tab-content px-10 md:px-16 lg:px-24 py-10">
+    <div className="tab-content px-2 md:px-4 py-8">
       <GreetingBar />
       <TilesGrid onSelect={onSelect} />
     </div>

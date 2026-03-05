@@ -34,7 +34,7 @@ export function Header({ view, onBack, onRefresh }: HeaderProps) {
       : null;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 h-[54px] flex items-center px-6 gap-6 bg-black/30 backdrop-blur-2xl border-b border-white/[0.08]">
+    <header className="sticky top-0 z-50 h-[54px] flex items-center px-6 gap-6 bg-black/30 backdrop-blur-2xl border-b border-white/[0.08] rounded-t-xl">
       {view.mode === "dashboard" ? (
         /* Dashboard: logo */
         <div className="flex items-center gap-2 shrink-0">
