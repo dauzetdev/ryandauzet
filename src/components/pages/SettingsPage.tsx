@@ -16,7 +16,7 @@ export function SettingsPage() {
     <div>
       <PageHeader title="Settings" subtitle="Preferences and connection status" />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="flex flex-wrap gap-5">
         <Card title="Appearance" icon="🎨">
           <div className="mb-4">
             <div className="text-sm text-text-secondary mb-3">Color Mode</div>

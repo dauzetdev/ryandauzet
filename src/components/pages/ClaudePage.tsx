@@ -121,7 +121,7 @@ export function ClaudePage({ scrollY }: Props) {
         </div>
       </Card>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+      <div className="flex flex-wrap gap-5">
         <Card title="Cost Breakdown (30d)" icon="💸" depth={1} scrollY={scrollY}>
           {data ? (
             <>

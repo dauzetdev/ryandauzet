@@ -44,7 +44,7 @@ export function DashboardPage({ scrollY }: Props) {
     <div>
       <Greeting />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+      <div className="flex flex-wrap gap-5">
         {/* OpenClaw */}
         <Card depth={1} scrollY={scrollY}>
           <div className="flex items-center gap-3 mb-4">

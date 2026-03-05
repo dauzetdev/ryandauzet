@@ -41,7 +41,7 @@ export function OpenClawPage({ scrollY }: Props) {
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+      <div className="flex flex-wrap gap-5">
         <Card title="Agents" icon="🤖" depth={1} scrollY={scrollY}>
           {agents.length > 0 ? agents.map((a) => (
             <AgentRow
@@ -150,7 +150,7 @@ export function OpenClawPage({ scrollY }: Props) {
         </Card>
 
         <Card title="Cron Jobs" icon="⏰" wide depth={0} scrollY={scrollY}>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+          <div className="flex flex-wrap gap-5">
             {crons.length > 0 ? crons.map((c) => {
               const variant = c.status === "error" ? "error" : c.status === "ok" ? "ok" : "idle";
               const detail = [c.schedule, c.model, c.lastRun ? `Last: ${c.lastRun}` : ""].filter(Boolean).join(" · ");

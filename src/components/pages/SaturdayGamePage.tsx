@@ -30,7 +30,7 @@ export function SaturdayGamePage({ scrollY }: Props) {
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+      <div className="flex flex-wrap gap-5">
         <Card title="App Status" icon="📱" depth={1} scrollY={scrollY}>
           <StatRow label="Platform">iOS + macOS</StatRow>
           <StatRow label="Backend">Firebase</StatRow>

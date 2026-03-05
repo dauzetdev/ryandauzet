@@ -31,7 +31,7 @@ export function HitThePinPage({ scrollY }: Props) {
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mb-5">
+      <div className="flex flex-wrap gap-5 mb-5">
         <Card title="SEO & Indexing" icon="📈" depth={1} scrollY={scrollY}>
           <StatRow label="Google Indexing API">
             <Pill variant="ok">active</Pill>
