@@ -27,7 +27,7 @@ export function AppShell() {
   const [page, setPage] = useState<PageId>("dashboard");
 
   return (
-    <>
+    <div className="flex h-screen">
       <Sidebar activePage={page} onNavigate={setPage} />
       <ContentArea>
         {(scrollY) => (
@@ -36,6 +36,6 @@ export function AppShell() {
           </div>
         )}
       </ContentArea>
-    </>
+    </div>
   );
 }

@@ -26,7 +26,7 @@ export function Sidebar({ activePage, onNavigate }: Props) {
   const themeLabel = theme === "light" ? "Light" : theme === "dark" ? "Dark" : "System";
 
   return (
-    <aside className="fixed top-0 left-0 w-60 h-screen bg-sidebar border-r border-border flex flex-col z-40">
+    <aside className="w-60 shrink-0 h-screen bg-sidebar border-r border-border flex flex-col sticky top-0">
       {/* Logo */}
       <div className="h-14 flex items-center gap-2.5 px-5 border-b border-border shrink-0">
         <span className="text-xl">🐦</span>
