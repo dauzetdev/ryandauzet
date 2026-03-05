@@ -660,76 +660,12 @@
 <!-- ════════════════════════════════════════════════ -->
 <!-- CLAUDE USAGE -->
 <!-- ════════════════════════════════════════════════ -->
-<div class="page" id="page-claude">
-  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:10px;">
-    <div>
-      <h1 style="font-size:1.3rem; margin-bottom:4px;">🤖 Claude Usage</h1>
-      <div style="font-size:0.78rem; color:var(--muted);">API cost & token consumption</div>
-    </div>
-    <a href="/claude-code-stats.html" target="_blank" style="display:inline-flex; align-items:center; gap:6px; padding:8px 16px; background:rgba(59,130,246,0.12); color:var(--accent); border:1px solid rgba(59,130,246,0.3); border-radius:8px; font-size:0.8rem; font-weight:600; text-decoration:none; transition:all 0.15s;">📊 Full Stats Dashboard →</a>
-  </div>
-
-  <div class="kpi-row" style="margin-bottom:16px;">
-    <div class="kpi"><div class="kpi-val" style="color:var(--red);">$172.64</div><div class="kpi-lbl">30-Day Cost</div></div>
-    <div class="kpi"><div class="kpi-val" style="color:var(--accent);">175.7M</div><div class="kpi-lbl">Tokens (30d)</div></div>
-    <div class="kpi"><div class="kpi-val" style="color:var(--green);">92%</div><div class="kpi-lbl">Cache Hit Rate</div></div>
-    <div class="kpi"><div class="kpi-val" style="color:var(--orange);">$70.55</div><div class="kpi-lbl">Peak Day</div></div>
-  </div>
-
-  <!-- Full-width LLM chart -->
-  <div class="card wide" style="margin-bottom:16px;">
-    <h2>🖥️ Local vs Cloud LLM Usage (Output Tokens)</h2>
-    <div style="display:flex; gap:24px; margin-bottom:16px; flex-wrap:wrap;">
-      <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:3px;background:var(--accent);"></div><span style="font-size:0.75rem; color:var(--muted);">Cloud (Anthropic)</span></div>
-      <div style="display:flex; align-items:center; gap:6px;"><div style="width:12px;height:12px;border-radius:3px;background:var(--green);"></div><span style="font-size:0.75rem; color:var(--muted);">Local (Ollama)</span></div>
-    </div>
-    <div id="llmChart" style="display:flex; align-items:flex-end; gap:6px; height:160px; margin-bottom:4px;"></div>
-    <div id="llmLabels" style="display:flex; gap:6px; margin-top:4px;"></div>
-    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-top:16px; padding-top:14px; border-top:1px solid var(--border);">
-      <div style="text-align:center;"><div style="font-size:1.4rem; font-weight:700; color:var(--accent);">971.6K</div><div style="font-size:0.65rem; color:var(--muted);">Cloud Tokens</div></div>
-      <div style="text-align:center;"><div style="font-size:1.4rem; font-weight:700; color:var(--green);">12.2K</div><div style="font-size:0.65rem; color:var(--muted);">Local Tokens</div></div>
-      <div style="text-align:center;"><div style="font-size:1.4rem; font-weight:700; color:var(--muted);">98.8%</div><div style="font-size:0.65rem; color:var(--muted);">Cloud Share</div></div>
-    </div>
-  </div>
-
-  <!-- Second row: cost breakdown + session budgets + model -->
-  <div class="grid">
-    <div class="card">
-      <h2>💸 Cost Breakdown (30d)</h2>
-      <div class="stat-row"><span class="stat-label">Input tokens (3.4K)</span><span class="stat-value" style="color:var(--accent);">$0.01</span></div>
-      <div class="stat-row"><span class="stat-label">Output tokens (506K)</span><span class="stat-value" style="color:var(--purple);">$12.45</span></div>
-      <div class="stat-row"><span class="stat-label">Cache reads (161M)</span><span class="stat-value" style="color:var(--green);">$78.43</span></div>
-      <div class="stat-row"><span class="stat-label">Cache writes (14M)</span><span class="stat-value" style="color:var(--orange);">$81.75</span></div>
-      <div style="margin-top:10px; font-size:0.68rem; color:var(--muted);">Cache writes (cold misses) are the biggest cost driver.</div>
-    </div>
-
-    <div class="card">
-      <h2>🔑 Session Token Budgets</h2>
-      <div style="margin-bottom:10px;">
-        <div class="stat-row"><span class="stat-label">main (direct)</span><span class="stat-value">19k / 200k <span style="color:var(--green)">10%</span></span></div>
-        <div class="bar-bg"><div class="bar-fill" style="width:10%; background:var(--green);"></div></div>
-      </div>
-      <div style="margin-bottom:10px;">
-        <div class="stat-row"><span class="stat-label">discord (#general)</span><span class="stat-value">167k / 200k <span style="color:var(--orange)">84%</span></span></div>
-        <div class="bar-bg"><div class="bar-fill" style="width:84%; background:var(--orange);"></div></div>
-      </div>
-      <div style="margin-bottom:10px;">
-        <div class="stat-row"><span class="stat-label">discord (#din-tai-fung)</span><span class="stat-value">137k / 200k <span style="color:var(--yellow)">69%</span></span></div>
-        <div class="bar-bg"><div class="bar-fill" style="width:69%; background:var(--yellow);"></div></div>
-      </div>
-      <div>
-        <div class="stat-row"><span class="stat-label">discord (#ryandauzet)</span><span class="stat-value">109k / 200k <span style="color:var(--yellow)">55%</span></span></div>
-        <div class="bar-bg"><div class="bar-fill" style="width:55%; background:var(--yellow);"></div></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>🧠 Model Config</h2>
-      <div class="stat-row"><span class="stat-label">Default model</span><span class="stat-value">claude-sonnet-4-6</span></div>
-      <div class="stat-row"><span class="stat-label">Geoff agent</span><span class="stat-value">claude-sonnet-4-6</span></div>
-      <div class="stat-row"><span class="stat-label">Cron overrides</span><span class="stat-value">Sonnet for recon jobs</span></div>
-    </div>
-  </div>
+<div class="page" id="page-claude" style="padding:0; height:calc(100vh - 53px);">
+  <iframe
+    src="/claude-code-stats.html"
+    style="width:100%; height:100%; border:none; display:block;"
+    title="Claude Code Stats"
+  ></iframe>
 </div>
 
 <!-- OPENCLAW -->
