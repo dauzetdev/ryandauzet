@@ -22,7 +22,7 @@ const colorMap: Record<string, string> = {
 
 export function KpiRow({ items }: KpiRowProps) {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-[repeat(auto-fit,minmax(130px,1fr))] gap-4">
+    <div className="grid grid-cols-[repeat(auto-fill,minmax(120px,1fr))] gap-4">
       {items.map((kpi) => (
         <div
           key={kpi.label}

@@ -37,7 +37,7 @@ export function OpenClawTab() {
         />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-6">
         <Card title="Agents" icon="🤖">
           {agents.length > 0 ? agents.map((a) => (
             <AgentRow
@@ -190,7 +190,7 @@ export function OpenClawTab() {
         </Card>
 
         <Card title="Cron Jobs" icon="⏰" wide>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-5">
             {crons.length > 0 ? crons.map((c) => {
               const variant = c.status === "error" ? "error" : c.status === "ok" ? "ok" : "idle";
               const detail = [c.schedule, c.model, c.lastRun ? `Last: ${c.lastRun}` : ""].filter(Boolean).join(" · ");
