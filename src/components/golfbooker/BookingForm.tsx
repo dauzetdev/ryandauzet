@@ -43,7 +43,6 @@ export function BookingForm({ userId, editingBooking, onClearEdit }: Props) {
   const [foursomes, setFoursomes] = useState<FoursomeState[]>([makeFoursome()]);
   const [submitting, setSubmitting] = useState(false);
 
-  // Load editing booking into form
   useEffect(() => {
     if (!editingBooking) return;
     setTargetDate(editingBooking.targetDate ?? "");
@@ -129,17 +128,16 @@ export function BookingForm({ userId, editingBooking, onClearEdit }: Props) {
   return (
     <form onSubmit={handleSubmit} autoComplete="off">
       {isEditing && (
-        <div className="mb-4 px-3 py-2.5 bg-accent/10 border border-accent/20 rounded-lg text-sm text-accent flex items-center justify-between">
+        <div className="mb-4 px-3 py-2.5 bg-accent/8 border border-accent/15 rounded-xl text-sm text-accent flex items-center justify-between">
           <span>Editing booking for {editingBooking?.targetDate}</span>
-          <button type="button" onClick={reset} className="text-muted hover:text-text text-xs underline">
+          <button type="button" onClick={reset} className="text-text-secondary hover:text-text text-xs underline cursor-pointer">
             Cancel edit
           </button>
         </div>
       )}
 
-      {/* Target date */}
       <div className="mb-4">
-        <label className="block text-xs uppercase tracking-wider text-muted mb-1.5">
+        <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-1.5">
           Target Play Date
         </label>
         <input
@@ -147,18 +145,17 @@ export function BookingForm({ userId, editingBooking, onClearEdit }: Props) {
           value={targetDate}
           onChange={(e) => setTargetDate(e.target.value)}
           required
-          className="w-full px-3 py-2 bg-surface border border-border rounded-lg text-sm text-text outline-none focus:border-accent transition-[border-color] duration-150"
+          className="w-full px-3 py-2 bg-surface border border-border rounded-xl text-sm text-text outline-none focus:border-accent transition-colors"
         />
         {targetDate && (
-          <div className="mt-2 text-xs text-cyan px-3 py-2 bg-cyan/[0.08] rounded-lg">
+          <div className="mt-2 text-xs text-cyan px-3 py-2 bg-cyan/8 rounded-xl">
             {formatDropDate(targetDate, execTime)}
           </div>
         )}
       </div>
 
-      {/* Execution time */}
       <div className="mb-4">
-        <label className="block text-xs uppercase tracking-wider text-muted mb-1.5">
+        <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-1.5">
           Execution Time
         </label>
         <div className="flex gap-2 items-center flex-wrap">
@@ -167,13 +164,11 @@ export function BookingForm({ userId, editingBooking, onClearEdit }: Props) {
             value={execTime}
             onChange={(e) => setExecTime(e.target.value)}
             disabled={bookNow}
-            className="px-3 py-2 bg-surface border border-border rounded-lg text-sm text-text outline-none focus:border-accent transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed"
+            className="px-3 py-2 bg-surface border border-border rounded-xl text-sm text-text outline-none focus:border-accent transition-all disabled:opacity-40 disabled:cursor-not-allowed"
             style={{ maxWidth: 140 }}
           />
-          <span className="text-xs text-muted">
-            {bookNow
-              ? "Booking will start immediately upon submission"
-              : "PST — when to start the booking attempt"}
+          <span className="text-xs text-text-secondary">
+            {bookNow ? "Booking will start immediately upon submission" : "PST — when to start the booking attempt"}
           </span>
         </div>
         <label className="flex items-center gap-2 mt-2 cursor-pointer select-none">
@@ -183,14 +178,13 @@ export function BookingForm({ userId, editingBooking, onClearEdit }: Props) {
             onChange={(e) => setBookNow(e.target.checked)}
             className="w-4 h-4 accent-accent cursor-pointer"
           />
-          <span className="text-sm">Book Now</span>
-          <span className="text-xs text-muted">— skip scheduling, run immediately</span>
+          <span className="text-sm text-text">Book Now</span>
+          <span className="text-xs text-text-secondary">— skip scheduling, run immediately</span>
         </label>
       </div>
 
-      {/* Foursomes */}
       <div className="mb-4">
-        <label className="block text-xs uppercase tracking-wider text-muted mb-2">
+        <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-2">
           Foursomes
         </label>
         {foursomes.map((fs, i) => (

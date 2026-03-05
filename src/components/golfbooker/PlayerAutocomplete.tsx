@@ -3,7 +3,7 @@ import { PLAYERS } from "../../lib/constants";
 
 interface Props {
   selected: string[];
-  allSelected: string[]; // across all foursomes
+  allSelected: string[];
   onAdd: (player: string) => void;
   disabled?: boolean;
 }
@@ -13,7 +13,6 @@ export function PlayerAutocomplete({ selected, allSelected, onAdd, disabled }: P
   const [open, setOpen] = useState(false);
   const [hlIdx, setHlIdx] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
-  const listRef = useRef<HTMLDivElement>(null);
 
   const matches =
     query.trim().length > 0
@@ -54,19 +53,18 @@ export function PlayerAutocomplete({ selected, allSelected, onAdd, disabled }: P
         onBlur={() => setTimeout(() => setOpen(false), 150)}
         placeholder="Search players…"
         disabled={disabled || selected.length >= 4}
-        className="w-full px-3 py-2 bg-surface border border-border rounded-lg text-sm text-text placeholder:text-muted outline-none transition-[border-color] duration-150 focus:border-accent disabled:opacity-40 disabled:cursor-not-allowed"
+        className="w-full px-3 py-2 bg-surface border border-border rounded-xl text-sm text-text placeholder:text-muted outline-none transition-colors focus:border-accent disabled:opacity-40 disabled:cursor-not-allowed"
       />
       {open && (
-        <div
-          ref={listRef}
-          className="absolute top-full left-0 right-0 mt-0.5 bg-surface border border-border rounded-lg max-h-44 overflow-y-auto z-50 shadow-xl shadow-black/30"
-        >
+        <div className="absolute top-full left-0 right-0 mt-0.5 bg-card border border-border rounded-xl max-h-44 overflow-y-auto z-50 shadow-card-hover">
           {matches.map((p, i) => (
             <div
               key={p}
               onMouseDown={() => select(p)}
               onMouseEnter={() => setHlIdx(i)}
-              className={`px-3 py-2 text-sm cursor-pointer transition-colors duration-75 ${i === hlIdx ? "bg-accent/10 text-accent" : "hover:bg-white/5"}`}
+              className={`px-3 py-2 text-sm cursor-pointer transition-colors ${
+                i === hlIdx ? "bg-accent/10 text-accent" : "text-text hover:bg-surface"
+              }`}
             >
               {p}
             </div>

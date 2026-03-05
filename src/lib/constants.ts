@@ -1,20 +1,21 @@
-import type { Tab, ProjectDef } from "../types";
+import type { PageDef, ProjectDef } from "../types";
 
-export const TABS: Tab[] = [
-  { id: "home", label: "Home" },
-  { id: "hitthepin", label: "HitThePin" },
-  { id: "saturdaygame", label: "SaturdayGame" },
-  { id: "golfbooker", label: "GolfBooker" },
-  { id: "claude", label: "Claude Usage" },
-  { id: "openclaw", label: "OpenClaw" },
+export const PAGES: PageDef[] = [
+  { id: "dashboard",    label: "Dashboard",    icon: "grid" },
+  { id: "openclaw",     label: "OpenClaw",     icon: "cpu" },
+  { id: "hitthepin",    label: "HitThePin",    icon: "flag" },
+  { id: "saturdaygame", label: "SaturdayGame", icon: "trophy" },
+  { id: "golfbooker",   label: "GolfBooker",   icon: "calendar" },
+  { id: "claude",       label: "Claude",       icon: "bot" },
+  { id: "settings",     label: "Settings",     icon: "settings" },
 ];
 
 export const PROJECTS: ProjectDef[] = [
-  { id: "openclaw",     label: "OpenClaw",      icon: "\uD83E\uDDE0", accentHex: "#06b6d4", subtitle: "AI Agent Platform" },
-  { id: "hitthepin",    label: "HitThePin",     icon: "\u26F3",       accentHex: "#22c55e", subtitle: "Golf Course Reviews & SEO" },
-  { id: "saturdaygame", label: "SaturdayGame",  icon: "\uD83C\uDFCC\uFE0F", accentHex: "#eab308", subtitle: "Golf Scoring App" },
-  { id: "golfbooker",   label: "GolfBooker",    icon: "\uD83D\uDCC5", accentHex: "#a855f7", subtitle: "Reservation Automation" },
-  { id: "claude",       label: "Claude Usage",  icon: "\uD83E\uDD16", accentHex: "#ef4444", subtitle: "API Spend & Token Tracking" },
+  { id: "openclaw",     label: "OpenClaw",      icon: "🧠", accentHex: "#32ade6", subtitle: "AI Agent Platform" },
+  { id: "hitthepin",    label: "HitThePin",     icon: "⛳",  accentHex: "#34c759", subtitle: "Golf Course Reviews & SEO" },
+  { id: "saturdaygame", label: "SaturdayGame",  icon: "🏌️", accentHex: "#ff9500", subtitle: "Golf Scoring App" },
+  { id: "golfbooker",   label: "GolfBooker",    icon: "📅", accentHex: "#af52de", subtitle: "Reservation Automation" },
+  { id: "claude",       label: "Claude Usage",  icon: "🤖", accentHex: "#ff3b30", subtitle: "API Spend & Token Tracking" },
 ];
 
 export const PLAYERS = [
@@ -75,86 +76,3 @@ export const TIME_PRESETS = [
   "9:30 AM",
   "9:40 AM",
 ];
-
-export const DEFAULT_WIDGET_IDS = [
-  "claude-cost",
-  "gb-bookings",
-  "oc-vitals",
-  "htp-seo",
-  "htp-todos",
-  "oc-crons",
-];
-
-export interface WidgetDef {
-  name: string;
-  source: string;
-  desc: string;
-}
-
-export const WIDGETS: Record<string, WidgetDef> = {
-  "htp-kpis": {
-    name: "HitThePin KPIs",
-    source: "HitThePin",
-    desc: "Course count, pages, states",
-  },
-  "htp-seo": {
-    name: "SEO Status",
-    source: "HitThePin",
-    desc: "Indexing, sitemap, console",
-  },
-  "htp-todos": {
-    name: "HitThePin Todos",
-    source: "HitThePin",
-    desc: "Outstanding tasks",
-  },
-  "htp-socials": {
-    name: "Social Accounts",
-    source: "HitThePin",
-    desc: "IG, YouTube, X, TikTok status",
-  },
-  "sg-status": {
-    name: "SaturdayGame Status",
-    source: "SaturdayGame",
-    desc: "App platform & backend",
-  },
-  "gb-bookings": {
-    name: "Active Bookings",
-    source: "GolfBooker",
-    desc: "Upcoming reservation targets",
-  },
-  "gb-crons": {
-    name: "Booking Crons",
-    source: "GolfBooker",
-    desc: "Reservation monitoring jobs",
-  },
-  "claude-cost": {
-    name: "30-Day Cost",
-    source: "Claude",
-    desc: "Total spend & tokens",
-  },
-  "claude-daily": {
-    name: "Daily Spend Chart",
-    source: "Claude",
-    desc: "Spend over last 9 days",
-  },
-  "claude-sessions": {
-    name: "Session Budgets",
-    source: "Claude",
-    desc: "Token usage per session",
-  },
-  "oc-vitals": {
-    name: "System Vitals",
-    source: "OpenClaw",
-    desc: "Gateway, sessions, agents",
-  },
-  "oc-channels": {
-    name: "Channels",
-    source: "OpenClaw",
-    desc: "Connected messaging channels",
-  },
-  "oc-crons": {
-    name: "All Cron Jobs",
-    source: "OpenClaw",
-    desc: "Status of all scheduled jobs",
-  },
-};

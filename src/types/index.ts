@@ -1,21 +1,12 @@
-export type TabId =
-  | "home"
-  | "hitthepin"
-  | "saturdaygame"
-  | "golfbooker"
-  | "claude"
-  | "openclaw";
+export type PageId = "dashboard" | "openclaw" | "hitthepin" | "saturdaygame" | "golfbooker" | "claude" | "settings";
 
-export interface Tab {
-  id: TabId;
+export interface PageDef {
+  id: PageId;
   label: string;
+  icon: string;
 }
 
 export type ProjectId = "openclaw" | "hitthepin" | "saturdaygame" | "golfbooker" | "claude";
-
-export type AppView =
-  | { mode: "dashboard" }
-  | { mode: "detail"; project: ProjectId };
 
 export interface ProjectDef {
   id: ProjectId;
@@ -32,12 +23,6 @@ export type PillVariant =
   | "idle"
   | "blue"
   | "purple";
-
-export interface Widget {
-  name: string;
-  source: string;
-  desc: string;
-}
 
 export interface Booking {
   id: string;

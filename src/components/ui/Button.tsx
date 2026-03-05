@@ -7,18 +7,18 @@ const variantClasses: Record<Variant, string> = {
   primary:
     "bg-accent text-white hover:bg-accent-hover disabled:opacity-50 disabled:cursor-not-allowed",
   secondary:
-    "bg-transparent border border-border text-text hover:border-accent hover:text-accent",
+    "bg-surface border border-border text-text hover:border-border-hover",
   danger:
-    "bg-transparent border border-danger/30 text-danger hover:bg-danger/10",
+    "bg-danger/8 border border-danger/20 text-danger hover:bg-danger/15",
   success:
-    "bg-success text-black hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed",
-  ghost: "bg-transparent text-muted hover:text-text hover:bg-white/5",
+    "bg-success text-white hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed",
+  ghost: "bg-transparent text-text-secondary hover:text-text hover:bg-surface",
 };
 
 const sizeClasses: Record<Size, string> = {
-  sm: "px-3 py-1.5 text-xs rounded-md gap-1.5",
-  md: "px-4 py-2 text-sm rounded-lg gap-2",
-  lg: "px-5 py-2.5 text-sm rounded-lg gap-2 w-full justify-center",
+  sm: "px-3 py-1.5 text-xs rounded-lg gap-1.5",
+  md: "px-4 py-2 text-sm rounded-xl gap-2",
+  lg: "px-5 py-2.5 text-sm rounded-xl gap-2 w-full justify-center",
 };
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

@@ -6,17 +6,17 @@ interface BarProgressProps {
 const colorMap: Record<string, string> = {
   green: "bg-success",
   yellow: "bg-warn",
-  orange: "bg-orange",
+  orange: "bg-warn",
   red: "bg-danger",
   blue: "bg-accent",
   purple: "bg-purple",
 };
 
-export function BarProgress({ percent, color = "accent" }: BarProgressProps) {
+export function BarProgress({ percent, color = "blue" }: BarProgressProps) {
   return (
-    <div className="w-full h-1.5 bg-border rounded-sm mt-1.5 overflow-hidden">
+    <div className="w-full h-1.5 bg-surface rounded-full mt-1.5 overflow-hidden">
       <div
-        className={`h-full rounded-sm transition-[width] duration-600 ${colorMap[color] ?? "bg-accent"}`}
+        className={`h-full rounded-full transition-[width] duration-500 ${colorMap[color] ?? "bg-accent"}`}
         style={{ width: `${percent}%` }}
       />
     </div>

@@ -10,17 +10,17 @@ export function Modal({ open, onClose, title, children }: ModalProps) {
 
   return (
     <div
-      className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[200] flex justify-center items-center"
+      className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[200] flex justify-center items-center"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="bg-surface border border-border rounded-2xl p-6 w-[min(600px,90vw)] max-h-[80vh] overflow-y-auto max-md:w-[95vw] max-md:p-4 max-md:m-2.5">
+      <div className="bg-card border border-border rounded-2xl p-6 w-[min(560px,90vw)] max-h-[80vh] overflow-y-auto shadow-card-hover">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-base">{title}</h2>
+          <h2 className="text-base font-semibold text-text">{title}</h2>
           <button
             onClick={onClose}
-            className="bg-transparent border-none text-muted text-xl cursor-pointer"
+            className="bg-transparent border-none text-text-tertiary hover:text-text text-xl cursor-pointer transition-colors"
           >
             &times;
           </button>
