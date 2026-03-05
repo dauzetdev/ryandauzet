@@ -17,7 +17,7 @@ export function ContentArea({ children }: Props) {
   }, []);
 
   return (
-    <div ref={ref} className="flex-1 min-w-0 h-screen overflow-y-auto">
+    <div ref={ref} className="flex-1 min-w-0 min-h-0 overflow-y-auto">
       <div className="max-w-5xl mx-auto px-8 py-8">
         {children(scrollY)}
       </div>

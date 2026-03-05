@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { PageId } from "../../types";
-import { Sidebar } from "./Sidebar";
+import { Header } from "./Header";
 import { ContentArea } from "./ContentArea";
 import { DashboardPage } from "../pages/DashboardPage";
 import { OpenClawPage } from "../pages/OpenClawPage";
@@ -27,8 +27,8 @@ export function AppShell() {
   const [page, setPage] = useState<PageId>("dashboard");
 
   return (
-    <div className="flex h-screen">
-      <Sidebar activePage={page} onNavigate={setPage} />
+    <div className="flex flex-col h-screen">
+      <Header activePage={page} onNavigate={setPage} />
       <ContentArea>
         {(scrollY) => (
           <div key={page} className="page-content">
