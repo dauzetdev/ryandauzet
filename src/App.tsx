@@ -1,16 +1,19 @@
 import { useState } from "react";
-import type { TabId } from "./types";
+import type { AppView, ProjectId } from "./types";
 import { Header } from "./components/layout/Header";
-import { TabPanel } from "./components/layout/TabPanel";
-import { HomeTab } from "./components/tabs/HomeTab";
-import { HitThePinTab } from "./components/tabs/HitThePinTab";
-import { SaturdayGameTab } from "./components/tabs/SaturdayGameTab";
-import { GolfBookerTab } from "./components/tabs/GolfBookerTab";
-import { ClaudeTab } from "./components/tabs/ClaudeTab";
-import { OpenClawTab } from "./components/tabs/OpenClawTab";
+import { DashboardView } from "./components/dashboard/DashboardView";
+import { DetailView } from "./components/layout/DetailView";
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<TabId>("home");
+  const [view, setView] = useState<AppView>({ mode: "dashboard" });
+
+  const handleSelect = (project: ProjectId) => {
+    setView({ mode: "detail", project });
+  };
+
+  const handleBack = () => {
+    setView({ mode: "dashboard" });
+  };
 
   const handleRefresh = () => {
     // Wired to React Query invalidation in Phase 3+
@@ -18,14 +21,13 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
-      <Header activeTab={activeTab} onTabChange={setActiveTab} onRefresh={handleRefresh} />
+      <Header view={view} onBack={handleBack} onRefresh={handleRefresh} />
       <main className="pt-[54px]">
-        <TabPanel key={activeTab} active={activeTab === "home"}><HomeTab /></TabPanel>
-        <TabPanel key={activeTab + "h"} active={activeTab === "hitthepin"}><HitThePinTab /></TabPanel>
-        <TabPanel key={activeTab + "s"} active={activeTab === "saturdaygame"}><SaturdayGameTab /></TabPanel>
-        <TabPanel key={activeTab + "g"} active={activeTab === "golfbooker"}><GolfBookerTab /></TabPanel>
-        <TabPanel key={activeTab + "c"} active={activeTab === "claude"}><ClaudeTab /></TabPanel>
-        <TabPanel key={activeTab + "o"} active={activeTab === "openclaw"}><OpenClawTab /></TabPanel>
+        {view.mode === "dashboard" ? (
+          <DashboardView onSelect={handleSelect} />
+        ) : (
+          <DetailView key={view.project} project={view.project} />
+        )}
       </main>
     </div>
   );

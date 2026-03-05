@@ -94,7 +94,7 @@ export function HomeTab() {
         <p className="text-sm text-white/40">{dateStr}</p>
       </div>
 
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {widgetIds.map((id, idx) => {
           const w = WIDGETS[id];
           if (!w) return null;

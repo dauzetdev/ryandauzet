@@ -11,6 +11,20 @@ export interface Tab {
   label: string;
 }
 
+export type ProjectId = "openclaw" | "hitthepin" | "saturdaygame" | "golfbooker" | "claude";
+
+export type AppView =
+  | { mode: "dashboard" }
+  | { mode: "detail"; project: ProjectId };
+
+export interface ProjectDef {
+  id: ProjectId;
+  label: string;
+  icon: string;
+  accentHex: string;
+  subtitle: string;
+}
+
 export type PillVariant =
   | "ok"
   | "warn"

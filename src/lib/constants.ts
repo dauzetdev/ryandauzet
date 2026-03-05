@@ -1,4 +1,4 @@
-import type { Tab } from "../types";
+import type { Tab, ProjectDef } from "../types";
 
 export const TABS: Tab[] = [
   { id: "home", label: "Home" },
@@ -7,6 +7,14 @@ export const TABS: Tab[] = [
   { id: "golfbooker", label: "GolfBooker" },
   { id: "claude", label: "Claude Usage" },
   { id: "openclaw", label: "OpenClaw" },
+];
+
+export const PROJECTS: ProjectDef[] = [
+  { id: "openclaw",     label: "OpenClaw",      icon: "\uD83E\uDDE0", accentHex: "#06b6d4", subtitle: "AI Agent Platform" },
+  { id: "hitthepin",    label: "HitThePin",     icon: "\u26F3",       accentHex: "#22c55e", subtitle: "Golf Course Reviews & SEO" },
+  { id: "saturdaygame", label: "SaturdayGame",  icon: "\uD83C\uDFCC\uFE0F", accentHex: "#eab308", subtitle: "Golf Scoring App" },
+  { id: "golfbooker",   label: "GolfBooker",    icon: "\uD83D\uDCC5", accentHex: "#a855f7", subtitle: "Reservation Automation" },
+  { id: "claude",       label: "Claude Usage",  icon: "\uD83E\uDD16", accentHex: "#ef4444", subtitle: "API Spend & Token Tracking" },
 ];
 
 export const PLAYERS = [
