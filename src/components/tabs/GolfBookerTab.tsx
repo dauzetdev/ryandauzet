@@ -39,7 +39,7 @@ export function GolfBookerTab() {
         </div>
       )}
 
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))] max-md:grid-cols-1 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <Card title="New Booking Request" icon="🆕" span2 noHover>
           {status === "authenticated" && user ? (
             <BookingForm

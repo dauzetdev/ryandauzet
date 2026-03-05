@@ -28,7 +28,7 @@ export function HitThePinTab() {
         />
       </div>
 
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] max-md:grid-cols-1 gap-4 mb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mb-4">
         <Card title="SEO & Indexing" icon="📈">
           <StatRow label="Google Indexing API">
             <Pill variant="ok">active</Pill>

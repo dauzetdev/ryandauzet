@@ -121,7 +121,7 @@ export function ClaudeTab() {
         </div>
       </Card>
 
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] max-md:grid-cols-1 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
         <Card title="Cost Breakdown (30d)" icon="💸">
           {data ? (
             <>
