@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-05T19:02:19.880563+00:00",
+  "generated_at": "2026-03-06T17:00:03.081912+00:00",
   "locale": {
     "locale_code": "en-US",
     "html_lang": "en",
@@ -165,12 +165,12 @@
     "email": "dauzetdev@gmail.com"
   },
   "kpi": {
-    "total_cost": 48.79,
+    "total_cost": 48.82,
     "actual_plan_cost": 100.0,
     "total_sessions": 37,
-    "total_messages": 5327,
-    "total_output_tokens": 380069,
-    "total_input_tokens": 114337,
+    "total_messages": 5542,
+    "total_output_tokens": 396185,
+    "total_input_tokens": 118524,
     "first_session": "2026-02-16",
     "last_session": "2026-03-05",
     "total_projects": 7
@@ -180,16 +180,16 @@
       {
         "plan": "Max",
         "start": "2025-10-01",
-        "end": "2026-03-05",
-        "total_days": 156,
+        "end": "2026-03-06",
+        "total_days": 157,
         "days_active": 11,
         "plan_cost_eur": 93.0,
         "plan_cost_usd": 100.0,
-        "api_cost": 48.79,
-        "savings": -51.21,
+        "api_cost": 48.82,
+        "savings": -51.18,
         "roi_factor": 0.5,
         "sessions": 37,
-        "messages": 5327,
+        "messages": 5542,
         "cost_per_day": 0.31
       }
     ],
@@ -197,22 +197,22 @@
       "plan": "Max",
       "period_start": "2026-03-01",
       "period_end": "2026-04-01",
-      "days_elapsed": 5,
+      "days_elapsed": 6,
       "days_total": 31,
-      "days_remaining": 26,
+      "days_remaining": 25,
       "plan_cost_eur": 93.0,
       "plan_cost_usd": 100.0,
-      "api_cost": 34.13,
-      "projected_cost": 211.62,
-      "savings": -65.87,
+      "api_cost": 34.16,
+      "projected_cost": 176.5,
+      "savings": -65.84,
       "roi_factor": 0.3,
       "sessions": 19,
-      "messages": 3629,
-      "cost_per_day": 6.83
+      "messages": 3844,
+      "cost_per_day": 5.69
     },
-    "total_api_cost": 48.79,
+    "total_api_cost": 48.82,
     "total_plan_cost": 100.0,
-    "total_savings": -51.21,
+    "total_savings": -51.18,
     "overall_roi": 0.5
   },
   "daily_costs": [
@@ -288,10 +288,10 @@
     },
     {
       "date": "2026-03-05",
-      "Haiku 4.5": 2.0126,
-      "Opus 4.6": 7.8577,
+      "Haiku 4.5": 3.1955,
+      "Opus 4.6": 6.7039,
       "Unknown": 3.9924,
-      "total": 13.8627
+      "total": 13.8918
     }
   ],
   "cumulative_costs": [
@@ -337,7 +337,7 @@
     },
     {
       "date": "2026-03-05",
-      "cost": 48.79
+      "cost": 48.82
     }
   ],
   "daily_messages": [
@@ -393,7 +393,7 @@
     },
     {
       "date": "2026-03-05",
-      "messages": 799,
+      "messages": 1014,
       "sessions": 6
     }
   ],
@@ -468,11 +468,11 @@
     },
     {
       "hour": 17,
-      "messages": 162
+      "messages": 161
     },
     {
       "hour": 18,
-      "messages": 334
+      "messages": 313
     },
     {
       "hour": 19,
@@ -488,7 +488,7 @@
     },
     {
       "hour": 22,
-      "messages": 49
+      "messages": 161
     },
     {
       "hour": 23,
@@ -510,7 +510,7 @@
     },
     {
       "day": "Thu",
-      "messages": 508
+      "messages": 598
     },
     {
       "day": "Fri",
@@ -533,21 +533,21 @@
   "model_summary": [
     {
       "model": "Opus 4.6",
-      "cost": 23.61,
-      "input_tokens": 14570,
-      "output_tokens": 95934,
-      "cache_read_tokens": 15346163,
-      "cache_write_tokens": 2155012,
-      "calls": 447
+      "cost": 22.46,
+      "input_tokens": 14523,
+      "output_tokens": 93124,
+      "cache_read_tokens": 14375573,
+      "cache_write_tokens": 2059326,
+      "calls": 418
     },
     {
       "model": "Haiku 4.5",
-      "cost": 19.72,
-      "input_tokens": 83417,
-      "output_tokens": 257002,
-      "cache_read_tokens": 80954645,
-      "cache_write_tokens": 8201252,
-      "calls": 2553
+      "cost": 20.9,
+      "input_tokens": 87651,
+      "output_tokens": 275928,
+      "cache_read_tokens": 85318083,
+      "cache_write_tokens": 8719461,
+      "calls": 2707
     },
     {
       "model": "Unknown",
@@ -561,20 +561,20 @@
   ],
   "cost_by_token_type": {
     "input": 0.24,
-    "output": 4.36,
-    "cache_read": 16.73,
-    "cache_write": 27.47
+    "output": 4.39,
+    "cache_read": 16.68,
+    "cache_write": 27.52
   },
   "projects": [
     {
       "name": "dev/ryandauzet",
       "sessions": 8,
-      "messages": 1156,
-      "cost": 18.71,
-      "input_tokens": 21950,
-      "output_tokens": 138187,
-      "cache_read_tokens": 15057500,
-      "cache_write_tokens": 2906647,
+      "messages": 1371,
+      "cost": 18.74,
+      "input_tokens": 26137,
+      "output_tokens": 154303,
+      "cache_read_tokens": 18450348,
+      "cache_write_tokens": 3329170,
       "file_size_mb": 1.7
     },
     {
@@ -1839,11 +1839,11 @@
       "project_dir": "-Users-dauzet-dev-ryandauzet",
       "date": "2026-03-05",
       "start": "2026-03-05T17:37:28.147000+00:00",
-      "end": "2026-03-05T18:28:27.516000+00:00",
-      "duration_min": 51.0,
+      "end": "2026-03-05T18:07:07.601000+00:00",
+      "duration_min": 29.7,
       "cost": 3.8578,
-      "messages": 112,
-      "user_messages": 53,
+      "messages": 111,
+      "user_messages": 52,
       "assistant_messages": 59,
       "input_tokens": 5613,
       "output_tokens": 10920,
@@ -1870,7 +1870,7 @@
       },
       "first_prompt": "Explore the codebase at /Users/dauzet/dev/ryandauzet thoroughly. I need to understand:\n1. Full file tree (src/ directory especially)\n2. Current App.tsx content\n3. Current main.tsx content  \n4. Current",
       "slug": "indexed-yawning-flame",
-      "file_size_mb": 0.23
+      "file_size_mb": 0.28
     },
     {
       "session_id": "31ce64f8-2a1e-4c6c-9772-99a7e243ef18",
@@ -1911,46 +1911,45 @@
       "project": "dev/ryandauzet",
       "project_dir": "-Users-dauzet-dev-ryandauzet",
       "date": "2026-03-05",
-      "start": "2026-03-05T18:28:27.515000+00:00",
-      "end": "2026-03-05T18:29:29.059000+00:00",
-      "duration_min": 1.0,
-      "cost": 1.1538,
-      "messages": 50,
-      "user_messages": 21,
-      "assistant_messages": 29,
-      "input_tokens": 47,
-      "output_tokens": 2810,
-      "cache_read_tokens": 970590,
-      "cache_write_tokens": 95686,
-      "api_calls": 29,
-      "primary_model": "Opus 4.6",
+      "start": "2026-03-05T22:29:28.372000+00:00",
+      "end": "2026-03-06T04:01:52.423000+00:00",
+      "duration_min": 332.4,
+      "cost": 1.183,
+      "messages": 266,
+      "user_messages": 112,
+      "assistant_messages": 154,
+      "input_tokens": 4234,
+      "output_tokens": 18926,
+      "cache_read_tokens": 4363438,
+      "cache_write_tokens": 518209,
+      "api_calls": 154,
+      "primary_model": "Haiku 4.5",
       "model_breakdown": {
-        "Opus 4.6": {
-          "cost": 1.1538,
-          "output_tokens": 2810,
-          "calls": 29
+        "Haiku 4.5": {
+          "cost": 1.183,
+          "output_tokens": 18926,
+          "calls": 154
         }
       },
       "tools": {
-        "Read": 8,
-        "Write": 1,
-        "Edit": 8,
-        "Bash": 1,
+        "Read": 69,
+        "Glob": 7,
+        "Bash": 31,
         "Grep": 2
       },
-      "first_prompt": "Implement the following plan:\n\n# Uniform Square Tiles + Flex Layout\n\n## Context\nCards across all pages have varying heights creating an uneven \"rectangle\" look. User wants uniform square-ish \"boxes no",
+      "first_prompt": "Explore /Users/dauzet/dev/ryandauzet thoroughly. I need to understand:\n\n1. The Claude Usage page — it's now an iframe pointing to `/claude-code-stats.html`. Find and read this HTML file (likely in `pu",
       "slug": "indexed-yawning-flame",
-      "file_size_mb": 0.23
+      "file_size_mb": 0.19
     }
   ],
   "tool_summary": [
     {
       "name": "Read",
-      "count": 1228
+      "count": 1289
     },
     {
       "name": "Bash",
-      "count": 567
+      "count": 597
     },
     {
       "name": "Grep",
@@ -1958,11 +1957,7 @@
     },
     {
       "name": "Glob",
-      "count": 99
-    },
-    {
-      "name": "Edit",
-      "count": 21
+      "count": 106
     },
     {
       "name": "WebSearch",
@@ -1973,12 +1968,16 @@
       "count": 15
     },
     {
+      "name": "Edit",
+      "count": 13
+    },
+    {
       "name": "TaskUpdate",
       "count": 12
     },
     {
       "name": "Write",
-      "count": 10
+      "count": 9
     },
     {
       "name": "TaskCreate",
@@ -2082,24 +2081,24 @@
       "files": 12
     },
     "file_history": {
-      "total_files": 508,
+      "total_files": 516,
       "total_sessions": 21,
       "total_size_mb": 5.4
     },
     "storage": {
-      "total_mb": 125.4,
+      "total_mb": 127.3,
       "items": [
         {
           "name": "projects/",
-          "size_mb": 86.26
+          "size_mb": 87.83
         },
         {
           "name": "debug/",
-          "size_mb": 23.67
+          "size_mb": 23.99
         },
         {
           "name": "file-history/",
-          "size_mb": 5.42
+          "size_mb": 5.44
         },
         {
           "name": "plugins/",
@@ -2131,7 +2130,7 @@
         },
         {
           "name": "history.jsonl",
-          "size_mb": 0.08
+          "size_mb": 0.09
         },
         {
           "name": "commands/",
