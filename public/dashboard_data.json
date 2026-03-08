@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-07T17:00:01.334100+00:00",
+  "generated_at": "2026-03-08T16:00:01.390109+00:00",
   "locale": {
     "locale_code": "en-US",
     "html_lang": "en",
@@ -165,14 +165,14 @@
     "email": "dauzetdev@gmail.com"
   },
   "kpi": {
-    "total_cost": 48.82,
+    "total_cost": 49.38,
     "actual_plan_cost": 100.0,
-    "total_sessions": 37,
-    "total_messages": 5542,
-    "total_output_tokens": 396185,
-    "total_input_tokens": 118524,
+    "total_sessions": 38,
+    "total_messages": 5633,
+    "total_output_tokens": 402645,
+    "total_input_tokens": 118772,
     "first_session": "2026-02-16",
-    "last_session": "2026-03-05",
+    "last_session": "2026-03-08",
     "total_projects": 7
   },
   "plan": {
@@ -180,16 +180,16 @@
       {
         "plan": "Max",
         "start": "2025-10-01",
-        "end": "2026-03-07",
-        "total_days": 158,
-        "days_active": 11,
+        "end": "2026-03-08",
+        "total_days": 159,
+        "days_active": 12,
         "plan_cost_eur": 93.0,
         "plan_cost_usd": 100.0,
-        "api_cost": 48.82,
-        "savings": -51.18,
+        "api_cost": 49.38,
+        "savings": -50.62,
         "roi_factor": 0.5,
-        "sessions": 37,
-        "messages": 5542,
+        "sessions": 38,
+        "messages": 5633,
         "cost_per_day": 0.31
       }
     ],
@@ -197,22 +197,22 @@
       "plan": "Max",
       "period_start": "2026-03-01",
       "period_end": "2026-04-01",
-      "days_elapsed": 7,
+      "days_elapsed": 8,
       "days_total": 31,
-      "days_remaining": 24,
+      "days_remaining": 23,
       "plan_cost_eur": 93.0,
       "plan_cost_usd": 100.0,
-      "api_cost": 34.16,
-      "projected_cost": 151.29,
-      "savings": -65.84,
+      "api_cost": 34.72,
+      "projected_cost": 134.54,
+      "savings": -65.28,
       "roi_factor": 0.3,
-      "sessions": 19,
-      "messages": 3844,
-      "cost_per_day": 4.88
+      "sessions": 20,
+      "messages": 3935,
+      "cost_per_day": 4.34
     },
-    "total_api_cost": 48.82,
+    "total_api_cost": 49.38,
     "total_plan_cost": 100.0,
-    "total_savings": -51.18,
+    "total_savings": -50.62,
     "overall_roi": 0.5
   },
   "daily_costs": [
@@ -288,10 +288,17 @@
     },
     {
       "date": "2026-03-05",
-      "Haiku 4.5": 3.1955,
+      "Haiku 4.5": 3.5569,
       "Opus 4.6": 6.7039,
       "Unknown": 3.9924,
-      "total": 13.8918
+      "total": 14.2532
+    },
+    {
+      "date": "2026-03-08",
+      "Haiku 4.5": 0.1953,
+      "Opus 4.6": 0.0,
+      "Unknown": 0.0,
+      "total": 0.1953
     }
   ],
   "cumulative_costs": [
@@ -337,7 +344,11 @@
     },
     {
       "date": "2026-03-05",
-      "cost": 48.82
+      "cost": 49.18
+    },
+    {
+      "date": "2026-03-08",
+      "cost": 49.38
     }
   ],
   "daily_messages": [
@@ -393,8 +404,13 @@
     },
     {
       "date": "2026-03-05",
-      "messages": 1014,
+      "messages": 1081,
       "sessions": 6
+    },
+    {
+      "date": "2026-03-08",
+      "messages": 24,
+      "sessions": 1
     }
   ],
   "hourly_distribution": [
@@ -404,7 +420,7 @@
     },
     {
       "hour": 1,
-      "messages": 235
+      "messages": 245
     },
     {
       "hour": 2,
@@ -488,7 +504,7 @@
     },
     {
       "hour": 22,
-      "messages": 161
+      "messages": 189
     },
     {
       "hour": 23,
@@ -510,7 +526,7 @@
     },
     {
       "day": "Thu",
-      "messages": 598
+      "messages": 626
     },
     {
       "day": "Fri",
@@ -522,7 +538,7 @@
     },
     {
       "day": "Sun",
-      "messages": 346
+      "messages": 356
     }
   ],
   "models": [
@@ -542,12 +558,12 @@
     },
     {
       "model": "Haiku 4.5",
-      "cost": 20.9,
-      "input_tokens": 87651,
-      "output_tokens": 275928,
-      "cache_read_tokens": 85318083,
-      "cache_write_tokens": 8719461,
-      "calls": 2707
+      "cost": 21.46,
+      "input_tokens": 87899,
+      "output_tokens": 282388,
+      "cache_read_tokens": 86783851,
+      "cache_write_tokens": 9021521,
+      "calls": 2760
     },
     {
       "model": "Unknown",
@@ -561,20 +577,20 @@
   ],
   "cost_by_token_type": {
     "input": 0.24,
-    "output": 4.39,
-    "cache_read": 16.68,
-    "cache_write": 27.52
+    "output": 4.42,
+    "cache_read": 16.82,
+    "cache_write": 27.9
   },
   "projects": [
     {
       "name": "dev/ryandauzet",
       "sessions": 8,
-      "messages": 1371,
-      "cost": 18.74,
-      "input_tokens": 26137,
-      "output_tokens": 154303,
-      "cache_read_tokens": 18450348,
-      "cache_write_tokens": 3329170,
+      "messages": 1438,
+      "cost": 19.1,
+      "input_tokens": 26330,
+      "output_tokens": 157112,
+      "cache_read_tokens": 19711310,
+      "cache_write_tokens": 3506004,
       "file_size_mb": 1.7
     },
     {
@@ -612,14 +628,14 @@
     },
     {
       "name": "dev/GolfBooker",
-      "sessions": 2,
-      "messages": 219,
-      "cost": 2.24,
-      "input_tokens": 357,
-      "output_tokens": 17936,
-      "cache_read_tokens": 4085112,
-      "cache_write_tokens": 356108,
-      "file_size_mb": 0.6
+      "sessions": 3,
+      "messages": 243,
+      "cost": 2.43,
+      "input_tokens": 412,
+      "output_tokens": 21587,
+      "cache_read_tokens": 4289918,
+      "cache_write_tokens": 481334,
+      "file_size_mb": 0.8
     },
     {
       "name": "workspace/golfbooker",
@@ -1912,52 +1928,86 @@
       "project_dir": "-Users-dauzet-dev-ryandauzet",
       "date": "2026-03-05",
       "start": "2026-03-05T22:29:28.372000+00:00",
-      "end": "2026-03-06T04:01:52.423000+00:00",
-      "duration_min": 332.4,
-      "cost": 1.183,
-      "messages": 266,
-      "user_messages": 112,
-      "assistant_messages": 154,
-      "input_tokens": 4234,
-      "output_tokens": 18926,
-      "cache_read_tokens": 4363438,
-      "cache_write_tokens": 518209,
-      "api_calls": 154,
+      "end": "2026-03-08T00:34:39.880000+00:00",
+      "duration_min": 3005.2,
+      "cost": 1.5443,
+      "messages": 333,
+      "user_messages": 140,
+      "assistant_messages": 193,
+      "input_tokens": 4427,
+      "output_tokens": 21735,
+      "cache_read_tokens": 5624400,
+      "cache_write_tokens": 695043,
+      "api_calls": 193,
       "primary_model": "Haiku 4.5",
       "model_breakdown": {
         "Haiku 4.5": {
-          "cost": 1.183,
-          "output_tokens": 18926,
-          "calls": 154
+          "cost": 1.5443,
+          "output_tokens": 21735,
+          "calls": 193
         }
       },
       "tools": {
-        "Read": 69,
-        "Glob": 7,
-        "Bash": 31,
-        "Grep": 2
+        "Read": 82,
+        "Glob": 13,
+        "Bash": 35,
+        "Grep": 7
       },
       "first_prompt": "Explore /Users/dauzet/dev/ryandauzet thoroughly. I need to understand:\n\n1. The Claude Usage page — it's now an iframe pointing to `/claude-code-stats.html`. Find and read this HTML file (likely in `pu",
       "slug": "indexed-yawning-flame",
       "file_size_mb": 0.19
+    },
+    {
+      "session_id": "dc5be59d-d87a-4f88-8d5d-5fcf4cf56829",
+      "project": "dev/GolfBooker",
+      "project_dir": "-Users-dauzet-dev-GolfBooker",
+      "date": "2026-03-08",
+      "start": "2026-03-08T01:10:36.423000+00:00",
+      "end": "2026-03-08T01:11:10.147000+00:00",
+      "duration_min": 0.6,
+      "cost": 0.1953,
+      "messages": 24,
+      "user_messages": 10,
+      "assistant_messages": 14,
+      "input_tokens": 55,
+      "output_tokens": 3651,
+      "cache_read_tokens": 204806,
+      "cache_write_tokens": 125226,
+      "api_calls": 14,
+      "primary_model": "Haiku 4.5",
+      "model_breakdown": {
+        "Haiku 4.5": {
+          "cost": 0.1953,
+          "output_tokens": 3651,
+          "calls": 14
+        }
+      },
+      "tools": {
+        "Read": 7,
+        "Grep": 1,
+        "Bash": 1
+      },
+      "first_prompt": "Explore the GolfBooker codebase to understand the existing profile system thoroughly. I need to understand:\n\n1. The TeeTimeProfile and ProfileInstance models (full structure)\n2. How profiles are curre",
+      "slug": "twinkling-mixing-patterson",
+      "file_size_mb": 0.15
     }
   ],
   "tool_summary": [
     {
       "name": "Read",
-      "count": 1289
+      "count": 1309
     },
     {
       "name": "Bash",
-      "count": 597
+      "count": 602
     },
     {
       "name": "Grep",
-      "count": 135
+      "count": 141
     },
     {
       "name": "Glob",
-      "count": 106
+      "count": 112
     },
     {
       "name": "WebSearch",
@@ -2081,24 +2131,24 @@
       "files": 12
     },
     "file_history": {
-      "total_files": 516,
-      "total_sessions": 21,
-      "total_size_mb": 5.4
+      "total_files": 523,
+      "total_sessions": 22,
+      "total_size_mb": 5.7
     },
     "storage": {
-      "total_mb": 127.4,
+      "total_mb": 129.8,
       "items": [
         {
           "name": "projects/",
-          "size_mb": 87.83
+          "size_mb": 89.74
         },
         {
           "name": "debug/",
-          "size_mb": 24.12
+          "size_mb": 24.34
         },
         {
           "name": "file-history/",
-          "size_mb": 5.44
+          "size_mb": 5.66
         },
         {
           "name": "plugins/",
@@ -2122,7 +2172,7 @@
         },
         {
           "name": "cache/",
-          "size_mb": 0.12
+          "size_mb": 0.13
         },
         {
           "name": "backups/",
@@ -2166,6 +2216,10 @@
         },
         {
           "name": "settings.local.json",
+          "size_mb": 0.0
+        },
+        {
+          "name": "mcp-needs-auth-cache.json",
           "size_mb": 0.0
         },
         {
