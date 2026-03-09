@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-08T16:00:01.390109+00:00",
+  "generated_at": "2026-03-09T16:00:01.830196+00:00",
   "locale": {
     "locale_code": "en-US",
     "html_lang": "en",
@@ -165,55 +165,55 @@
     "email": "dauzetdev@gmail.com"
   },
   "kpi": {
-    "total_cost": 49.38,
+    "total_cost": 79.87,
     "actual_plan_cost": 100.0,
-    "total_sessions": 38,
-    "total_messages": 5633,
-    "total_output_tokens": 402645,
-    "total_input_tokens": 118772,
+    "total_sessions": 45,
+    "total_messages": 7205,
+    "total_output_tokens": 591554,
+    "total_input_tokens": 187337,
     "first_session": "2026-02-16",
-    "last_session": "2026-03-08",
-    "total_projects": 7
+    "last_session": "2026-03-09",
+    "total_projects": 8
   },
   "plan": {
     "periods": [
       {
         "plan": "Max",
         "start": "2025-10-01",
-        "end": "2026-03-08",
-        "total_days": 159,
-        "days_active": 12,
+        "end": "2026-03-09",
+        "total_days": 160,
+        "days_active": 13,
         "plan_cost_eur": 93.0,
         "plan_cost_usd": 100.0,
-        "api_cost": 49.38,
-        "savings": -50.62,
-        "roi_factor": 0.5,
-        "sessions": 38,
-        "messages": 5633,
-        "cost_per_day": 0.31
+        "api_cost": 79.87,
+        "savings": -20.13,
+        "roi_factor": 0.8,
+        "sessions": 45,
+        "messages": 7205,
+        "cost_per_day": 0.5
       }
     ],
     "current_billing": {
       "plan": "Max",
       "period_start": "2026-03-01",
       "period_end": "2026-04-01",
-      "days_elapsed": 8,
+      "days_elapsed": 9,
       "days_total": 31,
-      "days_remaining": 23,
+      "days_remaining": 22,
       "plan_cost_eur": 93.0,
       "plan_cost_usd": 100.0,
-      "api_cost": 34.72,
-      "projected_cost": 134.54,
-      "savings": -65.28,
-      "roi_factor": 0.3,
-      "sessions": 20,
-      "messages": 3935,
-      "cost_per_day": 4.34
+      "api_cost": 65.21,
+      "projected_cost": 224.62,
+      "savings": -34.79,
+      "roi_factor": 0.7,
+      "sessions": 27,
+      "messages": 5507,
+      "cost_per_day": 7.25
     },
-    "total_api_cost": 49.38,
+    "total_api_cost": 79.87,
     "total_plan_cost": 100.0,
-    "total_savings": -50.62,
-    "overall_roi": 0.5
+    "total_savings": -20.13,
+    "overall_roi": 0.8
   },
   "daily_costs": [
     {
@@ -288,17 +288,24 @@
     },
     {
       "date": "2026-03-05",
-      "Haiku 4.5": 3.5569,
+      "Haiku 4.5": 3.6457,
       "Opus 4.6": 6.7039,
       "Unknown": 3.9924,
-      "total": 14.2532
+      "total": 14.342
     },
     {
       "date": "2026-03-08",
       "Haiku 4.5": 0.1953,
-      "Opus 4.6": 0.0,
+      "Opus 4.6": 22.3634,
       "Unknown": 0.0,
-      "total": 0.1953
+      "total": 22.5587
+    },
+    {
+      "date": "2026-03-09",
+      "Haiku 4.5": 5.0085,
+      "Opus 4.6": 3.0337,
+      "Unknown": 0.0,
+      "total": 8.0422
     }
   ],
   "cumulative_costs": [
@@ -344,11 +351,15 @@
     },
     {
       "date": "2026-03-05",
-      "cost": 49.18
+      "cost": 49.27
     },
     {
       "date": "2026-03-08",
-      "cost": 49.38
+      "cost": 71.83
+    },
+    {
+      "date": "2026-03-09",
+      "cost": 79.87
     }
   ],
   "daily_messages": [
@@ -404,31 +415,36 @@
     },
     {
       "date": "2026-03-05",
-      "messages": 1081,
+      "messages": 1083,
       "sessions": 6
     },
     {
       "date": "2026-03-08",
-      "messages": 24,
+      "messages": 497,
       "sessions": 1
+    },
+    {
+      "date": "2026-03-09",
+      "messages": 1097,
+      "sessions": 7
     }
   ],
   "hourly_distribution": [
     {
       "hour": 0,
-      "messages": 397
+      "messages": 596
     },
     {
       "hour": 1,
-      "messages": 245
+      "messages": 404
     },
     {
       "hour": 2,
-      "messages": 17
+      "messages": 298
     },
     {
       "hour": 3,
-      "messages": 0
+      "messages": 2
     },
     {
       "hour": 4,
@@ -504,7 +520,7 @@
     },
     {
       "hour": 22,
-      "messages": 189
+      "messages": 190
     },
     {
       "hour": 23,
@@ -514,7 +530,7 @@
   "weekday_distribution": [
     {
       "day": "Mon",
-      "messages": 191
+      "messages": 655
     },
     {
       "day": "Tue",
@@ -526,7 +542,7 @@
     },
     {
       "day": "Thu",
-      "messages": 626
+      "messages": 627
     },
     {
       "day": "Fri",
@@ -538,7 +554,7 @@
     },
     {
       "day": "Sun",
-      "messages": 356
+      "messages": 533
     }
   ],
   "models": [
@@ -549,21 +565,21 @@
   "model_summary": [
     {
       "model": "Opus 4.6",
-      "cost": 22.46,
-      "input_tokens": 14523,
-      "output_tokens": 93124,
-      "cache_read_tokens": 14375573,
-      "cache_write_tokens": 2059326,
-      "calls": 418
+      "cost": 47.86,
+      "input_tokens": 34788,
+      "output_tokens": 218148,
+      "cache_read_tokens": 36184834,
+      "cache_write_tokens": 3861806,
+      "calls": 801
     },
     {
       "model": "Haiku 4.5",
-      "cost": 21.46,
-      "input_tokens": 87899,
-      "output_tokens": 282388,
-      "cache_read_tokens": 86783851,
-      "cache_write_tokens": 9021521,
-      "calls": 2760
+      "cost": 26.55,
+      "input_tokens": 136199,
+      "output_tokens": 346273,
+      "cache_read_tokens": 106967903,
+      "cache_write_tokens": 11190461,
+      "calls": 3302
     },
     {
       "model": "Unknown",
@@ -576,33 +592,44 @@
     }
   ],
   "cost_by_token_type": {
-    "input": 0.24,
-    "output": 4.42,
-    "cache_read": 16.82,
-    "cache_write": 27.9
+    "input": 0.39,
+    "output": 7.86,
+    "cache_read": 29.75,
+    "cache_write": 41.87
   },
   "projects": [
     {
+      "name": "dev/GolfBooker",
+      "sessions": 5,
+      "messages": 833,
+      "cost": 25.85,
+      "input_tokens": 20873,
+      "output_tokens": 138987,
+      "cache_read_tokens": 24909414,
+      "cache_write_tokens": 2473964,
+      "file_size_mb": 1.2
+    },
+    {
       "name": "dev/ryandauzet",
-      "sessions": 8,
-      "messages": 1438,
-      "cost": 19.1,
-      "input_tokens": 26330,
-      "output_tokens": 157112,
-      "cache_read_tokens": 19711310,
-      "cache_write_tokens": 3506004,
-      "file_size_mb": 1.7
+      "sessions": 10,
+      "messages": 1749,
+      "cost": 22.37,
+      "input_tokens": 66317,
+      "output_tokens": 182354,
+      "cache_read_tokens": 24847776,
+      "cache_write_tokens": 3985163,
+      "file_size_mb": 2.4
     },
     {
       "name": "dev/FairwayIQ",
-      "sessions": 10,
-      "messages": 1701,
-      "cost": 12.59,
-      "input_tokens": 51764,
-      "output_tokens": 52570,
-      "cache_read_tokens": 28275812,
-      "cache_write_tokens": 3636282,
-      "file_size_mb": 1.6
+      "sessions": 12,
+      "messages": 2367,
+      "cost": 16.31,
+      "input_tokens": 59872,
+      "output_tokens": 98427,
+      "cache_read_tokens": 44477777,
+      "cache_write_tokens": 5125811,
+      "file_size_mb": 2.3
     },
     {
       "name": "SaturdayGame/SaturdayGame",
@@ -627,17 +654,6 @@
       "file_size_mb": 0.9
     },
     {
-      "name": "dev/GolfBooker",
-      "sessions": 3,
-      "messages": 243,
-      "cost": 2.43,
-      "input_tokens": 412,
-      "output_tokens": 21587,
-      "cache_read_tokens": 4289918,
-      "cache_write_tokens": 481334,
-      "file_size_mb": 0.8
-    },
-    {
       "name": "workspace/golfbooker",
       "sessions": 2,
       "messages": 63,
@@ -658,6 +674,17 @@
       "cache_read_tokens": 1025010,
       "cache_write_tokens": 53558,
       "file_size_mb": 0.4
+    },
+    {
+      "name": "dev/sandbox",
+      "sessions": 1,
+      "messages": 5,
+      "cost": 0.09,
+      "input_tokens": 9,
+      "output_tokens": 410,
+      "cache_read_tokens": 35386,
+      "cache_write_tokens": 10102,
+      "file_size_mb": 0.0
     }
   ],
   "sessions": [
@@ -1928,23 +1955,23 @@
       "project_dir": "-Users-dauzet-dev-ryandauzet",
       "date": "2026-03-05",
       "start": "2026-03-05T22:29:28.372000+00:00",
-      "end": "2026-03-08T00:34:39.880000+00:00",
-      "duration_min": 3005.2,
-      "cost": 1.5443,
-      "messages": 333,
-      "user_messages": 140,
-      "assistant_messages": 193,
-      "input_tokens": 4427,
-      "output_tokens": 21735,
+      "end": "2026-03-09T00:47:11.655000+00:00",
+      "duration_min": 4457.7,
+      "cost": 1.6331,
+      "messages": 335,
+      "user_messages": 141,
+      "assistant_messages": 194,
+      "input_tokens": 4432,
+      "output_tokens": 24318,
       "cache_read_tokens": 5624400,
-      "cache_write_tokens": 695043,
-      "api_calls": 193,
+      "cache_write_tokens": 755718,
+      "api_calls": 194,
       "primary_model": "Haiku 4.5",
       "model_breakdown": {
         "Haiku 4.5": {
-          "cost": 1.5443,
-          "output_tokens": 21735,
-          "calls": 193
+          "cost": 1.6331,
+          "output_tokens": 24318,
+          "calls": 194
         }
       },
       "tools": {
@@ -1962,55 +1989,316 @@
       "project": "dev/GolfBooker",
       "project_dir": "-Users-dauzet-dev-GolfBooker",
       "date": "2026-03-08",
-      "start": "2026-03-08T01:10:36.423000+00:00",
-      "end": "2026-03-08T01:11:10.147000+00:00",
-      "duration_min": 0.6,
-      "cost": 0.1953,
-      "messages": 24,
-      "user_messages": 10,
-      "assistant_messages": 14,
-      "input_tokens": 55,
-      "output_tokens": 3651,
-      "cache_read_tokens": 204806,
-      "cache_write_tokens": 125226,
-      "api_calls": 14,
-      "primary_model": "Haiku 4.5",
+      "start": "2026-03-08T00:35:16.085000+00:00",
+      "end": "2026-03-09T00:44:00.523000+00:00",
+      "duration_min": 1448.7,
+      "cost": 22.5587,
+      "messages": 497,
+      "user_messages": 187,
+      "assistant_messages": 310,
+      "input_tokens": 20152,
+      "output_tokens": 109191,
+      "cache_read_tokens": 18465752,
+      "cache_write_tokens": 1804257,
+      "api_calls": 305,
+      "primary_model": "Opus 4.6",
       "model_breakdown": {
         "Haiku 4.5": {
           "cost": 0.1953,
           "output_tokens": 3651,
           "calls": 14
+        },
+        "Opus 4.6": {
+          "cost": 22.3634,
+          "output_tokens": 105540,
+          "calls": 291
         }
       },
       "tools": {
-        "Read": 7,
-        "Grep": 1,
-        "Bash": 1
+        "Read": 67,
+        "Grep": 22,
+        "Bash": 4,
+        "ToolSearch": 3,
+        "Glob": 3,
+        "Edit": 51,
+        "Agent": 3
       },
       "first_prompt": "Explore the GolfBooker codebase to understand the existing profile system thoroughly. I need to understand:\n\n1. The TeeTimeProfile and ProfileInstance models (full structure)\n2. How profiles are curre",
       "slug": "twinkling-mixing-patterson",
       "file_size_mb": 0.15
+    },
+    {
+      "session_id": "c5f13038-e8db-4240-bf27-9b2d7fcbd63a",
+      "project": "dev/GolfBooker",
+      "project_dir": "-Users-dauzet-dev-GolfBooker",
+      "date": "2026-03-09",
+      "start": "2026-03-09T00:49:32.001000+00:00",
+      "end": "2026-03-09T00:56:26.685000+00:00",
+      "duration_min": 6.9,
+      "cost": 0.4558,
+      "messages": 31,
+      "user_messages": 12,
+      "assistant_messages": 19,
+      "input_tokens": 33,
+      "output_tokens": 5552,
+      "cache_read_tokens": 344535,
+      "cache_write_tokens": 23126,
+      "api_calls": 19,
+      "primary_model": "Opus 4.6",
+      "model_breakdown": {
+        "Opus 4.6": {
+          "cost": 0.4558,
+          "output_tokens": 5552,
+          "calls": 19
+        }
+      },
+      "tools": {
+        "Glob": 1,
+        "Grep": 3,
+        "Read": 2,
+        "Edit": 3
+      },
+      "first_prompt": "the tee time setting has up/down arrows to tweak H:MM AM. In addition to the up/down arrows, can we allow people to type in the time too?",
+      "slug": "atomic-greeting-diffie",
+      "file_size_mb": 0.09
+    },
+    {
+      "session_id": "6b94a06c-858b-48e9-9d98-fb354b4b0bbc",
+      "project": "dev/GolfBooker",
+      "project_dir": "-Users-dauzet-dev-GolfBooker",
+      "date": "2026-03-09",
+      "start": "2026-03-09T01:24:08.207000+00:00",
+      "end": "2026-03-09T01:27:14.679000+00:00",
+      "duration_min": 3.1,
+      "cost": 0.5964,
+      "messages": 86,
+      "user_messages": 37,
+      "assistant_messages": 49,
+      "input_tokens": 331,
+      "output_tokens": 6308,
+      "cache_read_tokens": 2014015,
+      "cache_write_tokens": 290473,
+      "api_calls": 49,
+      "primary_model": "Haiku 4.5",
+      "model_breakdown": {
+        "Haiku 4.5": {
+          "cost": 0.5964,
+          "output_tokens": 6308,
+          "calls": 49
+        }
+      },
+      "tools": {
+        "Bash": 9,
+        "Glob": 1,
+        "Grep": 13,
+        "Read": 13
+      },
+      "first_prompt": "Explore this GolfBooker iOS codebase thoroughly. I need to understand:\n\n1. How the tee time search works - look for search logic, the \"Search #XXXX - Not found:\" debug messages, and the JavaScript tha",
+      "slug": "nifty-growing-sedgewick",
+      "file_size_mb": 0.33
+    },
+    {
+      "session_id": "973fea47-0180-405e-9f55-0cf3ef8d0fc6",
+      "project": "dev/ryandauzet",
+      "project_dir": "-Users-dauzet-dev-ryandauzet",
+      "date": "2026-03-09",
+      "start": "2026-03-09T01:35:57.769000+00:00",
+      "end": "2026-03-09T01:47:29.131000+00:00",
+      "duration_min": 11.5,
+      "cost": 0.6927,
+      "messages": 184,
+      "user_messages": 77,
+      "assistant_messages": 107,
+      "input_tokens": 39856,
+      "output_tokens": 9137,
+      "cache_read_tokens": 1968072,
+      "cache_write_tokens": 328263,
+      "api_calls": 107,
+      "primary_model": "Haiku 4.5",
+      "model_breakdown": {
+        "Haiku 4.5": {
+          "cost": 0.6927,
+          "output_tokens": 9137,
+          "calls": 107
+        }
+      },
+      "tools": {
+        "Glob": 4,
+        "Bash": 17,
+        "Read": 23,
+        "Grep": 2,
+        "WebSearch": 13,
+        "WebFetch": 14
+      },
+      "first_prompt": "I need to understand the existing data sources and API patterns for HitThePin in this project. Specifically:\n\n1. Find any existing HitThePin-related API routes in `api/` directory\n2. Check what env va",
+      "slug": "indexed-yawning-flame",
+      "file_size_mb": 0.39
+    },
+    {
+      "session_id": "43610470-069e-41d1-9210-fb323ba46b52",
+      "project": "dev/ryandauzet",
+      "project_dir": "-Users-dauzet-dev-ryandauzet",
+      "date": "2026-03-09",
+      "start": "2026-03-09T01:47:29.129000+00:00",
+      "end": "2026-03-09T02:24:14.553000+00:00",
+      "duration_min": 36.8,
+      "cost": 2.4868,
+      "messages": 125,
+      "user_messages": 55,
+      "assistant_messages": 70,
+      "input_tokens": 126,
+      "output_tokens": 13522,
+      "cache_read_tokens": 3168394,
+      "cache_write_tokens": 90221,
+      "api_calls": 70,
+      "primary_model": "Opus 4.6",
+      "model_breakdown": {
+        "Opus 4.6": {
+          "cost": 2.4868,
+          "output_tokens": 13522,
+          "calls": 70
+        }
+      },
+      "tools": {
+        "Read": 6,
+        "TaskCreate": 4,
+        "TaskUpdate": 8,
+        "Write": 2,
+        "Edit": 2,
+        "Bash": 16
+      },
+      "first_prompt": "Implement the following plan:\n\n# HitThePin Analytics Tab\n\n## Context\nNew tab on the dashboard showing HitThePin website health data via Google Search Console API. Follows the same pattern as SaturdayG",
+      "slug": "indexed-yawning-flame",
+      "file_size_mb": 0.39
+    },
+    {
+      "session_id": "b3fce7fc-9104-49fa-b85a-1d3c25c2756f",
+      "project": "dev/FairwayIQ",
+      "project_dir": "-Users-dauzet-dev-FairwayIQ",
+      "date": "2026-03-09",
+      "start": "2026-03-09T02:24:45.106000+00:00",
+      "end": "2026-03-09T02:26:16.805000+00:00",
+      "duration_min": 1.5,
+      "cost": 0.659,
+      "messages": 99,
+      "user_messages": 41,
+      "assistant_messages": 58,
+      "input_tokens": 6588,
+      "output_tokens": 8240,
+      "cache_read_tokens": 2592034,
+      "cache_write_tokens": 281628,
+      "api_calls": 58,
+      "primary_model": "Haiku 4.5",
+      "model_breakdown": {
+        "Haiku 4.5": {
+          "cost": 0.659,
+          "output_tokens": 8240,
+          "calls": 58
+        }
+      },
+      "tools": {
+        "Glob": 1,
+        "Bash": 19,
+        "Grep": 2,
+        "Read": 18
+      },
+      "first_prompt": "Very thorough exploration of image loading and performance in this codebase. I need to understand:\n\n1. How images are referenced and loaded across all components (src/components/, src/pages/)\n2. Any i",
+      "slug": "virtual-shimmying-tarjan",
+      "file_size_mb": 0.28
+    },
+    {
+      "session_id": "4693e6ab-2876-4f70-99f7-d18a68448829",
+      "project": "dev/FairwayIQ",
+      "project_dir": "-Users-dauzet-dev-FairwayIQ",
+      "date": "2026-03-09",
+      "start": "2026-03-09T02:57:36.760000+00:00",
+      "end": "2026-03-09T03:13:16.011000+00:00",
+      "duration_min": 15.7,
+      "cost": 3.0605,
+      "messages": 567,
+      "user_messages": 240,
+      "assistant_messages": 327,
+      "input_tokens": 1520,
+      "output_tokens": 37617,
+      "cache_read_tokens": 13609931,
+      "cache_write_tokens": 1207901,
+      "api_calls": 327,
+      "primary_model": "Haiku 4.5",
+      "model_breakdown": {
+        "Haiku 4.5": {
+          "cost": 3.0605,
+          "output_tokens": 37617,
+          "calls": 327
+        }
+      },
+      "tools": {
+        "Bash": 56,
+        "Glob": 10,
+        "Read": 156,
+        "Grep": 13
+      },
+      "first_prompt": "Do a very thorough audit of all page components and UI components for bugs, edge cases, and stability issues. Check:\n\n1. All page components in src/page-components/ and app/ - look for unhandled state",
+      "slug": "starry-tumbling-sunbeam",
+      "file_size_mb": 0.37
+    },
+    {
+      "session_id": "4d480abc-bfa0-4ccf-9bee-68bdc932e4e5",
+      "project": "dev/sandbox",
+      "project_dir": "-Users-dauzet-dev-sandbox",
+      "date": "2026-03-09",
+      "start": "2026-03-09T03:22:16.230000+00:00",
+      "end": "2026-03-09T03:29:08.279000+00:00",
+      "duration_min": 6.9,
+      "cost": 0.0911,
+      "messages": 5,
+      "user_messages": 2,
+      "assistant_messages": 3,
+      "input_tokens": 9,
+      "output_tokens": 410,
+      "cache_read_tokens": 35386,
+      "cache_write_tokens": 10102,
+      "api_calls": 3,
+      "primary_model": "Opus 4.6",
+      "model_breakdown": {
+        "Opus 4.6": {
+          "cost": 0.0911,
+          "output_tokens": 410,
+          "calls": 3
+        }
+      },
+      "tools": {},
+      "first_prompt": "is it possible to browse this directory and download the video content from the website? https://onlyfans.com/jazmenjafar/media",
+      "slug": "",
+      "file_size_mb": 0.01
     }
   ],
   "tool_summary": [
     {
       "name": "Read",
-      "count": 1309
+      "count": 1587
     },
     {
       "name": "Bash",
-      "count": 602
+      "count": 722
     },
     {
       "name": "Grep",
-      "count": 141
+      "count": 195
     },
     {
       "name": "Glob",
-      "count": 112
+      "count": 132
+    },
+    {
+      "name": "Edit",
+      "count": 69
     },
     {
       "name": "WebSearch",
+      "count": 33
+    },
+    {
+      "name": "TaskUpdate",
       "count": 20
     },
     {
@@ -2018,20 +2306,24 @@
       "count": 15
     },
     {
-      "name": "Edit",
-      "count": 13
-    },
-    {
-      "name": "TaskUpdate",
-      "count": 12
+      "name": "WebFetch",
+      "count": 14
     },
     {
       "name": "Write",
-      "count": 9
+      "count": 11
     },
     {
       "name": "TaskCreate",
-      "count": 6
+      "count": 10
+    },
+    {
+      "name": "ToolSearch",
+      "count": 3
+    },
+    {
+      "name": "Agent",
+      "count": 3
     },
     {
       "name": "AskUserQuestion",
@@ -2079,11 +2371,11 @@
       {
         "filename": "indexed-yawning-flame.md",
         "slug": "indexed-yawning-flame",
-        "title": "Uniform Square Tiles + Flex Layout",
-        "created": "2026-03-05T18:07:51.223053+00:00",
-        "modified": "2026-03-05T18:07:51.222809+00:00",
-        "size_kb": 1.5,
-        "lines": 33
+        "title": "HitThePin Analytics Tab",
+        "created": "2026-03-09T01:45:56.236906+00:00",
+        "modified": "2026-03-09T01:45:56.236519+00:00",
+        "size_kb": 3.7,
+        "lines": 78
       },
       {
         "filename": "soft-wobbling-sutton.md",
@@ -2131,24 +2423,28 @@
       "files": 12
     },
     "file_history": {
-      "total_files": 523,
-      "total_sessions": 22,
-      "total_size_mb": 5.7
+      "total_files": 610,
+      "total_sessions": 28,
+      "total_size_mb": 6.4
     },
     "storage": {
-      "total_mb": 129.8,
+      "total_mb": 243.2,
       "items": [
         {
           "name": "projects/",
-          "size_mb": 89.74
+          "size_mb": 181.63
         },
         {
           "name": "debug/",
-          "size_mb": 24.34
+          "size_mb": 24.85
+        },
+        {
+          "name": "paste-cache/",
+          "size_mb": 19.38
         },
         {
           "name": "file-history/",
-          "size_mb": 5.66
+          "size_mb": 6.39
         },
         {
           "name": "plugins/",
@@ -2159,12 +2455,12 @@
           "size_mb": 3.32
         },
         {
-          "name": "get-shit-done/",
-          "size_mb": 0.83
+          "name": "image-cache/",
+          "size_mb": 1.07
         },
         {
-          "name": "paste-cache/",
-          "size_mb": 0.23
+          "name": "get-shit-done/",
+          "size_mb": 0.83
         },
         {
           "name": "agents/",
@@ -2176,11 +2472,11 @@
         },
         {
           "name": "backups/",
-          "size_mb": 0.11
+          "size_mb": 0.12
         },
         {
           "name": "history.jsonl",
-          "size_mb": 0.09
+          "size_mb": 0.1
         },
         {
           "name": "commands/",
