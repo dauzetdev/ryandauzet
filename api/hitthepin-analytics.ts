@@ -36,7 +36,7 @@ async function getGSCToken(sa: ServiceAccount): Promise<string> {
   return data.access_token;
 }
 
-const SITE_URL = "https://www.hitthepin.com/";
+const SITE_URL = "sc-domain:hitthepin.com";
 const GSC_BASE = `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(SITE_URL)}`;
 
 async function gscQuery(token: string, body: object): Promise<any> {
