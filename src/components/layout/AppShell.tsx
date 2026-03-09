@@ -3,12 +3,13 @@ import { useAuth } from "../../context/AuthContext";
 import { useTheme } from "../../context/ThemeContext";
 import { SidebarIcon } from "./SidebarIcon";
 
-type Tab = "openclaw" | "claude" | "saturdaygame";
+type Tab = "openclaw" | "claude" | "saturdaygame" | "hitthepin";
 
 const TABS: { id: Tab; emoji: string; label: string; src: string }[] = [
   { id: "openclaw",     emoji: "🦞", label: "OpenClaw",      src: "https://lobsterboard.hitthepin.com" },
   { id: "claude",       emoji: "🤖", label: "Claude Usage",  src: "/claude-code-stats.html" },
   { id: "saturdaygame", emoji: "🏌️", label: "SaturdayGame", src: "/saturdaygame-stats.html" },
+  { id: "hitthepin",    emoji: "📍", label: "HitThePin",     src: "/hitthepin-stats.html" },
 ];
 
 export function AppShell() {
