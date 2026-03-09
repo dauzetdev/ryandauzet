@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SaturdayGame Analytics</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #0f1117;
+  --bg2: #1a1d27;
+  --bg3: #242836;
+  --border: #2d3348;
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --accent: #6366f1;
+  --accent2: #818cf8;
+  --green: #22c55e;
+  --orange: #f59e0b;
+  --red: #ef4444;
+  --blue: #3b82f6;
+  --purple: #a855f7;
+  --cyan: #06b6d4;
+  --pink: #ec4899;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; font-size:14px; }
+.header { background:var(--bg2); border-bottom:1px solid var(--border); padding:16px 24px; display:flex; align-items:center; justify-content:space-between; }
+.header h1 { font-size:20px; font-weight:600; }
+.header h1 span { color:var(--green); }
+.header .meta { color:var(--text2); font-size:13px; }
+.container { max-width:1400px; margin:0 auto; padding:20px; }
+
+/* KPI Cards */
+.kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:16px; margin-bottom:24px; }
+.kpi-card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:20px; }
+.kpi-card .label { color:var(--text2); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px; }
+.kpi-card .value { font-size:28px; font-weight:700; }
+.kpi-card .sub { color:var(--text2); font-size:12px; margin-top:4px; }
+
+/* Tabs */
+.tabs { display:flex; gap:4px; margin-bottom:20px; background:var(--bg2); padding:4px; border-radius:10px; border:1px solid var(--border); }
+.tab-btn { flex:1; padding:10px 16px; background:transparent; border:none; color:var(--text2); font-size:14px; font-weight:500; cursor:pointer; border-radius:8px; transition:all .2s; }
+.tab-btn:hover { color:var(--text); background:var(--bg3); }
+.tab-btn.active { background:var(--accent); color:white; }
+.tab-content { display:none; }
+.tab-content.active { display:block; }
+
+/* Chart containers */
+.chart-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px; }
+.chart-grid.full { grid-template-columns:1fr; }
+.chart-box { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:20px; }
+.chart-box h3 { font-size:15px; font-weight:600; margin-bottom:16px; color:var(--text); }
+.chart-box canvas { max-height:350px; }
+
+/* Tables */
+.data-table { width:100%; border-collapse:collapse; }
+.data-table th { text-align:left; padding:10px 12px; font-size:12px; color:var(--text2); text-transform:uppercase; letter-spacing:0.5px; border-bottom:2px solid var(--border); cursor:pointer; user-select:none; white-space:nowrap; }
+.data-table th:hover { color:var(--accent2); }
+.data-table th.sort-asc::after { content:" \25B2"; font-size:10px; }
+.data-table th.sort-desc::after { content:" \25BC"; font-size:10px; }
+.data-table td { padding:10px 12px; border-bottom:1px solid var(--border); font-size:13px; }
+.data-table tr:hover td { background:var(--bg3); }
+
+/* Info cards */
+.info-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px; }
+.info-box { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:20px; }
+.info-box h3 { font-size:15px; font-weight:600; margin-bottom:16px; color:var(--text); }
+.info-row { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); }
+.info-row:last-child { border-bottom:none; }
+.info-row .ir-label { color:var(--text2); font-size:13px; }
+.info-row .ir-value { font-weight:600; font-size:13px; }
+.version-badge { display:inline-block; padding:2px 10px; border-radius:4px; font-size:11px; font-weight:600; }
+.version-badge.live { background:rgba(34,197,94,0.2); color:var(--green); }
+.version-badge.processing { background:rgba(245,158,11,0.2); color:var(--orange); }
+.version-badge.other { background:rgba(99,102,241,0.2); color:var(--accent2); }
+.status-badge { display:inline-block; padding:2px 10px; border-radius:4px; font-size:11px; font-weight:600; }
+.status-badge.active { background:rgba(34,197,94,0.2); color:var(--green); }
+.status-badge.completed { background:rgba(59,130,246,0.2); color:var(--blue); }
+.status-badge.cancelled { background:rgba(239,68,68,0.2); color:var(--red); }
+.status-badge.upcoming { background:rgba(168,85,247,0.2); color:var(--purple); }
+
+.empty-state { text-align:center; padding:40px; color:var(--text2); }
+
+/* Loading */
+.loading { display:flex; align-items:center; justify-content:center; height:60vh; }
+.loading::after { content:"Loading..."; color:var(--text2); font-size:16px; }
+
+@media (max-width:900px) {
+  .chart-grid, .info-grid { grid-template-columns:1fr; }
+  .kpi-grid { grid-template-columns:repeat(2,1fr); }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1><span>SaturdayGame</span> Analytics</h1>
+  <div class="meta" id="headerMeta"></div>
+</div>
+
+<div class="container">
+  <div class="loading" id="loadingState"></div>
+
+  <div id="mainContent" style="display:none;">
+    <div class="kpi-grid" id="kpiGrid"></div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('overview')">Overview</button>
+      <button class="tab-btn" onclick="switchTab('tournaments')">Tournaments</button>
+      <button class="tab-btn" onclick="switchTab('appinfo')">App Info</button>
+    </div>
+
+    <div class="tab-content active" id="tab-overview">
+      <div class="chart-grid full">
+        <div class="chart-box"><h3>User Growth (Recent Signups)</h3><canvas id="chartUserGrowth"></canvas></div>
+      </div>
+      <div class="chart-grid">
+        <div class="chart-box"><h3>Tournament Status</h3><canvas id="chartTournamentStatus"></canvas></div>
+        <div class="chart-box"><h3>Game Formats</h3><canvas id="chartGameFormats"></canvas></div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-tournaments">
+      <div class="chart-box">
+        <h3>Recent Tournaments</h3>
+        <table class="data-table" id="tournamentTable">
+          <thead><tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Format</th>
+          </tr></thead>
+          <tbody id="tournamentTableBody"></tbody>
+        </table>
+        <div class="empty-state" id="noTournaments" style="display:none;">No tournament data available</div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-appinfo">
+      <div class="info-grid">
+        <div class="info-box" id="configBox">
+          <h3>App Configuration</h3>
+          <div id="configContent"></div>
+        </div>
+        <div class="info-box" id="appStoreBox">
+          <h3>App Store Versions</h3>
+          <div id="appStoreContent"></div>
+        </div>
+      </div>
+      <div class="chart-box" id="buildsBox">
+        <h3>Recent Builds</h3>
+        <table class="data-table" id="buildsTable">
+          <thead><tr>
+            <th>Version</th>
+            <th>Build</th>
+            <th>Uploaded</th>
+          </tr></thead>
+          <tbody id="buildsTableBody"></tbody>
+        </table>
+        <div class="empty-state" id="noBuilds" style="display:none;">App Store Connect not configured</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let DATA = null;
+
+function switchTab(name) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  const btns = document.querySelectorAll('.tab-btn');
+  const tabs = ['overview', 'tournaments', 'appinfo'];
+  const idx = tabs.indexOf(name);
+  if (idx >= 0) btns[idx].classList.add('active');
+}
+
+function fmt(n) {
+  return n != null ? n.toLocaleString() : '—';
+}
+
+function formatDate(d) {
+  if (!d) return '—';
+  try {
+    const date = new Date(d);
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  } catch { return d; }
+}
+
+function statusClass(s) {
+  if (!s) return 'other';
+  const lower = s.toLowerCase();
+  if (lower === 'active' || lower === 'in_progress' || lower === 'inProgress') return 'active';
+  if (lower === 'completed' || lower === 'complete' || lower === 'finished') return 'completed';
+  if (lower === 'cancelled' || lower === 'canceled') return 'cancelled';
+  return 'upcoming';
+}
+
+function versionStateClass(s) {
+  if (!s) return 'other';
+  if (s.includes('READY_FOR_DISTRIBUTION') || s.includes('READY_FOR_SALE')) return 'live';
+  if (s.includes('PROCESSING') || s.includes('IN_REVIEW') || s.includes('WAITING')) return 'processing';
+  return 'other';
+}
+
+function renderKPI(data) {
+  const c = data.counts;
+  const cards = [
+    { label: 'Users', value: fmt(c.users), color: 'var(--blue)' },
+    { label: 'Score Sessions', value: fmt(c.rounds), color: 'var(--green)' },
+    { label: 'Tournaments', value: fmt(c.tournaments), color: 'var(--purple)' },
+    { label: 'Groups', value: fmt(c.groups), color: 'var(--orange)' },
+    { label: 'Polls', value: fmt(c.polls), color: 'var(--cyan)' },
+  ];
+  document.getElementById('kpiGrid').innerHTML = cards.map(c =>
+    `<div class="kpi-card"><div class="label">${c.label}</div><div class="value" style="color:${c.color}">${c.value}</div></div>`
+  ).join('');
+}
+
+function renderUserGrowthChart(data) {
+  const users = (data.recentUsers || []).filter(u => u.createdAt);
+  if (!users.length) return;
+
+  // Group by date
+  const dateCounts = {};
+  users.forEach(u => {
+    const d = new Date(u.createdAt).toISOString().split('T')[0];
+    dateCounts[d] = (dateCounts[d] || 0) + 1;
+  });
+
+  const sorted = Object.entries(dateCounts).sort((a, b) => a[0].localeCompare(b[0]));
+  const labels = sorted.map(([d]) => d);
+  const values = sorted.map(([, v]) => v);
+
+  new Chart(document.getElementById('chartUserGrowth'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        label: 'New Users',
+        data: values,
+        backgroundColor: 'rgba(59,130,246,0.6)',
+        borderColor: 'var(--blue)',
+        borderWidth: 1,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: '#94a3b8', maxRotation: 45 }, grid: { color: 'rgba(45,51,72,0.5)' } },
+        y: { beginAtZero: true, ticks: { color: '#94a3b8', stepSize: 1 }, grid: { color: 'rgba(45,51,72,0.5)' } }
+      }
+    }
+  });
+}
+
+function renderTournamentStatusChart(data) {
+  const tournaments = data.recentTournaments || [];
+  if (!tournaments.length) return;
+
+  const statusCounts = {};
+  tournaments.forEach(t => {
+    const s = t.status || 'unknown';
+    statusCounts[s] = (statusCounts[s] || 0) + 1;
+  });
+
+  const labels = Object.keys(statusCounts);
+  const values = Object.values(statusCounts);
+  const colors = labels.map(l => {
+    const cls = statusClass(l);
+    if (cls === 'active') return '#22c55e';
+    if (cls === 'completed') return '#3b82f6';
+    if (cls === 'cancelled') return '#ef4444';
+    return '#a855f7';
+  });
+
+  new Chart(document.getElementById('chartTournamentStatus'), {
+    type: 'doughnut',
+    data: {
+      labels,
+      datasets: [{ data: values, backgroundColor: colors, borderWidth: 0 }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom', labels: { color: '#94a3b8', padding: 16 } } }
+    }
+  });
+}
+
+function renderGameFormatsChart(data) {
+  const tournaments = data.recentTournaments || [];
+  if (!tournaments.length) return;
+
+  const formatCounts = {};
+  tournaments.forEach(t => {
+    const f = t.gameFormat || 'unknown';
+    formatCounts[f] = (formatCounts[f] || 0) + 1;
+  });
+
+  const labels = Object.keys(formatCounts);
+  const values = Object.values(formatCounts);
+  const colors = ['#6366f1', '#22c55e', '#f59e0b', '#ef4444', '#06b6d4', '#ec4899', '#a855f7'];
+
+  new Chart(document.getElementById('chartGameFormats'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Count',
+        data: values,
+        backgroundColor: labels.map((_, i) => colors[i % colors.length] + '99'),
+        borderColor: labels.map((_, i) => colors[i % colors.length]),
+        borderWidth: 1,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      indexAxis: 'y',
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { beginAtZero: true, ticks: { color: '#94a3b8', stepSize: 1 }, grid: { color: 'rgba(45,51,72,0.5)' } },
+        y: { ticks: { color: '#94a3b8' }, grid: { display: false } }
+      }
+    }
+  });
+}
+
+function renderTournamentTable(data) {
+  const tournaments = data.recentTournaments || [];
+  const tbody = document.getElementById('tournamentTableBody');
+
+  if (!tournaments.length) {
+    document.getElementById('noTournaments').style.display = 'block';
+    document.getElementById('tournamentTable').style.display = 'none';
+    return;
+  }
+
+  tbody.innerHTML = tournaments.map(t => {
+    const cls = statusClass(t.status);
+    return `<tr>
+      <td>${t.name || '—'}</td>
+      <td>${formatDate(t.date || t.createdAt)}</td>
+      <td><span class="status-badge ${cls}">${t.status || '—'}</span></td>
+      <td>${t.gameFormat || '—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderAppInfo(data) {
+  // Config section
+  const config = data.appConfig;
+  const configEl = document.getElementById('configContent');
+  if (config) {
+    configEl.innerHTML = `
+      <div class="info-row"><span class="ir-label">Minimum Version</span><span class="ir-value">${config.minimumVersion || '—'}</span></div>
+      <div class="info-row"><span class="ir-label">Recommended Version</span><span class="ir-value">${config.recommendedVersion || '—'}</span></div>
+      <div class="info-row"><span class="ir-label">Bundle ID</span><span class="ir-value">com.dauzet.SaturdayGame</span></div>
+      <div class="info-row"><span class="ir-label">App Store ID</span><span class="ir-value">6754344063</span></div>
+    `;
+  } else {
+    configEl.innerHTML = '<div class="empty-state">Config not available</div>';
+  }
+
+  // App Store versions
+  const appStore = data.appStore;
+  const storeEl = document.getElementById('appStoreContent');
+  if (appStore && appStore.versions && appStore.versions.length) {
+    storeEl.innerHTML = appStore.versions.map(v => {
+      const cls = versionStateClass(v.state);
+      return `<div class="info-row">
+        <span class="ir-label">v${v.version}</span>
+        <span class="version-badge ${cls}">${v.state?.replace(/_/g, ' ') || '—'}</span>
+      </div>`;
+    }).join('');
+  } else {
+    storeEl.innerHTML = '<div class="empty-state">App Store Connect not configured</div>';
+  }
+
+  // Builds
+  const buildsBody = document.getElementById('buildsTableBody');
+  if (appStore && appStore.recentBuilds && appStore.recentBuilds.length) {
+    buildsBody.innerHTML = appStore.recentBuilds.map(b =>
+      `<tr><td>${b.version || '—'}</td><td>${b.buildNumber || '—'}</td><td>${formatDate(b.uploadedDate)}</td></tr>`
+    ).join('');
+  } else {
+    document.getElementById('noBuilds').style.display = 'block';
+    document.getElementById('buildsTable').style.display = 'none';
+  }
+}
+
+async function load() {
+  try {
+    const res = await fetch('/api/saturdaygame-analytics', { credentials: 'same-origin' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    DATA = await res.json();
+
+    document.getElementById('loadingState').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'block';
+    document.getElementById('headerMeta').textContent = 'Updated ' + new Date().toLocaleString();
+
+    renderKPI(DATA);
+    renderUserGrowthChart(DATA);
+    renderTournamentStatusChart(DATA);
+    renderGameFormatsChart(DATA);
+    renderTournamentTable(DATA);
+    renderAppInfo(DATA);
+  } catch (err) {
+    document.getElementById('loadingState').innerHTML = '<div style="color:var(--red);text-align:center;">Failed to load data: ' + err.message + '</div>';
+  }
+}
+
+load();
+</script>
+</body>
+</html>
