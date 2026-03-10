@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-09T16:00:01.830196+00:00",
+  "generated_at": "2026-03-10T16:00:01.786690+00:00",
   "locale": {
     "locale_code": "en-US",
     "html_lang": "en",
@@ -165,14 +165,14 @@
     "email": "dauzetdev@gmail.com"
   },
   "kpi": {
-    "total_cost": 79.87,
+    "total_cost": 81.67,
     "actual_plan_cost": 100.0,
-    "total_sessions": 45,
-    "total_messages": 7205,
-    "total_output_tokens": 591554,
-    "total_input_tokens": 187337,
+    "total_sessions": 49,
+    "total_messages": 7438,
+    "total_output_tokens": 606605,
+    "total_input_tokens": 189259,
     "first_session": "2026-02-16",
-    "last_session": "2026-03-09",
+    "last_session": "2026-03-10",
     "total_projects": 8
   },
   "plan": {
@@ -180,39 +180,39 @@
       {
         "plan": "Max",
         "start": "2025-10-01",
-        "end": "2026-03-09",
-        "total_days": 160,
-        "days_active": 13,
+        "end": "2026-03-10",
+        "total_days": 161,
+        "days_active": 14,
         "plan_cost_eur": 93.0,
         "plan_cost_usd": 100.0,
-        "api_cost": 79.87,
-        "savings": -20.13,
+        "api_cost": 81.67,
+        "savings": -18.33,
         "roi_factor": 0.8,
-        "sessions": 45,
-        "messages": 7205,
-        "cost_per_day": 0.5
+        "sessions": 49,
+        "messages": 7438,
+        "cost_per_day": 0.51
       }
     ],
     "current_billing": {
       "plan": "Max",
       "period_start": "2026-03-01",
       "period_end": "2026-04-01",
-      "days_elapsed": 9,
+      "days_elapsed": 10,
       "days_total": 31,
-      "days_remaining": 22,
+      "days_remaining": 21,
       "plan_cost_eur": 93.0,
       "plan_cost_usd": 100.0,
-      "api_cost": 65.21,
-      "projected_cost": 224.62,
-      "savings": -34.79,
+      "api_cost": 67.01,
+      "projected_cost": 207.72,
+      "savings": -32.99,
       "roi_factor": 0.7,
-      "sessions": 27,
-      "messages": 5507,
-      "cost_per_day": 7.25
+      "sessions": 31,
+      "messages": 5740,
+      "cost_per_day": 6.7
     },
-    "total_api_cost": 79.87,
+    "total_api_cost": 81.67,
     "total_plan_cost": 100.0,
-    "total_savings": -20.13,
+    "total_savings": -18.33,
     "overall_roi": 0.8
   },
   "daily_costs": [
@@ -302,10 +302,17 @@
     },
     {
       "date": "2026-03-09",
-      "Haiku 4.5": 5.0085,
+      "Haiku 4.5": 5.981,
       "Opus 4.6": 3.0337,
       "Unknown": 0.0,
-      "total": 8.0422
+      "total": 9.0147
+    },
+    {
+      "date": "2026-03-10",
+      "Haiku 4.5": 0.1509,
+      "Opus 4.6": 0.6706,
+      "Unknown": 0.0,
+      "total": 0.8215
     }
   ],
   "cumulative_costs": [
@@ -359,7 +366,11 @@
     },
     {
       "date": "2026-03-09",
-      "cost": 79.87
+      "cost": 80.85
+    },
+    {
+      "date": "2026-03-10",
+      "cost": 81.67
     }
   ],
   "daily_messages": [
@@ -425,14 +436,19 @@
     },
     {
       "date": "2026-03-09",
-      "messages": 1097,
+      "messages": 1228,
       "sessions": 7
+    },
+    {
+      "date": "2026-03-10",
+      "messages": 102,
+      "sessions": 4
     }
   ],
   "hourly_distribution": [
     {
       "hour": 0,
-      "messages": 596
+      "messages": 613
     },
     {
       "hour": 1,
@@ -440,11 +456,11 @@
     },
     {
       "hour": 2,
-      "messages": 298
+      "messages": 354
     },
     {
       "hour": 3,
-      "messages": 2
+      "messages": 31
     },
     {
       "hour": 4,
@@ -530,11 +546,11 @@
   "weekday_distribution": [
     {
       "day": "Mon",
-      "messages": 655
+      "messages": 711
     },
     {
       "day": "Tue",
-      "messages": 654
+      "messages": 700
     },
     {
       "day": "Wed",
@@ -565,21 +581,21 @@
   "model_summary": [
     {
       "model": "Opus 4.6",
-      "cost": 47.86,
-      "input_tokens": 34788,
-      "output_tokens": 218148,
-      "cache_read_tokens": 36184834,
-      "cache_write_tokens": 3861806,
-      "calls": 801
+      "cost": 48.53,
+      "input_tokens": 34842,
+      "output_tokens": 221206,
+      "cache_read_tokens": 36659373,
+      "cache_write_tokens": 3918863,
+      "calls": 831
     },
     {
       "model": "Haiku 4.5",
-      "cost": 26.55,
-      "input_tokens": 136199,
-      "output_tokens": 346273,
-      "cache_read_tokens": 106967903,
-      "cache_write_tokens": 11190461,
-      "calls": 3302
+      "cost": 27.68,
+      "input_tokens": 138067,
+      "output_tokens": 358266,
+      "cache_read_tokens": 110192491,
+      "cache_write_tokens": 11781764,
+      "calls": 3403
     },
     {
       "model": "Unknown",
@@ -593,20 +609,20 @@
   ],
   "cost_by_token_type": {
     "input": 0.39,
-    "output": 7.86,
-    "cache_read": 29.75,
-    "cache_write": 41.87
+    "output": 8.0,
+    "cache_read": 30.31,
+    "cache_write": 42.97
   },
   "projects": [
     {
       "name": "dev/GolfBooker",
-      "sessions": 5,
-      "messages": 833,
-      "cost": 25.85,
-      "input_tokens": 20873,
-      "output_tokens": 138987,
-      "cache_read_tokens": 24909414,
-      "cache_write_tokens": 2473964,
+      "sessions": 7,
+      "messages": 859,
+      "cost": 26.05,
+      "input_tokens": 20893,
+      "output_tokens": 139743,
+      "cache_read_tokens": 25037689,
+      "cache_write_tokens": 2492176,
       "file_size_mb": 1.2
     },
     {
@@ -622,13 +638,13 @@
     },
     {
       "name": "dev/FairwayIQ",
-      "sessions": 12,
-      "messages": 2367,
-      "cost": 16.31,
-      "input_tokens": 59872,
-      "output_tokens": 98427,
-      "cache_read_tokens": 44477777,
-      "cache_write_tokens": 5125811,
+      "sessions": 13,
+      "messages": 2541,
+      "cost": 17.43,
+      "input_tokens": 61740,
+      "output_tokens": 110420,
+      "cache_read_tokens": 47702365,
+      "cache_write_tokens": 5717114,
       "file_size_mb": 2.3
     },
     {
@@ -644,14 +660,14 @@
     },
     {
       "name": "GolfBooker/GolfBooker",
-      "sessions": 8,
-      "messages": 432,
-      "cost": 3.84,
-      "input_tokens": 4493,
-      "output_tokens": 28492,
-      "cache_read_tokens": 5849614,
-      "cache_write_tokens": 1192046,
-      "file_size_mb": 0.9
+      "sessions": 9,
+      "messages": 465,
+      "cost": 4.31,
+      "input_tokens": 4527,
+      "output_tokens": 30794,
+      "cache_read_tokens": 6195878,
+      "cache_write_tokens": 1230891,
+      "file_size_mb": 1.1
     },
     {
       "name": "workspace/golfbooker",
@@ -2212,34 +2228,34 @@
       "project_dir": "-Users-dauzet-dev-FairwayIQ",
       "date": "2026-03-09",
       "start": "2026-03-09T02:57:36.760000+00:00",
-      "end": "2026-03-09T03:13:16.011000+00:00",
-      "duration_min": 15.7,
-      "cost": 3.0605,
-      "messages": 567,
-      "user_messages": 240,
-      "assistant_messages": 327,
-      "input_tokens": 1520,
-      "output_tokens": 37617,
-      "cache_read_tokens": 13609931,
-      "cache_write_tokens": 1207901,
-      "api_calls": 327,
+      "end": "2026-03-09T19:59:12.552000+00:00",
+      "duration_min": 1021.6,
+      "cost": 4.033,
+      "messages": 698,
+      "user_messages": 296,
+      "assistant_messages": 402,
+      "input_tokens": 3273,
+      "output_tokens": 47290,
+      "cache_read_tokens": 16330487,
+      "cache_write_tokens": 1728147,
+      "api_calls": 402,
       "primary_model": "Haiku 4.5",
       "model_breakdown": {
         "Haiku 4.5": {
-          "cost": 3.0605,
-          "output_tokens": 37617,
-          "calls": 327
+          "cost": 4.033,
+          "output_tokens": 47290,
+          "calls": 402
         }
       },
       "tools": {
-        "Bash": 56,
-        "Glob": 10,
-        "Read": 156,
+        "Read": 192,
+        "Bash": 74,
+        "Glob": 11,
         "Grep": 13
       },
-      "first_prompt": "Do a very thorough audit of all page components and UI components for bugs, edge cases, and stability issues. Check:\n\n1. All page components in src/page-components/ and app/ - look for unhandled state",
+      "first_prompt": "Do a very thorough performance audit of this Next.js app. Focus on what slows down initial page loads for uncached visitors. Check:\n\n1. **Bundle analysis**: Read package.json for heavy dependencies. C",
       "slug": "starry-tumbling-sunbeam",
-      "file_size_mb": 0.37
+      "file_size_mb": 0.32
     },
     {
       "session_id": "4d480abc-bfa0-4ccf-9bee-68bdc932e4e5",
@@ -2270,16 +2286,147 @@
       "first_prompt": "is it possible to browse this directory and download the video content from the website? https://onlyfans.com/jazmenjafar/media",
       "slug": "",
       "file_size_mb": 0.01
+    },
+    {
+      "session_id": "2d6b1bf8-12cd-4dcb-9624-220c56f3c57a",
+      "project": "dev/FairwayIQ",
+      "project_dir": "-Users-dauzet-dev-FairwayIQ",
+      "date": "2026-03-10",
+      "start": "2026-03-10T00:20:42.453000+00:00",
+      "end": "2026-03-10T00:21:24.600000+00:00",
+      "duration_min": 0.7,
+      "cost": 0.1509,
+      "messages": 43,
+      "user_messages": 17,
+      "assistant_messages": 26,
+      "input_tokens": 115,
+      "output_tokens": 2320,
+      "cache_read_tokens": 504032,
+      "cache_write_tokens": 71057,
+      "api_calls": 26,
+      "primary_model": "Haiku 4.5",
+      "model_breakdown": {
+        "Haiku 4.5": {
+          "cost": 0.1509,
+          "output_tokens": 2320,
+          "calls": 26
+        }
+      },
+      "tools": {
+        "Bash": 4,
+        "Read": 9,
+        "Glob": 3
+      },
+      "first_prompt": "The URL /best/alabama/birmingham is returning \"Destination not found\" on the website. I need to understand how the routing works for this path and what data it expects. \n\nExplore the codebase thorough",
+      "slug": "velvet-singing-wind",
+      "file_size_mb": 0.09
+    },
+    {
+      "session_id": "fc27d084-e017-4678-85f0-93862a12ae3f",
+      "project": "dev/GolfBooker",
+      "project_dir": "-Users-dauzet-dev-GolfBooker",
+      "date": "2026-03-10",
+      "start": "2026-03-10T03:33:43.783000+00:00",
+      "end": "2026-03-10T03:35:45.136000+00:00",
+      "duration_min": 2.0,
+      "cost": 0.1108,
+      "messages": 11,
+      "user_messages": 8,
+      "assistant_messages": 3,
+      "input_tokens": 7,
+      "output_tokens": 183,
+      "cache_read_tokens": 29153,
+      "cache_write_tokens": 14663,
+      "api_calls": 3,
+      "primary_model": "Opus 4.6",
+      "model_breakdown": {
+        "Opus 4.6": {
+          "cost": 0.1108,
+          "output_tokens": 183,
+          "calls": 3
+        }
+      },
+      "tools": {
+        "Bash": 1
+      },
+      "first_prompt": "are there pending changes to git?",
+      "slug": "",
+      "file_size_mb": 0.01
+    },
+    {
+      "session_id": "ba558887-1e2d-42bb-bad1-76fb88465746",
+      "project": "dev/GolfBooker",
+      "project_dir": "-Users-dauzet-dev-GolfBooker",
+      "date": "2026-03-10",
+      "start": "2026-03-10T03:36:31.785000+00:00",
+      "end": "2026-03-10T03:37:04.339000+00:00",
+      "duration_min": 0.5,
+      "cost": 0.0861,
+      "messages": 15,
+      "user_messages": 8,
+      "assistant_messages": 7,
+      "input_tokens": 13,
+      "output_tokens": 573,
+      "cache_read_tokens": 99122,
+      "cache_write_tokens": 3549,
+      "api_calls": 7,
+      "primary_model": "Opus 4.6",
+      "model_breakdown": {
+        "Opus 4.6": {
+          "cost": 0.0861,
+          "output_tokens": 573,
+          "calls": 7
+        }
+      },
+      "tools": {
+        "Bash": 3
+      },
+      "first_prompt": "are there pending changes to git?",
+      "slug": "",
+      "file_size_mb": 0.01
+    },
+    {
+      "session_id": "89b76ac0-68e3-4845-a63c-5419455ff180",
+      "project": "GolfBooker/GolfBooker",
+      "project_dir": "-Users-dauzet-dev-GolfBooker-GolfBooker",
+      "date": "2026-03-10",
+      "start": "2026-03-10T03:37:14.496000+00:00",
+      "end": "2026-03-10T03:39:25.645000+00:00",
+      "duration_min": 2.2,
+      "cost": 0.4736,
+      "messages": 33,
+      "user_messages": 13,
+      "assistant_messages": 20,
+      "input_tokens": 34,
+      "output_tokens": 2302,
+      "cache_read_tokens": 346264,
+      "cache_write_tokens": 38845,
+      "api_calls": 20,
+      "primary_model": "Opus 4.6",
+      "model_breakdown": {
+        "Opus 4.6": {
+          "cost": 0.4736,
+          "output_tokens": 2302,
+          "calls": 20
+        }
+      },
+      "tools": {
+        "Bash": 9,
+        "Read": 2
+      },
+      "first_prompt": "are there pending changes to git?",
+      "slug": "curried-noodling-shore",
+      "file_size_mb": 0.22
     }
   ],
   "tool_summary": [
     {
       "name": "Read",
-      "count": 1587
+      "count": 1634
     },
     {
       "name": "Bash",
-      "count": 722
+      "count": 757
     },
     {
       "name": "Grep",
@@ -2287,7 +2434,7 @@
     },
     {
       "name": "Glob",
-      "count": 132
+      "count": 136
     },
     {
       "name": "Edit",
@@ -2423,20 +2570,20 @@
       "files": 12
     },
     "file_history": {
-      "total_files": 610,
+      "total_files": 627,
       "total_sessions": 28,
-      "total_size_mb": 6.4
+      "total_size_mb": 6.5
     },
     "storage": {
-      "total_mb": 243.2,
+      "total_mb": 244.1,
       "items": [
         {
           "name": "projects/",
-          "size_mb": 181.63
+          "size_mb": 183.48
         },
         {
           "name": "debug/",
-          "size_mb": 24.85
+          "size_mb": 24.86
         },
         {
           "name": "paste-cache/",
@@ -2444,7 +2591,7 @@
         },
         {
           "name": "file-history/",
-          "size_mb": 6.39
+          "size_mb": 6.48
         },
         {
           "name": "plugins/",
@@ -2453,10 +2600,6 @@
         {
           "name": "telemetry/",
           "size_mb": 3.32
-        },
-        {
-          "name": "image-cache/",
-          "size_mb": 1.07
         },
         {
           "name": "get-shit-done/",
@@ -2468,11 +2611,11 @@
         },
         {
           "name": "cache/",
-          "size_mb": 0.13
+          "size_mb": 0.14
         },
         {
           "name": "backups/",
-          "size_mb": 0.12
+          "size_mb": 0.13
         },
         {
           "name": "history.jsonl",
@@ -2508,6 +2651,10 @@
         },
         {
           "name": "settings.json",
+          "size_mb": 0.0
+        },
+        {
+          "name": ".credentials.json",
           "size_mb": 0.0
         },
         {
