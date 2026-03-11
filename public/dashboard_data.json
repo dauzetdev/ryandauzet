@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-10T16:00:01.786690+00:00",
+  "generated_at": "2026-03-11T16:00:03.000557+00:00",
   "locale": {
     "locale_code": "en-US",
     "html_lang": "en",
@@ -165,12 +165,12 @@
     "email": "dauzetdev@gmail.com"
   },
   "kpi": {
-    "total_cost": 81.67,
+    "total_cost": 88.19,
     "actual_plan_cost": 100.0,
-    "total_sessions": 49,
-    "total_messages": 7438,
-    "total_output_tokens": 606605,
-    "total_input_tokens": 189259,
+    "total_sessions": 51,
+    "total_messages": 7672,
+    "total_output_tokens": 636920,
+    "total_input_tokens": 189438,
     "first_session": "2026-02-16",
     "last_session": "2026-03-10",
     "total_projects": 8
@@ -180,40 +180,40 @@
       {
         "plan": "Max",
         "start": "2025-10-01",
-        "end": "2026-03-10",
-        "total_days": 161,
+        "end": "2026-03-11",
+        "total_days": 162,
         "days_active": 14,
         "plan_cost_eur": 93.0,
         "plan_cost_usd": 100.0,
-        "api_cost": 81.67,
-        "savings": -18.33,
-        "roi_factor": 0.8,
-        "sessions": 49,
-        "messages": 7438,
-        "cost_per_day": 0.51
+        "api_cost": 88.19,
+        "savings": -11.81,
+        "roi_factor": 0.9,
+        "sessions": 51,
+        "messages": 7672,
+        "cost_per_day": 0.54
       }
     ],
     "current_billing": {
       "plan": "Max",
       "period_start": "2026-03-01",
       "period_end": "2026-04-01",
-      "days_elapsed": 10,
+      "days_elapsed": 11,
       "days_total": 31,
-      "days_remaining": 21,
+      "days_remaining": 20,
       "plan_cost_eur": 93.0,
       "plan_cost_usd": 100.0,
-      "api_cost": 67.01,
-      "projected_cost": 207.72,
-      "savings": -32.99,
+      "api_cost": 73.53,
+      "projected_cost": 207.21,
+      "savings": -26.47,
       "roi_factor": 0.7,
-      "sessions": 31,
-      "messages": 5740,
-      "cost_per_day": 6.7
+      "sessions": 33,
+      "messages": 5974,
+      "cost_per_day": 6.68
     },
-    "total_api_cost": 81.67,
+    "total_api_cost": 88.19,
     "total_plan_cost": 100.0,
-    "total_savings": -18.33,
-    "overall_roi": 0.8
+    "total_savings": -11.81,
+    "overall_roi": 0.9
   },
   "daily_costs": [
     {
@@ -310,9 +310,9 @@
     {
       "date": "2026-03-10",
       "Haiku 4.5": 0.1509,
-      "Opus 4.6": 0.6706,
+      "Opus 4.6": 7.1884,
       "Unknown": 0.0,
-      "total": 0.8215
+      "total": 7.3394
     }
   ],
   "cumulative_costs": [
@@ -370,7 +370,7 @@
     },
     {
       "date": "2026-03-10",
-      "cost": 81.67
+      "cost": 88.19
     }
   ],
   "daily_messages": [
@@ -441,8 +441,8 @@
     },
     {
       "date": "2026-03-10",
-      "messages": 102,
-      "sessions": 4
+      "messages": 336,
+      "sessions": 6
     }
   ],
   "hourly_distribution": [
@@ -528,11 +528,11 @@
     },
     {
       "hour": 20,
-      "messages": 135
+      "messages": 216
     },
     {
       "hour": 21,
-      "messages": 29
+      "messages": 35
     },
     {
       "hour": 22,
@@ -550,7 +550,7 @@
     },
     {
       "day": "Tue",
-      "messages": 700
+      "messages": 787
     },
     {
       "day": "Wed",
@@ -581,12 +581,12 @@
   "model_summary": [
     {
       "model": "Opus 4.6",
-      "cost": 48.53,
-      "input_tokens": 34842,
-      "output_tokens": 221206,
-      "cache_read_tokens": 36659373,
-      "cache_write_tokens": 3918863,
-      "calls": 831
+      "cost": 55.04,
+      "input_tokens": 35021,
+      "output_tokens": 251521,
+      "cache_read_tokens": 44604382,
+      "cache_write_tokens": 4204715,
+      "calls": 978
     },
     {
       "model": "Haiku 4.5",
@@ -609,9 +609,9 @@
   ],
   "cost_by_token_type": {
     "input": 0.39,
-    "output": 8.0,
-    "cache_read": 30.31,
-    "cache_write": 42.97
+    "output": 8.76,
+    "cache_read": 34.28,
+    "cache_write": 44.76
   },
   "projects": [
     {
@@ -626,6 +626,17 @@
       "file_size_mb": 1.2
     },
     {
+      "name": "dev/FairwayIQ",
+      "sessions": 14,
+      "messages": 2760,
+      "cost": 23.67,
+      "input_tokens": 61904,
+      "output_tokens": 139927,
+      "cache_read_tokens": 55473699,
+      "cache_write_tokens": 5975756,
+      "file_size_mb": 4.9
+    },
+    {
       "name": "dev/ryandauzet",
       "sessions": 10,
       "messages": 1749,
@@ -637,25 +648,14 @@
       "file_size_mb": 2.4
     },
     {
-      "name": "dev/FairwayIQ",
-      "sessions": 13,
-      "messages": 2541,
-      "cost": 17.43,
-      "input_tokens": 61740,
-      "output_tokens": 110420,
-      "cache_read_tokens": 47702365,
-      "cache_write_tokens": 5717114,
-      "file_size_mb": 2.3
-    },
-    {
       "name": "SaturdayGame/SaturdayGame",
-      "sessions": 4,
-      "messages": 1671,
-      "cost": 8.78,
-      "input_tokens": 19407,
-      "output_tokens": 124498,
-      "cache_read_tokens": 42723137,
-      "cache_write_tokens": 2707704,
+      "sessions": 5,
+      "messages": 1686,
+      "cost": 9.06,
+      "input_tokens": 19422,
+      "output_tokens": 125306,
+      "cache_read_tokens": 42896812,
+      "cache_write_tokens": 2734914,
       "file_size_mb": 1.1
     },
     {
@@ -2417,28 +2417,101 @@
       "first_prompt": "are there pending changes to git?",
       "slug": "curried-noodling-shore",
       "file_size_mb": 0.22
+    },
+    {
+      "session_id": "3e75fb39-14c5-4721-8a56-5697217a95ab",
+      "project": "dev/FairwayIQ",
+      "project_dir": "-Users-dauzet-dev-FairwayIQ",
+      "date": "2026-03-10",
+      "start": "2026-03-10T20:48:18.248000+00:00",
+      "end": "2026-03-10T21:13:07.324000+00:00",
+      "duration_min": 24.8,
+      "cost": 6.2407,
+      "messages": 219,
+      "user_messages": 81,
+      "assistant_messages": 138,
+      "input_tokens": 164,
+      "output_tokens": 29507,
+      "cache_read_tokens": 7771334,
+      "cache_write_tokens": 258642,
+      "api_calls": 138,
+      "primary_model": "Opus 4.6",
+      "model_breakdown": {
+        "Opus 4.6": {
+          "cost": 6.2407,
+          "output_tokens": 29507,
+          "calls": 138
+        }
+      },
+      "tools": {
+        "Read": 26,
+        "Grep": 2,
+        "Bash": 32,
+        "Glob": 4,
+        "ToolSearch": 1,
+        "WebFetch": 3,
+        "Write": 3,
+        "Edit": 6
+      },
+      "first_prompt": "bro top 10 link is loading to blank tiles",
+      "slug": "toasty-mixing-spindle",
+      "file_size_mb": 2.57
+    },
+    {
+      "session_id": "920d1369-d245-41e7-af0d-b097219e6ff8",
+      "project": "SaturdayGame/SaturdayGame",
+      "project_dir": "-Users-dauzet-dev-SaturdayGame-SaturdayGame",
+      "date": "2026-03-10",
+      "start": "2026-03-10T21:30:37.770000+00:00",
+      "end": "2026-03-10T21:34:32.652000+00:00",
+      "duration_min": 3.9,
+      "cost": 0.2772,
+      "messages": 15,
+      "user_messages": 6,
+      "assistant_messages": 9,
+      "input_tokens": 15,
+      "output_tokens": 808,
+      "cache_read_tokens": 173675,
+      "cache_write_tokens": 27210,
+      "api_calls": 9,
+      "primary_model": "Opus 4.6",
+      "model_breakdown": {
+        "Opus 4.6": {
+          "cost": 0.2772,
+          "output_tokens": 808,
+          "calls": 9
+        }
+      },
+      "tools": {
+        "ToolSearch": 1,
+        "WebFetch": 1,
+        "Bash": 3
+      },
+      "first_prompt": "Can you install this SwiftUI agent skill? https://github.com/twostraws/swiftui-agent-skill",
+      "slug": "",
+      "file_size_mb": 0.03
     }
   ],
   "tool_summary": [
     {
       "name": "Read",
-      "count": 1634
+      "count": 1660
     },
     {
       "name": "Bash",
-      "count": 757
+      "count": 792
     },
     {
       "name": "Grep",
-      "count": 195
+      "count": 197
     },
     {
       "name": "Glob",
-      "count": 136
+      "count": 140
     },
     {
       "name": "Edit",
-      "count": 69
+      "count": 75
     },
     {
       "name": "WebSearch",
@@ -2449,16 +2522,16 @@
       "count": 20
     },
     {
+      "name": "WebFetch",
+      "count": 18
+    },
+    {
       "name": "TodoWrite",
       "count": 15
     },
     {
-      "name": "WebFetch",
-      "count": 14
-    },
-    {
       "name": "Write",
-      "count": 11
+      "count": 14
     },
     {
       "name": "TaskCreate",
@@ -2466,7 +2539,7 @@
     },
     {
       "name": "ToolSearch",
-      "count": 3
+      "count": 5
     },
     {
       "name": "Agent",
@@ -2570,16 +2643,16 @@
       "files": 12
     },
     "file_history": {
-      "total_files": 627,
-      "total_sessions": 28,
+      "total_files": 641,
+      "total_sessions": 30,
       "total_size_mb": 6.5
     },
     "storage": {
-      "total_mb": 244.1,
+      "total_mb": 246.9,
       "items": [
         {
           "name": "projects/",
-          "size_mb": 183.48
+          "size_mb": 186.14
         },
         {
           "name": "debug/",
@@ -2591,11 +2664,11 @@
         },
         {
           "name": "file-history/",
-          "size_mb": 6.48
+          "size_mb": 6.54
         },
         {
           "name": "plugins/",
-          "size_mb": 4.99
+          "size_mb": 5.14
         },
         {
           "name": "telemetry/",
@@ -2610,12 +2683,12 @@
           "size_mb": 0.22
         },
         {
-          "name": "cache/",
+          "name": "backups/",
           "size_mb": 0.14
         },
         {
-          "name": "backups/",
-          "size_mb": 0.13
+          "name": "cache/",
+          "size_mb": 0.14
         },
         {
           "name": "history.jsonl",
@@ -2651,10 +2724,6 @@
         },
         {
           "name": "settings.json",
-          "size_mb": 0.0
-        },
-        {
-          "name": ".credentials.json",
           "size_mb": 0.0
         },
         {
