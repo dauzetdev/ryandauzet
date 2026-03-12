@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-11T16:00:03.000557+00:00",
+  "generated_at": "2026-03-12T16:00:01.644295+00:00",
   "locale": {
     "locale_code": "en-US",
     "html_lang": "en",
@@ -165,14 +165,14 @@
     "email": "dauzetdev@gmail.com"
   },
   "kpi": {
-    "total_cost": 88.19,
+    "total_cost": 89.05,
     "actual_plan_cost": 100.0,
-    "total_sessions": 51,
-    "total_messages": 7672,
-    "total_output_tokens": 636920,
-    "total_input_tokens": 189438,
+    "total_sessions": 53,
+    "total_messages": 7885,
+    "total_output_tokens": 650912,
+    "total_input_tokens": 193424,
     "first_session": "2026-02-16",
-    "last_session": "2026-03-10",
+    "last_session": "2026-03-12",
     "total_projects": 8
   },
   "plan": {
@@ -180,39 +180,39 @@
       {
         "plan": "Max",
         "start": "2025-10-01",
-        "end": "2026-03-11",
-        "total_days": 162,
-        "days_active": 14,
+        "end": "2026-03-12",
+        "total_days": 163,
+        "days_active": 15,
         "plan_cost_eur": 93.0,
         "plan_cost_usd": 100.0,
-        "api_cost": 88.19,
-        "savings": -11.81,
+        "api_cost": 89.05,
+        "savings": -10.95,
         "roi_factor": 0.9,
-        "sessions": 51,
-        "messages": 7672,
-        "cost_per_day": 0.54
+        "sessions": 53,
+        "messages": 7885,
+        "cost_per_day": 0.55
       }
     ],
     "current_billing": {
       "plan": "Max",
       "period_start": "2026-03-01",
       "period_end": "2026-04-01",
-      "days_elapsed": 11,
+      "days_elapsed": 12,
       "days_total": 31,
-      "days_remaining": 20,
+      "days_remaining": 19,
       "plan_cost_eur": 93.0,
       "plan_cost_usd": 100.0,
-      "api_cost": 73.53,
-      "projected_cost": 207.21,
-      "savings": -26.47,
+      "api_cost": 74.39,
+      "projected_cost": 192.17,
+      "savings": -25.61,
       "roi_factor": 0.7,
-      "sessions": 33,
-      "messages": 5974,
-      "cost_per_day": 6.68
+      "sessions": 35,
+      "messages": 6187,
+      "cost_per_day": 6.2
     },
-    "total_api_cost": 88.19,
+    "total_api_cost": 89.05,
     "total_plan_cost": 100.0,
-    "total_savings": -11.81,
+    "total_savings": -10.95,
     "overall_roi": 0.9
   },
   "daily_costs": [
@@ -313,6 +313,13 @@
       "Opus 4.6": 7.1884,
       "Unknown": 0.0,
       "total": 7.3394
+    },
+    {
+      "date": "2026-03-12",
+      "Haiku 4.5": 0.8645,
+      "Opus 4.6": 0.0,
+      "Unknown": 0.0,
+      "total": 0.8645
     }
   ],
   "cumulative_costs": [
@@ -371,6 +378,10 @@
     {
       "date": "2026-03-10",
       "cost": 88.19
+    },
+    {
+      "date": "2026-03-12",
+      "cost": 89.05
     }
   ],
   "daily_messages": [
@@ -441,8 +452,13 @@
     },
     {
       "date": "2026-03-10",
-      "messages": 336,
+      "messages": 339,
       "sessions": 6
+    },
+    {
+      "date": "2026-03-12",
+      "messages": 210,
+      "sessions": 2
     }
   ],
   "hourly_distribution": [
@@ -452,7 +468,7 @@
     },
     {
       "hour": 1,
-      "messages": 404
+      "messages": 460
     },
     {
       "hour": 2,
@@ -464,7 +480,7 @@
     },
     {
       "hour": 4,
-      "messages": 13
+      "messages": 38
     },
     {
       "hour": 5,
@@ -532,7 +548,7 @@
     },
     {
       "hour": 21,
-      "messages": 35
+      "messages": 38
     },
     {
       "hour": 22,
@@ -550,7 +566,7 @@
     },
     {
       "day": "Tue",
-      "messages": 787
+      "messages": 790
     },
     {
       "day": "Wed",
@@ -558,7 +574,7 @@
     },
     {
       "day": "Thu",
-      "messages": 627
+      "messages": 708
     },
     {
       "day": "Fri",
@@ -590,12 +606,12 @@
     },
     {
       "model": "Haiku 4.5",
-      "cost": 27.68,
-      "input_tokens": 138067,
-      "output_tokens": 358266,
-      "cache_read_tokens": 110192491,
-      "cache_write_tokens": 11781764,
-      "calls": 3403
+      "cost": 28.54,
+      "input_tokens": 142053,
+      "output_tokens": 372258,
+      "cache_read_tokens": 113556493,
+      "cache_write_tokens": 12145088,
+      "calls": 3532
     },
     {
       "model": "Unknown",
@@ -608,10 +624,10 @@
     }
   ],
   "cost_by_token_type": {
-    "input": 0.39,
-    "output": 8.76,
-    "cache_read": 34.28,
-    "cache_write": 44.76
+    "input": 0.4,
+    "output": 8.83,
+    "cache_read": 34.61,
+    "cache_write": 45.21
   },
   "projects": [
     {
@@ -650,7 +666,7 @@
     {
       "name": "SaturdayGame/SaturdayGame",
       "sessions": 5,
-      "messages": 1686,
+      "messages": 1689,
       "cost": 9.06,
       "input_tokens": 19422,
       "output_tokens": 125306,
@@ -660,14 +676,14 @@
     },
     {
       "name": "GolfBooker/GolfBooker",
-      "sessions": 9,
-      "messages": 465,
-      "cost": 4.31,
-      "input_tokens": 4527,
-      "output_tokens": 30794,
-      "cache_read_tokens": 6195878,
-      "cache_write_tokens": 1230891,
-      "file_size_mb": 1.1
+      "sessions": 11,
+      "messages": 675,
+      "cost": 5.18,
+      "input_tokens": 8513,
+      "output_tokens": 44786,
+      "cache_read_tokens": 9559880,
+      "cache_write_tokens": 1594215,
+      "file_size_mb": 1.5
     },
     {
       "name": "workspace/golfbooker",
@@ -2463,11 +2479,11 @@
       "project_dir": "-Users-dauzet-dev-SaturdayGame-SaturdayGame",
       "date": "2026-03-10",
       "start": "2026-03-10T21:30:37.770000+00:00",
-      "end": "2026-03-10T21:34:32.652000+00:00",
-      "duration_min": 3.9,
+      "end": "2026-03-12T04:44:54.574000+00:00",
+      "duration_min": 1874.3,
       "cost": 0.2772,
-      "messages": 15,
-      "user_messages": 6,
+      "messages": 18,
+      "user_messages": 9,
       "assistant_messages": 9,
       "input_tokens": 15,
       "output_tokens": 808,
@@ -2489,25 +2505,94 @@
       },
       "first_prompt": "Can you install this SwiftUI agent skill? https://github.com/twostraws/swiftui-agent-skill",
       "slug": "",
-      "file_size_mb": 0.03
+      "file_size_mb": 0.04
+    },
+    {
+      "session_id": "9bbf31c0-ef65-4504-9981-50b1357828bb",
+      "project": "GolfBooker/GolfBooker",
+      "project_dir": "-Users-dauzet-dev-GolfBooker-GolfBooker",
+      "date": "2026-03-12",
+      "start": "2026-03-12T01:07:06.170000+00:00",
+      "end": "2026-03-12T04:05:07.339000+00:00",
+      "duration_min": 178.0,
+      "cost": 0.5518,
+      "messages": 142,
+      "user_messages": 56,
+      "assistant_messages": 86,
+      "input_tokens": 3908,
+      "output_tokens": 9438,
+      "cache_read_tokens": 2059347,
+      "cache_write_tokens": 235842,
+      "api_calls": 86,
+      "primary_model": "Haiku 4.5",
+      "model_breakdown": {
+        "Haiku 4.5": {
+          "cost": 0.5518,
+          "output_tokens": 9438,
+          "calls": 86
+        }
+      },
+      "tools": {
+        "Bash": 32,
+        "Read": 16,
+        "Grep": 6
+      },
+      "first_prompt": "Look at the GolfBooker Xcode project to understand the current code signing configuration. Check:\n\n1. The project.pbxproj for all CODE_SIGN_* settings, DEVELOPMENT_TEAM, provisioning profile settings\n",
+      "slug": "delightful-wibbling-stroustrup",
+      "file_size_mb": 0.13
+    },
+    {
+      "session_id": "1a0909f1-61ab-4dd2-bb78-0f5bbeeb466d",
+      "project": "GolfBooker/GolfBooker",
+      "project_dir": "-Users-dauzet-dev-GolfBooker-GolfBooker",
+      "date": "2026-03-12",
+      "start": "2026-03-12T04:37:02.458000+00:00",
+      "end": "2026-03-12T04:38:03.550000+00:00",
+      "duration_min": 1.0,
+      "cost": 0.3127,
+      "messages": 68,
+      "user_messages": 25,
+      "assistant_messages": 43,
+      "input_tokens": 78,
+      "output_tokens": 4554,
+      "cache_read_tokens": 1304655,
+      "cache_write_tokens": 127482,
+      "api_calls": 43,
+      "primary_model": "Haiku 4.5",
+      "model_breakdown": {
+        "Haiku 4.5": {
+          "cost": 0.3127,
+          "output_tokens": 4554,
+          "calls": 43
+        }
+      },
+      "tools": {
+        "Bash": 4,
+        "Glob": 3,
+        "Read": 14,
+        "Grep": 3
+      },
+      "first_prompt": "I need to understand the full flow when the user hits \"Start All\" (or start monitoring) in this GolfBooker app. Specifically:\n\n1. What happens when monitoring starts? Does it log in, navigate to the d",
+      "slug": "whimsical-tumbling-frog",
+      "file_size_mb": 0.25
     }
   ],
   "tool_summary": [
     {
       "name": "Read",
-      "count": 1660
+      "count": 1690
     },
     {
       "name": "Bash",
-      "count": 792
+      "count": 828
     },
     {
       "name": "Grep",
-      "count": 197
+      "count": 206
     },
     {
       "name": "Glob",
-      "count": 140
+      "count": 143
     },
     {
       "name": "Edit",
@@ -2643,16 +2728,16 @@
       "files": 12
     },
     "file_history": {
-      "total_files": 641,
-      "total_sessions": 30,
-      "total_size_mb": 6.5
+      "total_files": 655,
+      "total_sessions": 32,
+      "total_size_mb": 6.9
     },
     "storage": {
-      "total_mb": 246.9,
+      "total_mb": 250.7,
       "items": [
         {
           "name": "projects/",
-          "size_mb": 186.14
+          "size_mb": 189.11
         },
         {
           "name": "debug/",
@@ -2664,11 +2749,11 @@
         },
         {
           "name": "file-history/",
-          "size_mb": 6.54
+          "size_mb": 6.94
         },
         {
           "name": "plugins/",
-          "size_mb": 5.14
+          "size_mb": 5.16
         },
         {
           "name": "telemetry/",
@@ -2679,12 +2764,16 @@
           "size_mb": 0.83
         },
         {
+          "name": "image-cache/",
+          "size_mb": 0.4
+        },
+        {
           "name": "agents/",
           "size_mb": 0.22
         },
         {
           "name": "backups/",
-          "size_mb": 0.14
+          "size_mb": 0.15
         },
         {
           "name": "cache/",
@@ -2692,7 +2781,7 @@
         },
         {
           "name": "history.jsonl",
-          "size_mb": 0.1
+          "size_mb": 0.11
         },
         {
           "name": "commands/",
@@ -2711,11 +2800,11 @@
           "size_mb": 0.01
         },
         {
-          "name": "shell-snapshots/",
+          "name": "todos/",
           "size_mb": 0.0
         },
         {
-          "name": "todos/",
+          "name": "shell-snapshots/",
           "size_mb": 0.0
         },
         {
@@ -2728,10 +2817,6 @@
         },
         {
           "name": "settings.local.json",
-          "size_mb": 0.0
-        },
-        {
-          "name": "mcp-needs-auth-cache.json",
           "size_mb": 0.0
         },
         {
