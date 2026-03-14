@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-13T16:00:02.110627+00:00",
+  "generated_at": "2026-03-14T16:00:01.274689+00:00",
   "locale": {
     "locale_code": "en-US",
     "html_lang": "en",
@@ -165,14 +165,14 @@
     "email": "dauzetdev@gmail.com"
   },
   "kpi": {
-    "total_cost": 89.05,
+    "total_cost": 93.76,
     "actual_plan_cost": 100.0,
-    "total_sessions": 53,
-    "total_messages": 7885,
-    "total_output_tokens": 650912,
-    "total_input_tokens": 193424,
+    "total_sessions": 54,
+    "total_messages": 8153,
+    "total_output_tokens": 687826,
+    "total_input_tokens": 219835,
     "first_session": "2026-02-16",
-    "last_session": "2026-03-12",
+    "last_session": "2026-03-13",
     "total_projects": 8
   },
   "plan": {
@@ -180,39 +180,39 @@
       {
         "plan": "Max",
         "start": "2025-10-01",
-        "end": "2026-03-13",
-        "total_days": 164,
-        "days_active": 15,
+        "end": "2026-03-14",
+        "total_days": 165,
+        "days_active": 16,
         "plan_cost_eur": 93.0,
         "plan_cost_usd": 100.0,
-        "api_cost": 89.05,
-        "savings": -10.95,
+        "api_cost": 93.76,
+        "savings": -6.24,
         "roi_factor": 0.9,
-        "sessions": 53,
-        "messages": 7885,
-        "cost_per_day": 0.54
+        "sessions": 54,
+        "messages": 8153,
+        "cost_per_day": 0.57
       }
     ],
     "current_billing": {
       "plan": "Max",
       "period_start": "2026-03-01",
       "period_end": "2026-04-01",
-      "days_elapsed": 13,
+      "days_elapsed": 14,
       "days_total": 31,
-      "days_remaining": 18,
+      "days_remaining": 17,
       "plan_cost_eur": 93.0,
       "plan_cost_usd": 100.0,
-      "api_cost": 74.39,
-      "projected_cost": 177.39,
-      "savings": -25.61,
-      "roi_factor": 0.7,
-      "sessions": 35,
-      "messages": 6187,
-      "cost_per_day": 5.72
+      "api_cost": 79.1,
+      "projected_cost": 175.16,
+      "savings": -20.9,
+      "roi_factor": 0.8,
+      "sessions": 36,
+      "messages": 6455,
+      "cost_per_day": 5.65
     },
-    "total_api_cost": 89.05,
+    "total_api_cost": 93.76,
     "total_plan_cost": 100.0,
-    "total_savings": -10.95,
+    "total_savings": -6.24,
     "overall_roi": 0.9
   },
   "daily_costs": [
@@ -320,6 +320,13 @@
       "Opus 4.6": 0.0,
       "Unknown": 0.0,
       "total": 0.8645
+    },
+    {
+      "date": "2026-03-13",
+      "Haiku 4.5": 1.6602,
+      "Opus 4.6": 3.0534,
+      "Unknown": 0.0,
+      "total": 4.7136
     }
   ],
   "cumulative_costs": [
@@ -382,6 +389,10 @@
     {
       "date": "2026-03-12",
       "cost": 89.05
+    },
+    {
+      "date": "2026-03-13",
+      "cost": 93.76
     }
   ],
   "daily_messages": [
@@ -459,6 +470,11 @@
       "date": "2026-03-12",
       "messages": 210,
       "sessions": 2
+    },
+    {
+      "date": "2026-03-13",
+      "messages": 268,
+      "sessions": 1
     }
   ],
   "hourly_distribution": [
@@ -556,7 +572,7 @@
     },
     {
       "hour": 23,
-      "messages": 231
+      "messages": 346
     }
   ],
   "weekday_distribution": [
@@ -578,7 +594,7 @@
     },
     {
       "day": "Fri",
-      "messages": 86
+      "messages": 201
     },
     {
       "day": "Sat",
@@ -597,21 +613,21 @@
   "model_summary": [
     {
       "model": "Opus 4.6",
-      "cost": 55.04,
-      "input_tokens": 35021,
-      "output_tokens": 251521,
-      "cache_read_tokens": 44604382,
-      "cache_write_tokens": 4204715,
-      "calls": 978
+      "cost": 58.1,
+      "input_tokens": 35074,
+      "output_tokens": 261773,
+      "cache_read_tokens": 46162173,
+      "cache_write_tokens": 4527585,
+      "calls": 1017
     },
     {
       "model": "Haiku 4.5",
-      "cost": 28.54,
-      "input_tokens": 142053,
-      "output_tokens": 372258,
-      "cache_read_tokens": 113556493,
-      "cache_write_tokens": 12145088,
-      "calls": 3532
+      "cost": 30.2,
+      "input_tokens": 168411,
+      "output_tokens": 398920,
+      "cache_read_tokens": 118340440,
+      "cache_write_tokens": 12962786,
+      "calls": 3646
     },
     {
       "model": "Unknown",
@@ -624,10 +640,10 @@
     }
   ],
   "cost_by_token_type": {
-    "input": 0.4,
-    "output": 8.83,
-    "cache_read": 34.61,
-    "cache_write": 45.21
+    "input": 0.43,
+    "output": 9.22,
+    "cache_read": 35.87,
+    "cache_write": 48.25
   },
   "projects": [
     {
@@ -665,14 +681,14 @@
     },
     {
       "name": "SaturdayGame/SaturdayGame",
-      "sessions": 5,
-      "messages": 1689,
-      "cost": 9.06,
-      "input_tokens": 19422,
-      "output_tokens": 125306,
-      "cache_read_tokens": 42896812,
-      "cache_write_tokens": 2734914,
-      "file_size_mb": 1.1
+      "sessions": 6,
+      "messages": 1957,
+      "cost": 13.77,
+      "input_tokens": 45833,
+      "output_tokens": 162220,
+      "cache_read_tokens": 49238550,
+      "cache_write_tokens": 3875482,
+      "file_size_mb": 1.3
     },
     {
       "name": "GolfBooker/GolfBooker",
@@ -2575,24 +2591,64 @@
       "first_prompt": "I need to understand the full flow when the user hits \"Start All\" (or start monitoring) in this GolfBooker app. Specifically:\n\n1. What happens when monitoring starts? Does it log in, navigate to the d",
       "slug": "whimsical-tumbling-frog",
       "file_size_mb": 0.25
+    },
+    {
+      "session_id": "f3f01ef4-42ce-46fe-87eb-9895d27748a0",
+      "project": "SaturdayGame/SaturdayGame",
+      "project_dir": "-Users-dauzet-dev-SaturdayGame-SaturdayGame",
+      "date": "2026-03-13",
+      "start": "2026-03-13T23:36:37.229000+00:00",
+      "end": "2026-03-13T23:55:40.063000+00:00",
+      "duration_min": 19.0,
+      "cost": 4.7136,
+      "messages": 268,
+      "user_messages": 115,
+      "assistant_messages": 153,
+      "input_tokens": 26411,
+      "output_tokens": 36914,
+      "cache_read_tokens": 6341738,
+      "cache_write_tokens": 1140568,
+      "api_calls": 153,
+      "primary_model": "Haiku 4.5",
+      "model_breakdown": {
+        "Haiku 4.5": {
+          "cost": 1.6602,
+          "output_tokens": 26662,
+          "calls": 114
+        },
+        "Opus 4.6": {
+          "cost": 3.0534,
+          "output_tokens": 10252,
+          "calls": 39
+        }
+      },
+      "tools": {
+        "Read": 59,
+        "Glob": 17,
+        "Grep": 11,
+        "Bash": 23
+      },
+      "first_prompt": "I need a thorough analysis of the existing test infrastructure for scoring in this golf app. Read these files completely and report full code with line numbers:\n\n1. `/Users/dauzet/dev/SaturdayGame/Sat",
+      "slug": "ethereal-zooming-lamport",
+      "file_size_mb": 0.21
     }
   ],
   "tool_summary": [
     {
       "name": "Read",
-      "count": 1690
+      "count": 1749
     },
     {
       "name": "Bash",
-      "count": 828
+      "count": 851
     },
     {
       "name": "Grep",
-      "count": 206
+      "count": 217
     },
     {
       "name": "Glob",
-      "count": 143
+      "count": 160
     },
     {
       "name": "Edit",
@@ -2665,6 +2721,15 @@
         "lines": 259
       },
       {
+        "filename": "ethereal-zooming-lamport.md",
+        "slug": "ethereal-zooming-lamport",
+        "title": "Plan: Add \"Best N\" Score Selection Mode to Custom Game Format",
+        "created": "2026-03-13T23:45:26.616947+00:00",
+        "modified": "2026-03-13T23:45:26.616042+00:00",
+        "size_kb": 5.0,
+        "lines": 85
+      },
+      {
         "filename": "hazy-toasting-scott.md",
         "slug": "hazy-toasting-scott",
         "title": "Player Name Directory with Picker Suggestions",
@@ -2728,16 +2793,16 @@
       "files": 12
     },
     "file_history": {
-      "total_files": 655,
-      "total_sessions": 32,
-      "total_size_mb": 6.9
+      "total_files": 678,
+      "total_sessions": 33,
+      "total_size_mb": 7.2
     },
     "storage": {
-      "total_mb": 250.7,
+      "total_mb": 254.8,
       "items": [
         {
           "name": "projects/",
-          "size_mb": 189.11
+          "size_mb": 193.13
         },
         {
           "name": "debug/",
@@ -2749,11 +2814,11 @@
         },
         {
           "name": "file-history/",
-          "size_mb": 6.94
+          "size_mb": 7.25
         },
         {
           "name": "plugins/",
-          "size_mb": 5.16
+          "size_mb": 5.23
         },
         {
           "name": "telemetry/",
@@ -2764,16 +2829,12 @@
           "size_mb": 0.83
         },
         {
-          "name": "image-cache/",
-          "size_mb": 0.4
-        },
-        {
           "name": "agents/",
           "size_mb": 0.22
         },
         {
           "name": "backups/",
-          "size_mb": 0.15
+          "size_mb": 0.16
         },
         {
           "name": "cache/",
@@ -2789,7 +2850,7 @@
         },
         {
           "name": "plans/",
-          "size_mb": 0.04
+          "size_mb": 0.05
         },
         {
           "name": "gsd-file-manifest.json",
@@ -2800,11 +2861,11 @@
           "size_mb": 0.01
         },
         {
-          "name": "todos/",
+          "name": "shell-snapshots/",
           "size_mb": 0.0
         },
         {
-          "name": "shell-snapshots/",
+          "name": "todos/",
           "size_mb": 0.0
         },
         {
@@ -2817,6 +2878,14 @@
         },
         {
           "name": "settings.local.json",
+          "size_mb": 0.0
+        },
+        {
+          "name": "sessions/",
+          "size_mb": 0.0
+        },
+        {
+          "name": "mcp-needs-auth-cache.json",
           "size_mb": 0.0
         },
         {
