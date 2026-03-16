@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-15T16:00:01.896237+00:00",
+  "generated_at": "2026-03-16T16:00:02.190167+00:00",
   "locale": {
     "locale_code": "en-US",
     "html_lang": "en",
@@ -165,12 +165,12 @@
     "email": "dauzetdev@gmail.com"
   },
   "kpi": {
-    "total_cost": 93.76,
+    "total_cost": 114.43,
     "actual_plan_cost": 100.0,
     "total_sessions": 54,
-    "total_messages": 8153,
-    "total_output_tokens": 687826,
-    "total_input_tokens": 219835,
+    "total_messages": 8811,
+    "total_output_tokens": 769201,
+    "total_input_tokens": 261019,
     "first_session": "2026-02-16",
     "last_session": "2026-03-13",
     "total_projects": 8
@@ -180,40 +180,40 @@
       {
         "plan": "Max",
         "start": "2025-10-01",
-        "end": "2026-03-15",
-        "total_days": 166,
+        "end": "2026-03-16",
+        "total_days": 167,
         "days_active": 16,
         "plan_cost_eur": 93.0,
         "plan_cost_usd": 100.0,
-        "api_cost": 93.76,
-        "savings": -6.24,
-        "roi_factor": 0.9,
+        "api_cost": 114.43,
+        "savings": 14.43,
+        "roi_factor": 1.1,
         "sessions": 54,
-        "messages": 8153,
-        "cost_per_day": 0.56
+        "messages": 8811,
+        "cost_per_day": 0.69
       }
     ],
     "current_billing": {
       "plan": "Max",
       "period_start": "2026-03-01",
       "period_end": "2026-04-01",
-      "days_elapsed": 15,
+      "days_elapsed": 16,
       "days_total": 31,
-      "days_remaining": 16,
+      "days_remaining": 15,
       "plan_cost_eur": 93.0,
       "plan_cost_usd": 100.0,
-      "api_cost": 79.1,
-      "projected_cost": 163.48,
-      "savings": -20.9,
-      "roi_factor": 0.8,
+      "api_cost": 99.77,
+      "projected_cost": 193.31,
+      "savings": -0.23,
+      "roi_factor": 1.0,
       "sessions": 36,
-      "messages": 6455,
-      "cost_per_day": 5.27
+      "messages": 7113,
+      "cost_per_day": 6.24
     },
-    "total_api_cost": 93.76,
+    "total_api_cost": 114.43,
     "total_plan_cost": 100.0,
-    "total_savings": -6.24,
-    "overall_roi": 0.9
+    "total_savings": 14.43,
+    "overall_roi": 1.1
   },
   "daily_costs": [
     {
@@ -316,17 +316,17 @@
     },
     {
       "date": "2026-03-12",
-      "Haiku 4.5": 0.8645,
+      "Haiku 4.5": 2.0601,
       "Opus 4.6": 0.0,
       "Unknown": 0.0,
-      "total": 0.8645
+      "total": 2.0601
     },
     {
       "date": "2026-03-13",
-      "Haiku 4.5": 1.6602,
-      "Opus 4.6": 3.0534,
+      "Haiku 4.5": 2.387,
+      "Opus 4.6": 21.8004,
       "Unknown": 0.0,
-      "total": 4.7136
+      "total": 24.1874
     }
   ],
   "cumulative_costs": [
@@ -388,11 +388,11 @@
     },
     {
       "date": "2026-03-12",
-      "cost": 89.05
+      "cost": 90.25
     },
     {
       "date": "2026-03-13",
-      "cost": 93.76
+      "cost": 114.43
     }
   ],
   "daily_messages": [
@@ -468,12 +468,12 @@
     },
     {
       "date": "2026-03-12",
-      "messages": 210,
+      "messages": 409,
       "sessions": 2
     },
     {
       "date": "2026-03-13",
-      "messages": 268,
+      "messages": 727,
       "sessions": 1
     }
   ],
@@ -496,7 +496,7 @@
     },
     {
       "hour": 4,
-      "messages": 38
+      "messages": 120
     },
     {
       "hour": 5,
@@ -568,11 +568,11 @@
     },
     {
       "hour": 22,
-      "messages": 190
+      "messages": 492
     },
     {
       "hour": 23,
-      "messages": 346
+      "messages": 231
     }
   ],
   "weekday_distribution": [
@@ -590,11 +590,11 @@
     },
     {
       "day": "Thu",
-      "messages": 708
+      "messages": 790
     },
     {
       "day": "Fri",
-      "messages": 201
+      "messages": 388
     },
     {
       "day": "Sat",
@@ -613,21 +613,21 @@
   "model_summary": [
     {
       "model": "Opus 4.6",
-      "cost": 58.1,
-      "input_tokens": 35074,
-      "output_tokens": 261773,
-      "cache_read_tokens": 46162173,
-      "cache_write_tokens": 4527585,
-      "calls": 1017
+      "cost": 76.85,
+      "input_tokens": 48924,
+      "output_tokens": 320083,
+      "cache_read_tokens": 71733056,
+      "cache_write_tokens": 5237117,
+      "calls": 1219
     },
     {
       "model": "Haiku 4.5",
-      "cost": 30.2,
-      "input_tokens": 168411,
-      "output_tokens": 398920,
-      "cache_read_tokens": 118340440,
-      "cache_write_tokens": 12962786,
-      "calls": 3646
+      "cost": 32.12,
+      "input_tokens": 195745,
+      "output_tokens": 421985,
+      "cache_read_tokens": 126040459,
+      "cache_write_tokens": 13770541,
+      "calls": 3833
     },
     {
       "model": "Unknown",
@@ -640,12 +640,23 @@
     }
   ],
   "cost_by_token_type": {
-    "input": 0.43,
-    "output": 9.22,
-    "cache_read": 35.87,
-    "cache_write": 48.25
+    "input": 0.52,
+    "output": 10.79,
+    "cache_read": 49.43,
+    "cache_write": 53.69
   },
   "projects": [
+    {
+      "name": "SaturdayGame/SaturdayGame",
+      "sessions": 6,
+      "messages": 2416,
+      "cost": 33.25,
+      "input_tokens": 60021,
+      "output_tokens": 227747,
+      "cache_read_tokens": 78809525,
+      "cache_write_tokens": 4817298,
+      "file_size_mb": 1.3
+    },
     {
       "name": "dev/GolfBooker",
       "sessions": 7,
@@ -680,26 +691,15 @@
       "file_size_mb": 2.4
     },
     {
-      "name": "SaturdayGame/SaturdayGame",
-      "sessions": 6,
-      "messages": 1957,
-      "cost": 13.77,
-      "input_tokens": 45833,
-      "output_tokens": 162220,
-      "cache_read_tokens": 49238550,
-      "cache_write_tokens": 3875482,
-      "file_size_mb": 1.3
-    },
-    {
       "name": "GolfBooker/GolfBooker",
       "sessions": 11,
-      "messages": 675,
-      "cost": 5.18,
-      "input_tokens": 8513,
-      "output_tokens": 44786,
-      "cache_read_tokens": 9559880,
-      "cache_write_tokens": 1594215,
-      "file_size_mb": 1.5
+      "messages": 874,
+      "cost": 6.37,
+      "input_tokens": 35509,
+      "output_tokens": 60634,
+      "cache_read_tokens": 13259807,
+      "cache_write_tokens": 2169686,
+      "file_size_mb": 1.6
     },
     {
       "name": "workspace/golfbooker",
@@ -2563,70 +2563,78 @@
       "project_dir": "-Users-dauzet-dev-GolfBooker-GolfBooker",
       "date": "2026-03-12",
       "start": "2026-03-12T04:37:02.458000+00:00",
-      "end": "2026-03-12T04:38:03.550000+00:00",
-      "duration_min": 1.0,
-      "cost": 0.3127,
-      "messages": 68,
-      "user_messages": 25,
-      "assistant_messages": 43,
-      "input_tokens": 78,
-      "output_tokens": 4554,
-      "cache_read_tokens": 1304655,
-      "cache_write_tokens": 127482,
-      "api_calls": 43,
+      "end": "2026-03-15T23:24:31.927000+00:00",
+      "duration_min": 5447.5,
+      "cost": 1.5082,
+      "messages": 267,
+      "user_messages": 107,
+      "assistant_messages": 160,
+      "input_tokens": 27074,
+      "output_tokens": 20402,
+      "cache_read_tokens": 5004582,
+      "cache_write_tokens": 702953,
+      "api_calls": 160,
       "primary_model": "Haiku 4.5",
       "model_breakdown": {
         "Haiku 4.5": {
-          "cost": 0.3127,
-          "output_tokens": 4554,
-          "calls": 43
+          "cost": 1.5082,
+          "output_tokens": 20402,
+          "calls": 160
         }
       },
       "tools": {
-        "Bash": 4,
-        "Glob": 3,
-        "Read": 14,
-        "Grep": 3
+        "Glob": 16,
+        "Bash": 35,
+        "Read": 43,
+        "Grep": 9
       },
-      "first_prompt": "I need to understand the full flow when the user hits \"Start All\" (or start monitoring) in this GolfBooker app. Specifically:\n\n1. What happens when monitoring starts? Does it log in, navigate to the d",
+      "first_prompt": "I need a comprehensive understanding of the existing test suite in the SaturdayGame project. Read ALL test files completely so I can assess coverage gaps.\n\nThe project is at /Users/dauzet/dev/Saturday",
       "slug": "whimsical-tumbling-frog",
-      "file_size_mb": 0.25
+      "file_size_mb": 0.29
     },
     {
       "session_id": "f3f01ef4-42ce-46fe-87eb-9895d27748a0",
       "project": "SaturdayGame/SaturdayGame",
       "project_dir": "-Users-dauzet-dev-SaturdayGame-SaturdayGame",
       "date": "2026-03-13",
-      "start": "2026-03-13T23:36:37.229000+00:00",
-      "end": "2026-03-13T23:55:40.063000+00:00",
-      "duration_min": 19.0,
-      "cost": 4.7136,
-      "messages": 268,
-      "user_messages": 115,
-      "assistant_messages": 153,
-      "input_tokens": 26411,
-      "output_tokens": 36914,
-      "cache_read_tokens": 6341738,
-      "cache_write_tokens": 1140568,
-      "api_calls": 153,
-      "primary_model": "Haiku 4.5",
+      "start": "2026-03-13T22:53:48.095000+00:00",
+      "end": "2026-03-15T21:56:25.840000+00:00",
+      "duration_min": 2822.6,
+      "cost": 24.1874,
+      "messages": 727,
+      "user_messages": 302,
+      "assistant_messages": 425,
+      "input_tokens": 40599,
+      "output_tokens": 102441,
+      "cache_read_tokens": 35912713,
+      "cache_write_tokens": 2082384,
+      "api_calls": 425,
+      "primary_model": "Opus 4.6",
       "model_breakdown": {
         "Haiku 4.5": {
-          "cost": 1.6602,
-          "output_tokens": 26662,
-          "calls": 114
+          "cost": 2.387,
+          "output_tokens": 33879,
+          "calls": 184
         },
         "Opus 4.6": {
-          "cost": 3.0534,
-          "output_tokens": 10252,
-          "calls": 39
+          "cost": 21.8004,
+          "output_tokens": 68562,
+          "calls": 241
         }
       },
       "tools": {
-        "Read": 59,
-        "Glob": 17,
-        "Grep": 11,
-        "Bash": 23
+        "Read": 104,
+        "Glob": 22,
+        "Grep": 36,
+        "Bash": 70,
+        "Skill": 1,
+        "Edit": 24,
+        "Write": 5,
+        "Agent": 6,
+        "ToolSearch": 3,
+        "EnterPlanMode": 1,
+        "ExitPlanMode": 1,
+        "TaskOutput": 2
       },
       "first_prompt": "I need a thorough analysis of the existing test infrastructure for scoring in this golf app. Read these files completely and report full code with line numbers:\n\n1. `/Users/dauzet/dev/SaturdayGame/Sat",
       "slug": "ethereal-zooming-lamport",
@@ -2636,23 +2644,23 @@
   "tool_summary": [
     {
       "name": "Read",
-      "count": 1749
+      "count": 1823
     },
     {
       "name": "Bash",
-      "count": 851
+      "count": 929
     },
     {
       "name": "Grep",
-      "count": 217
+      "count": 248
     },
     {
       "name": "Glob",
-      "count": 160
+      "count": 178
     },
     {
       "name": "Edit",
-      "count": 75
+      "count": 99
     },
     {
       "name": "WebSearch",
@@ -2663,6 +2671,10 @@
       "count": 20
     },
     {
+      "name": "Write",
+      "count": 19
+    },
+    {
       "name": "WebFetch",
       "count": 18
     },
@@ -2671,24 +2683,36 @@
       "count": 15
     },
     {
-      "name": "Write",
-      "count": 14
-    },
-    {
       "name": "TaskCreate",
       "count": 10
     },
     {
-      "name": "ToolSearch",
-      "count": 5
+      "name": "Agent",
+      "count": 9
     },
     {
-      "name": "Agent",
-      "count": 3
+      "name": "ToolSearch",
+      "count": 8
     },
     {
       "name": "AskUserQuestion",
       "count": 2
+    },
+    {
+      "name": "TaskOutput",
+      "count": 2
+    },
+    {
+      "name": "Skill",
+      "count": 1
+    },
+    {
+      "name": "EnterPlanMode",
+      "count": 1
+    },
+    {
+      "name": "ExitPlanMode",
+      "count": 1
     }
   ],
   "insights": {
@@ -2793,16 +2817,16 @@
       "files": 12
     },
     "file_history": {
-      "total_files": 678,
+      "total_files": 704,
       "total_sessions": 33,
-      "total_size_mb": 7.2
+      "total_size_mb": 7.7
     },
     "storage": {
-      "total_mb": 254.8,
+      "total_mb": 264.8,
       "items": [
         {
           "name": "projects/",
-          "size_mb": 193.13
+          "size_mb": 202.35
         },
         {
           "name": "debug/",
@@ -2810,11 +2834,11 @@
         },
         {
           "name": "paste-cache/",
-          "size_mb": 19.38
+          "size_mb": 19.54
         },
         {
           "name": "file-history/",
-          "size_mb": 7.25
+          "size_mb": 7.72
         },
         {
           "name": "plugins/",
@@ -2833,6 +2857,10 @@
           "size_mb": 0.22
         },
         {
+          "name": "image-cache/",
+          "size_mb": 0.2
+        },
+        {
           "name": "backups/",
           "size_mb": 0.16
         },
@@ -2842,7 +2870,7 @@
         },
         {
           "name": "history.jsonl",
-          "size_mb": 0.11
+          "size_mb": 0.12
         },
         {
           "name": "commands/",
