@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-16T16:00:02.190167+00:00",
+  "generated_at": "2026-03-17T16:00:02.130257+00:00",
   "locale": {
     "locale_code": "en-US",
     "html_lang": "en",
@@ -165,14 +165,14 @@
     "email": "dauzetdev@gmail.com"
   },
   "kpi": {
-    "total_cost": 114.43,
+    "total_cost": 134.45,
     "actual_plan_cost": 100.0,
-    "total_sessions": 54,
-    "total_messages": 8811,
-    "total_output_tokens": 769201,
-    "total_input_tokens": 261019,
+    "total_sessions": 55,
+    "total_messages": 9315,
+    "total_output_tokens": 823019,
+    "total_input_tokens": 278039,
     "first_session": "2026-02-16",
-    "last_session": "2026-03-13",
+    "last_session": "2026-03-16",
     "total_projects": 8
   },
   "plan": {
@@ -180,40 +180,40 @@
       {
         "plan": "Max",
         "start": "2025-10-01",
-        "end": "2026-03-16",
-        "total_days": 167,
-        "days_active": 16,
+        "end": "2026-03-17",
+        "total_days": 168,
+        "days_active": 17,
         "plan_cost_eur": 93.0,
         "plan_cost_usd": 100.0,
-        "api_cost": 114.43,
-        "savings": 14.43,
-        "roi_factor": 1.1,
-        "sessions": 54,
-        "messages": 8811,
-        "cost_per_day": 0.69
+        "api_cost": 134.45,
+        "savings": 34.45,
+        "roi_factor": 1.3,
+        "sessions": 55,
+        "messages": 9315,
+        "cost_per_day": 0.8
       }
     ],
     "current_billing": {
       "plan": "Max",
       "period_start": "2026-03-01",
       "period_end": "2026-04-01",
-      "days_elapsed": 16,
+      "days_elapsed": 17,
       "days_total": 31,
-      "days_remaining": 15,
+      "days_remaining": 14,
       "plan_cost_eur": 93.0,
       "plan_cost_usd": 100.0,
-      "api_cost": 99.77,
-      "projected_cost": 193.31,
-      "savings": -0.23,
-      "roi_factor": 1.0,
-      "sessions": 36,
-      "messages": 7113,
-      "cost_per_day": 6.24
+      "api_cost": 119.79,
+      "projected_cost": 218.44,
+      "savings": 19.79,
+      "roi_factor": 1.2,
+      "sessions": 37,
+      "messages": 7617,
+      "cost_per_day": 7.05
     },
-    "total_api_cost": 114.43,
+    "total_api_cost": 134.45,
     "total_plan_cost": 100.0,
-    "total_savings": 14.43,
-    "overall_roi": 1.1
+    "total_savings": 34.45,
+    "overall_roi": 1.3
   },
   "daily_costs": [
     {
@@ -317,9 +317,9 @@
     {
       "date": "2026-03-12",
       "Haiku 4.5": 2.0601,
-      "Opus 4.6": 0.0,
+      "Opus 4.6": 19.7384,
       "Unknown": 0.0,
-      "total": 2.0601
+      "total": 21.7985
     },
     {
       "date": "2026-03-13",
@@ -327,6 +327,13 @@
       "Opus 4.6": 21.8004,
       "Unknown": 0.0,
       "total": 24.1874
+    },
+    {
+      "date": "2026-03-16",
+      "Haiku 4.5": 0.278,
+      "Opus 4.6": 0.0,
+      "Unknown": 0.0,
+      "total": 0.278
     }
   ],
   "cumulative_costs": [
@@ -388,11 +395,15 @@
     },
     {
       "date": "2026-03-12",
-      "cost": 90.25
+      "cost": 109.99
     },
     {
       "date": "2026-03-13",
-      "cost": 114.43
+      "cost": 134.17
+    },
+    {
+      "date": "2026-03-16",
+      "cost": 134.45
     }
   ],
   "daily_messages": [
@@ -468,12 +479,17 @@
     },
     {
       "date": "2026-03-12",
-      "messages": 409,
+      "messages": 831,
       "sessions": 2
     },
     {
       "date": "2026-03-13",
       "messages": 727,
+      "sessions": 1
+    },
+    {
+      "date": "2026-03-16",
+      "messages": 82,
       "sessions": 1
     }
   ],
@@ -496,7 +512,7 @@
     },
     {
       "hour": 4,
-      "messages": 120
+      "messages": 292
     },
     {
       "hour": 5,
@@ -560,7 +576,7 @@
     },
     {
       "hour": 20,
-      "messages": 216
+      "messages": 247
     },
     {
       "hour": 21,
@@ -578,7 +594,7 @@
   "weekday_distribution": [
     {
       "day": "Mon",
-      "messages": 711
+      "messages": 742
     },
     {
       "day": "Tue",
@@ -590,7 +606,7 @@
     },
     {
       "day": "Thu",
-      "messages": 790
+      "messages": 962
     },
     {
       "day": "Fri",
@@ -613,21 +629,21 @@
   "model_summary": [
     {
       "model": "Opus 4.6",
-      "cost": 76.85,
-      "input_tokens": 48924,
-      "output_tokens": 320083,
-      "cache_read_tokens": 71733056,
-      "cache_write_tokens": 5237117,
-      "calls": 1219
+      "cost": 96.58,
+      "input_tokens": 65875,
+      "output_tokens": 368904,
+      "cache_read_tokens": 91361974,
+      "cache_write_tokens": 6616106,
+      "calls": 1469
     },
     {
       "model": "Haiku 4.5",
-      "cost": 32.12,
-      "input_tokens": 195745,
-      "output_tokens": 421985,
-      "cache_read_tokens": 126040459,
-      "cache_write_tokens": 13770541,
-      "calls": 3833
+      "cost": 32.4,
+      "input_tokens": 195814,
+      "output_tokens": 426982,
+      "cache_read_tokens": 127592157,
+      "cache_write_tokens": 13848754,
+      "calls": 3884
     },
     {
       "model": "Unknown",
@@ -640,22 +656,33 @@
     }
   ],
   "cost_by_token_type": {
-    "input": 0.52,
-    "output": 10.79,
-    "cache_read": 49.43,
-    "cache_write": 53.69
+    "input": 0.61,
+    "output": 12.04,
+    "cache_read": 59.4,
+    "cache_write": 62.41
   },
   "projects": [
     {
       "name": "SaturdayGame/SaturdayGame",
-      "sessions": 6,
-      "messages": 2416,
-      "cost": 33.25,
-      "input_tokens": 60021,
-      "output_tokens": 227747,
-      "cache_read_tokens": 78809525,
-      "cache_write_tokens": 4817298,
-      "file_size_mb": 1.3
+      "sessions": 7,
+      "messages": 2498,
+      "cost": 33.53,
+      "input_tokens": 60090,
+      "output_tokens": 232744,
+      "cache_read_tokens": 80361223,
+      "cache_write_tokens": 4895511,
+      "file_size_mb": 1.5
+    },
+    {
+      "name": "GolfBooker/GolfBooker",
+      "sessions": 11,
+      "messages": 1296,
+      "cost": 26.11,
+      "input_tokens": 52460,
+      "output_tokens": 109455,
+      "cache_read_tokens": 32888725,
+      "cache_write_tokens": 3548675,
+      "file_size_mb": 1.6
     },
     {
       "name": "dev/GolfBooker",
@@ -689,17 +716,6 @@
       "cache_read_tokens": 24847776,
       "cache_write_tokens": 3985163,
       "file_size_mb": 2.4
-    },
-    {
-      "name": "GolfBooker/GolfBooker",
-      "sessions": 11,
-      "messages": 874,
-      "cost": 6.37,
-      "input_tokens": 35509,
-      "output_tokens": 60634,
-      "cache_read_tokens": 13259807,
-      "cache_write_tokens": 2169686,
-      "file_size_mb": 1.6
     },
     {
       "name": "workspace/golfbooker",
@@ -2562,31 +2578,39 @@
       "project": "GolfBooker/GolfBooker",
       "project_dir": "-Users-dauzet-dev-GolfBooker-GolfBooker",
       "date": "2026-03-12",
-      "start": "2026-03-12T04:37:02.458000+00:00",
-      "end": "2026-03-15T23:24:31.927000+00:00",
-      "duration_min": 5447.5,
-      "cost": 1.5082,
-      "messages": 267,
-      "user_messages": 107,
-      "assistant_messages": 160,
-      "input_tokens": 27074,
-      "output_tokens": 20402,
-      "cache_read_tokens": 5004582,
-      "cache_write_tokens": 702953,
-      "api_calls": 160,
-      "primary_model": "Haiku 4.5",
+      "start": "2026-03-12T04:34:51.821000+00:00",
+      "end": "2026-03-16T20:00:51.388000+00:00",
+      "duration_min": 6686.0,
+      "cost": 21.2467,
+      "messages": 689,
+      "user_messages": 279,
+      "assistant_messages": 410,
+      "input_tokens": 44025,
+      "output_tokens": 69223,
+      "cache_read_tokens": 24633500,
+      "cache_write_tokens": 2081942,
+      "api_calls": 410,
+      "primary_model": "Opus 4.6",
       "model_breakdown": {
         "Haiku 4.5": {
           "cost": 1.5082,
           "output_tokens": 20402,
           "calls": 160
+        },
+        "Opus 4.6": {
+          "cost": 19.7384,
+          "output_tokens": 48821,
+          "calls": 250
         }
       },
       "tools": {
-        "Glob": 16,
-        "Bash": 35,
-        "Read": 43,
-        "Grep": 9
+        "Glob": 19,
+        "Bash": 93,
+        "Read": 73,
+        "Grep": 31,
+        "Agent": 4,
+        "Edit": 19,
+        "Write": 4
       },
       "first_prompt": "I need a comprehensive understanding of the existing test suite in the SaturdayGame project. Read ALL test files completely so I can assess coverage gaps.\n\nThe project is at /Users/dauzet/dev/Saturday",
       "slug": "whimsical-tumbling-frog",
@@ -2639,40 +2663,74 @@
       "first_prompt": "I need a thorough analysis of the existing test infrastructure for scoring in this golf app. Read these files completely and report full code with line numbers:\n\n1. `/Users/dauzet/dev/SaturdayGame/Sat",
       "slug": "ethereal-zooming-lamport",
       "file_size_mb": 0.21
+    },
+    {
+      "session_id": "470a53b7-a1f4-4e45-8ec1-4d262a46ad9d",
+      "project": "SaturdayGame/SaturdayGame",
+      "project_dir": "-Users-dauzet-dev-SaturdayGame-SaturdayGame",
+      "date": "2026-03-16",
+      "start": "2026-03-16T20:16:33.166000+00:00",
+      "end": "2026-03-16T20:27:33.069000+00:00",
+      "duration_min": 11.0,
+      "cost": 0.278,
+      "messages": 82,
+      "user_messages": 31,
+      "assistant_messages": 51,
+      "input_tokens": 69,
+      "output_tokens": 4997,
+      "cache_read_tokens": 1551698,
+      "cache_write_tokens": 78213,
+      "api_calls": 51,
+      "primary_model": "Haiku 4.5",
+      "model_breakdown": {
+        "Haiku 4.5": {
+          "cost": 0.278,
+          "output_tokens": 4997,
+          "calls": 51
+        }
+      },
+      "tools": {
+        "Bash": 19,
+        "Read": 10,
+        "Grep": 1
+      },
+      "first_prompt": "Explore the macOS app build and deployment configuration for this project. I need to understand:\n\n1. The macOS target/scheme name (likely \"Saturday Game\" based on CLAUDE.md)\n2. Any Fastlane configurat",
+      "slug": "starry-doodling-swing",
+      "file_size_mb": 0.14
     }
   ],
   "tool_summary": [
     {
       "name": "Read",
-      "count": 1823
+      "count": 1863
     },
     {
       "name": "Bash",
-      "count": 929
+      "count": 1006
     },
     {
       "name": "Grep",
-      "count": 248
+      "count": 271
     },
     {
       "name": "Glob",
-      "count": 178
+      "count": 181
     },
     {
       "name": "Edit",
-      "count": 99
+      "count": 118
     },
     {
       "name": "WebSearch",
       "count": 33
     },
     {
-      "name": "TaskUpdate",
-      "count": 20
+      "name": "Write",
+      "count": 23
     },
     {
-      "name": "Write",
-      "count": 19
+      "name": "TaskUpdate",
+      "count": 20
     },
     {
       "name": "WebFetch",
@@ -2683,12 +2741,12 @@
       "count": 15
     },
     {
-      "name": "TaskCreate",
-      "count": 10
+      "name": "Agent",
+      "count": 13
     },
     {
-      "name": "Agent",
-      "count": 9
+      "name": "TaskCreate",
+      "count": 10
     },
     {
       "name": "ToolSearch",
@@ -2817,16 +2875,16 @@
       "files": 12
     },
     "file_history": {
-      "total_files": 704,
-      "total_sessions": 33,
+      "total_files": 706,
+      "total_sessions": 34,
       "total_size_mb": 7.7
     },
     "storage": {
-      "total_mb": 264.8,
+      "total_mb": 269.1,
       "items": [
         {
           "name": "projects/",
-          "size_mb": 202.35
+          "size_mb": 206.8
         },
         {
           "name": "debug/",
@@ -2857,16 +2915,12 @@
           "size_mb": 0.22
         },
         {
-          "name": "image-cache/",
-          "size_mb": 0.2
-        },
-        {
           "name": "backups/",
           "size_mb": 0.16
         },
         {
           "name": "cache/",
-          "size_mb": 0.14
+          "size_mb": 0.15
         },
         {
           "name": "history.jsonl",
@@ -2889,11 +2943,11 @@
           "size_mb": 0.01
         },
         {
-          "name": "shell-snapshots/",
+          "name": "todos/",
           "size_mb": 0.0
         },
         {
-          "name": "todos/",
+          "name": "shell-snapshots/",
           "size_mb": 0.0
         },
         {
