@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-19T16:00:01.992696+00:00",
+  "generated_at": "2026-03-20T16:00:01.658770+00:00",
   "locale": {
     "locale_code": "en-US",
     "html_lang": "en",
@@ -180,8 +180,8 @@
       {
         "plan": "Max",
         "start": "2025-10-01",
-        "end": "2026-03-19",
-        "total_days": 170,
+        "end": "2026-03-20",
+        "total_days": 171,
         "days_active": 17,
         "plan_cost_eur": 93.0,
         "plan_cost_usd": 100.0,
@@ -197,18 +197,18 @@
       "plan": "Max",
       "period_start": "2026-03-01",
       "period_end": "2026-04-01",
-      "days_elapsed": 19,
+      "days_elapsed": 20,
       "days_total": 31,
-      "days_remaining": 12,
+      "days_remaining": 11,
       "plan_cost_eur": 93.0,
       "plan_cost_usd": 100.0,
       "api_cost": 119.79,
-      "projected_cost": 195.45,
+      "projected_cost": 185.67,
       "savings": 19.79,
       "roi_factor": 1.2,
       "sessions": 37,
       "messages": 7617,
-      "cost_per_day": 6.3
+      "cost_per_day": 5.99
     },
     "total_api_cost": 134.45,
     "total_plan_cost": 100.0,
