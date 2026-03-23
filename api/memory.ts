@@ -1,10 +1,17 @@
-import { promises as fs } from "fs";
-import path from "path";
+export const config = { runtime: "edge" };
 
-export const config = { runtime: "nodejs" };
+function getProxy(): { url: string; token: string } | null {
+  const url = (globalThis as any).process?.env?.WORKSPACE_PROXY_URL;
+  const token = (globalThis as any).process?.env?.WORKSPACE_PROXY_TOKEN;
+  if (!url || !token) return null;
+  return { url: url.replace(/\/$/, ""), token };
+}
 
-const MEM_DIR = "/Users/dauzet/.openclaw/workspace/memory";
-const WORKSPACE = "/Users/dauzet/.openclaw/workspace";
+async function proxyGet(proxy: { url: string; token: string }, path: string): Promise<Response> {
+  return fetch(`${proxy.url}${path}`, {
+    headers: { authorization: `Bearer ${proxy.token}` },
+  });
+}
 
 export default async function handler(request: Request): Promise<Response> {
   const cookies = request.headers.get("cookie") || "";
@@ -12,57 +19,23 @@ export default async function handler(request: Request): Promise<Response> {
     return Response.json({ error: "Not authenticated" }, { status: 401 });
   }
 
+  const proxy = getProxy();
+  if (!proxy) return Response.json({ error: "Workspace proxy not configured" }, { status: 503 });
+
   const url = new URL(request.url);
-  const dateParam = url.searchParams.get("date");
-  const fileParam = url.searchParams.get("file");
-  const searchParam = url.searchParams.get("search");
+  const date = url.searchParams.get("date");
+  const file = url.searchParams.get("file");
+  const search = url.searchParams.get("search");
 
-  // GET ?file=MEMORY.md — fetch top-level workspace file
-  if (fileParam) {
-    const filePath = path.join(WORKSPACE, path.basename(fileParam));
-    try {
-      const content = await fs.readFile(filePath, "utf-8");
-      return Response.json({ content });
-    } catch {
-      return Response.json({ error: "File not found" }, { status: 404 });
-    }
-  }
+  let qs = "";
+  if (file) qs = `?file=${encodeURIComponent(file)}`;
+  else if (date) qs = `?date=${encodeURIComponent(date)}`;
+  else if (search) qs = `?search=${encodeURIComponent(search)}`;
 
-  // GET ?date=YYYY-MM-DD — fetch specific day log
-  if (dateParam) {
-    const filePath = path.join(MEM_DIR, `${dateParam}.md`);
-    try {
-      const content = await fs.readFile(filePath, "utf-8");
-      return Response.json({ content, date: dateParam });
-    } catch {
-      return Response.json({ error: "Not found" }, { status: 404 });
-    }
-  }
-
-  // GET (list) — list all dates + optional search
-  try {
-    const files = await fs.readdir(MEM_DIR);
-    const datFiles = files
-      .filter((f) => /^\d{4}-\d{2}-\d{2}\.md$/.test(f))
-      .sort()
-      .reverse();
-
-    if (searchParam) {
-      const results: { date: string; preview: string }[] = [];
-      for (const f of datFiles) {
-        const content = await fs.readFile(path.join(MEM_DIR, f), "utf-8");
-        if (content.toLowerCase().includes(searchParam.toLowerCase())) {
-          const idx = content.toLowerCase().indexOf(searchParam.toLowerCase());
-          const preview = content.slice(Math.max(0, idx - 50), idx + 100).replace(/\n/g, " ");
-          results.push({ date: f.replace(".md", ""), preview });
-        }
-      }
-      return Response.json({ results });
-    }
-
-    const dates = datFiles.map((f) => f.replace(".md", ""));
-    return Response.json({ dates });
-  } catch {
-    return Response.json({ dates: [] });
-  }
+  const upstream = await proxyGet(proxy, `/memory${qs}`);
+  const data = await upstream.text();
+  return new Response(data, {
+    status: upstream.status,
+    headers: { "content-type": "application/json" },
+  });
 }
