@@ -32,6 +32,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return onAuthStateChanged(auth, (u) => {
       setUser(u);
       setLoading(false);
+      if (u) {
+        // Set dash_auth cookie so API routes can verify authentication
+        document.cookie = `dash_auth=${u.uid}; path=/; max-age=86400; SameSite=Lax`;
+      } else {
+        // Clear it on logout
+        document.cookie = "dash_auth=; path=/; max-age=0";
+      }
     });
   }, []);
 
