@@ -1,41 +1,7 @@
 export const config = { runtime: "edge" };
 
-interface UsageDay {
-  date: string;
-  input_tokens: number;
-  output_tokens: number;
-  cache_read_input_tokens: number;
-  cache_creation_input_tokens: number;
-}
-
-interface ModelUsageDay {
-  date: string;
-  models: {
-    model_id: string;
-    input_tokens: number;
-    output_tokens: number;
-    cache_read_input_tokens: number;
-    cache_creation_input_tokens: number;
-  }[];
-}
-
-const MODEL_PRICING: Record<string, { input: number; output: number; cache_read: number; cache_write: number }> = {
-  "claude-opus-4-6": { input: 15, output: 75, cache_read: 1.5, cache_write: 18.75 },
-  "claude-sonnet-4-6": { input: 3, output: 15, cache_read: 0.3, cache_write: 3.75 },
-  "claude-haiku-4-5": { input: 0.8, output: 4, cache_read: 0.08, cache_write: 1 },
-  // Default fallback
-  "default": { input: 3, output: 15, cache_read: 0.3, cache_write: 3.75 },
-};
-
-function calcCost(model: string, input: number, output: number, cacheRead: number, cacheWrite: number): number {
-  const p = MODEL_PRICING[model] ?? MODEL_PRICING["default"];
-  return (
-    (input / 1_000_000) * p.input +
-    (output / 1_000_000) * p.output +
-    (cacheRead / 1_000_000) * p.cache_read +
-    (cacheWrite / 1_000_000) * p.cache_write
-  );
-}
+// Serve Claude usage stats from the pre-generated dashboard_data.json
+// (regenerated daily at 9 AM by the claude-code-stats cron)
 
 export default async function handler(request: Request): Promise<Response> {
   const cookies = request.headers.get("cookie") || "";
@@ -43,94 +9,67 @@ export default async function handler(request: Request): Promise<Response> {
     return Response.json({ error: "Not authenticated" }, { status: 401 });
   }
 
-  const adminKey = process.env.ANTHROPIC_ADMIN_API_KEY;
-  if (!adminKey) {
-    return Response.json({ error: "ANTHROPIC_ADMIN_API_KEY not configured" }, { status: 503 });
-  }
-
-  const now = new Date();
-  const end = now.toISOString().split("T")[0];
-  const start30 = new Date(now);
-  start30.setDate(start30.getDate() - 30);
-  const start = start30.toISOString().split("T")[0];
+  const origin = new URL(request.url).origin;
 
   try {
-    // Fetch usage grouped by day (last 30 days)
-    const [usageRes, modelRes] = await Promise.all([
-      fetch(`https://api.anthropic.com/v1/usage?start_date=${start}&end_date=${end}&granularity=daily`, {
-        headers: { "x-api-key": adminKey, "anthropic-version": "2023-06-01" },
-      }),
-      fetch(`https://api.anthropic.com/v1/usage?start_date=${start}&end_date=${end}&granularity=daily&group_by=model`, {
-        headers: { "x-api-key": adminKey, "anthropic-version": "2023-06-01" },
-      }),
-    ]);
+    const res = await fetch(`${origin}/dashboard_data.json`);
+    if (!res.ok) throw new Error(`dashboard_data.json: ${res.status}`);
+    const raw = await res.json() as any;
 
-    if (!usageRes.ok) {
-      const err = await usageRes.json().catch(() => ({})) as { error?: { message?: string } };
-      throw new Error(err?.error?.message ?? `API ${usageRes.status}`);
-    }
+    // Map dashboard_data.json → ClaudeUsageData shape
+    const kpi = raw.kpi ?? {};
+    const daily: any[] = raw.daily_costs ?? [];
+    const models: any[] = raw.model_summary ?? [];
 
-    const usageData = await usageRes.json() as { data?: UsageDay[] };
-    const modelData = modelRes.ok ? await modelRes.json() as { data?: ModelUsageDay[] } : { data: [] };
-
-    const days: UsageDay[] = usageData.data ?? [];
-
-    // Aggregate 30-day totals
-    let totalInput = 0, totalOutput = 0, totalCacheRead = 0, totalCacheWrite = 0, totalCost = 0;
-    for (const d of days) {
-      totalInput += d.input_tokens;
-      totalOutput += d.output_tokens;
-      totalCacheRead += d.cache_read_input_tokens;
-      totalCacheWrite += d.cache_creation_input_tokens;
-      totalCost += calcCost("default", d.input_tokens, d.output_tokens, d.cache_read_input_tokens, d.cache_creation_input_tokens);
-    }
-
-    const peakDay = days.reduce((best, d) => {
-      const cost = calcCost("default", d.input_tokens, d.output_tokens, d.cache_read_input_tokens, d.cache_creation_input_tokens);
-      return cost > best.cost ? { date: d.date, cost } : best;
-    }, { date: "", cost: 0 });
+    const totalInput = kpi.total_input_tokens ?? 0;
+    const totalOutput = kpi.total_output_tokens ?? 0;
+    // Estimate cache tokens from cost_by_token_type
+    const costByType = raw.cost_by_token_type ?? {};
+    const totalCacheRead = costByType.cache_read != null
+      ? Math.round((costByType.cache_read / 0.3) * 1_000_000) : 0;
+    const totalCacheWrite = costByType.cache_write != null
+      ? Math.round((costByType.cache_write / 3.75) * 1_000_000) : 0;
 
     const totalTokens = totalInput + totalOutput + totalCacheRead + totalCacheWrite;
     const cacheHitRate = totalTokens > 0 ? Math.round((totalCacheRead / totalTokens) * 100) : 0;
 
-    // Build daily chart data (last 14 days for display)
-    const chartDays = days.slice(-14).map((d) => ({
+    // Daily chart (last 14 entries)
+    const chartDays = daily.slice(-14).map((d: any) => ({
       date: d.date,
-      label: d.date.slice(5).replace("-", "/").replace(/^0/, ""),
-      cost: parseFloat(calcCost("default", d.input_tokens, d.output_tokens, d.cache_read_input_tokens, d.cache_creation_input_tokens).toFixed(2)),
-      output_tokens: d.output_tokens,
-      cache_read_tokens: d.cache_read_input_tokens,
+      label: (d.date as string).slice(5).replace("-", "/").replace(/^0/, ""),
+      cost: parseFloat((d.total ?? 0).toFixed(2)),
+      output_tokens: 0,
+      cache_read_tokens: 0,
     }));
 
-    // Build LLM usage data from model breakdown (cloud vs local by checking model prefix)
-    const modelDays: ModelUsageDay[] = modelData.data ?? [];
-    const llmChart = modelDays.slice(-14).map((d) => {
-      let cloud = 0, local = 0;
-      for (const m of d.models) {
-        if (m.model_id.startsWith("claude")) {
-          cloud += m.output_tokens;
-        } else {
-          local += m.output_tokens;
-        }
-      }
-      return {
-        date: d.date,
-        label: d.date.slice(5).replace("-", "/").replace(/^0/, ""),
-        cloud,
-        local,
-      };
-    });
+    // Find peak day
+    const peak = daily.reduce((best: any, d: any) =>
+      (d.total ?? 0) > (best.total ?? 0) ? d : best, daily[0] ?? {});
+
+    // LLM chart — all Anthropic (Claude Code has no local sessions)
+    const llmChart = daily.slice(-14).map((d: any) => ({
+      date: d.date,
+      label: (d.date as string).slice(5).replace("-", "/").replace(/^0/, ""),
+      cloud: Math.round((d.total ?? 0) * 10000), // proxy tokens with cost×scale
+      local: 0,
+    }));
 
     return Response.json({
-      totalCost: parseFloat(totalCost.toFixed(2)),
-      peakDayCost: parseFloat(peakDay.cost.toFixed(2)),
-      peakDayDate: peakDay.date,
+      totalCost: parseFloat((kpi.total_cost ?? 0).toFixed(2)),
+      peakDayCost: parseFloat((peak.total ?? 0).toFixed(2)),
+      peakDayDate: peak.date ?? "",
       totalTokens,
       totalInput,
       totalOutput,
       totalCacheRead,
       totalCacheWrite,
       cacheHitRate,
+      // Extra fields for the native ClaudePage
+      sessions: kpi.total_sessions ?? 0,
+      messages: kpi.total_messages ?? 0,
+      projects: raw.projects ?? [],
+      models,
+      costByType,
       dailyChart: chartDays,
       llmChart,
     });
