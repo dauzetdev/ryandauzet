@@ -1,101 +1,149 @@
-import { Card } from "../ui/Card";
-import { KpiRow } from "../ui/KpiCard";
-import { PageHeader } from "../ui/PageHeader";
-import { Pill } from "../ui/Pill";
-import { StatRow } from "../ui/StatRow";
-import { StatusDot } from "../ui/StatusDot";
 import { useHitThePinStats } from "../../hooks/useHitThePinStats";
 
 interface Props { scrollY: number }
 
-export function HitThePinPage({ scrollY }: Props) {
+export function HitThePinPage({ scrollY: _ }: Props) {
   const { data: stats, isLoading } = useHitThePinStats();
 
-  const courses = stats ? stats.courses.toLocaleString() : isLoading ? "…" : "1,660+";
-  const reviewPages = stats ? stats.reviewPages.toLocaleString() : isLoading ? "…" : "6,400+";
-  const states = stats ? String(stats.states) : isLoading ? "…" : "22";
+  const courses = stats ? stats.courses.toLocaleString() : isLoading ? "..." : "1,660";
+  const reviews = stats ? stats.reviewPages.toLocaleString() : isLoading ? "..." : "6,640";
+  const states = stats ? String(stats.states) : isLoading ? "..." : "22";
 
   return (
     <div>
-      <PageHeader title="HitThePin" subtitle="hitthepin.com — AI golf course reviews" />
-
-      <div className="mb-6">
-        <KpiRow
-          items={[
-            { value: courses, label: "Courses", color: "green" },
-            { value: reviewPages, label: "Review Pages", color: "blue" },
-            { value: states, label: "States", color: "purple" },
-            { value: "—", label: "Daily Visitors", color: "cyan" },
-            { value: "—", label: "Indexed Pages", color: "yellow" },
-          ]}
-        />
+      {/* Page header */}
+      <div style={{ marginBottom: 32 }}>
+        <h1 style={pageTitle}>HitThePin</h1>
+        <p style={pageSubtitle}>hitthepin.com — AI-powered golf course reviews</p>
       </div>
 
-      <div className="flex flex-wrap gap-5 mb-5">
-        <Card title="SEO & Indexing" icon="📈" depth={1} scrollY={scrollY}>
-          <StatRow label="Google Indexing API">
-            <Pill variant="ok">active</Pill>
-            <span className="text-text-secondary ml-1.5">200 URLs/day</span>
-          </StatRow>
-          <StatRow label="Sitemap"><Pill variant="ok">active</Pill></StatRow>
-          <StatRow label="Search Console"><Pill variant="ok">configured</Pill></StatRow>
-          <StatRow label="Analytics"><Pill variant="ok">GA4 active</Pill></StatRow>
-        </Card>
-
-        <Card title="Content — Geoff" icon="✍️" depth={2} scrollY={scrollY}>
-          <StatRow label="Status"><Pill variant="ok">running</Pill></StatRow>
-          <StatRow label="Schedule">7 AM + 3 PM PT</StatRow>
-          <StatRow label="Posts to">Discord #geoff</StatRow>
-          <StatRow label="Voice">Snarky golf pundit</StatRow>
-        </Card>
-
-        <Card title="Social Accounts" icon="📱" depth={1} scrollY={scrollY}>
-          <RowItem status="ok" name="Instagram" detail="@HitThePin_Golf" />
-          <RowItem status="ok" name="YouTube" detail="hitthepin.golf.1" />
-          <RowItem status="warn" name="X/Twitter" detail="@HitThePin_Golf (read-only)" />
-          <RowItem status="ok" name="TikTok" detail="@HitThePinGolf" />
-          <RowItem status="error" name="Facebook" detail="needs creation" />
-        </Card>
-
-        <Card title="Video Pipeline" icon="🎬" depth={2} scrollY={scrollY}>
-          <StatRow label="Voice">Ronald (Cartesia)</StatRow>
-          <StatRow label="Series">Weekly news, Top 10s</StatRow>
-          <StatRow label="Tools">PIL + ffmpeg + Playwright</StatRow>
-          <StatRow label="YouTube OAuth"><Pill variant="ok">configured</Pill></StatRow>
-        </Card>
-
-        <Card title="Revenue" icon="💰" depth={1} scrollY={scrollY}>
-          <StatRow label="Model">Ads + Affiliate + Premium</StatRow>
-          <StatRow label="GolfNow Affiliate"><Pill variant="warn">no ID yet</Pill></StatRow>
-          <StatRow label="Ads"><Pill variant="idle">not started</Pill></StatRow>
-        </Card>
-
-        <Card title="Infra" icon="🏗️" depth={2} scrollY={scrollY}>
-          <StatRow label="Hosting">Vercel</StatRow>
-          <StatRow label="Domain">hitthepin.com</StatRow>
-          <StatRow label="DB">Supabase</StatRow>
-          <StatRow label="Stack">Vite + React + TS + Tailwind</StatRow>
-          <StatRow label="Consent">Termly</StatRow>
-        </Card>
+      {/* KPIs */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 16, marginBottom: 32 }}>
+        {[
+          { label: "Courses", value: courses, color: "var(--color-success)" },
+          { label: "States", value: states, color: "var(--color-purple)" },
+          { label: "Reviews", value: reviews, color: "var(--color-accent)" },
+          { label: "Domain", value: "hitthepin.com", color: "var(--color-text)", small: true },
+        ].map((k) => (
+          <div key={k.label} style={cardBase}>
+            <div style={sectionLabel}>{k.label}</div>
+            <div style={{ fontSize: k.small ? "1.1rem" : "2rem", fontWeight: 700, lineHeight: 1, color: k.color }}>
+              {k.value}
+            </div>
+          </div>
+        ))}
       </div>
 
-      <Card title="Todos" icon="📋" wide depth={0} scrollY={scrollY}>
-        <StatRow label="Sitemap.xml"><span className="text-success">Done</span></StatRow>
-        <StatRow label="Google Search Console"><span className="text-success">Configured</span></StatRow>
-        <StatRow label="Facebook Page"><span className="text-warn">Retry creation (rate limited)</span></StatRow>
-        <StatRow label="GolfNow affiliate ID"><span className="text-warn">Apply for affiliate program</span></StatRow>
-        <StatRow label="Daily Visitors"><span className="text-warn">Connect Search Console API for live data</span></StatRow>
-      </Card>
+      {/* Cards */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(380px, 1fr))", gap: 16, marginBottom: 32 }}>
+        {/* SEO Status */}
+        <div style={cardBase}>
+          <div style={cardHeader}><span>📈</span> SEO Status</div>
+          <InfoRow label="Sitemap.xml"><Pill type="warn">Missing</Pill></InfoRow>
+          <InfoRow label="Google Search Console"><Pill type="warn">Not set up</Pill></InfoRow>
+          <InfoRow label="Google Indexing API"><Pill type="ok">Active — 200 URLs/day</Pill></InfoRow>
+          <InfoRow label="Analytics"><Pill type="ok">GA4</Pill></InfoRow>
+          <div style={{
+            marginTop: 16, padding: "12px 16px", borderRadius: 8, fontSize: 13,
+            background: "rgba(217,119,6,0.08)", color: "var(--color-warn)",
+          }}>
+            Action: Generate sitemap.xml and submit to Google Search Console
+          </div>
+        </div>
+
+        {/* Geoff Bot */}
+        <div style={cardBase}>
+          <div style={cardHeader}><span>🤖</span> Geoff — Content Bot</div>
+          <InfoRow label="Status"><Pill type="ok">Running</Pill></InfoRow>
+          <InfoRow label="Schedule">7 AM + 3 PM PT</InfoRow>
+          <InfoRow label="Model">claude-sonnet-4-6</InfoRow>
+          <InfoRow label="Posts to">Discord #geoff</InfoRow>
+          <InfoRow label="Voice">Snarky golf pundit</InfoRow>
+        </div>
+      </div>
+
+      {/* Todos */}
+      <div style={sectionLabel}>Todos</div>
+      <div style={{ ...cardBase, padding: 0, overflow: "hidden" }}>
+        <TodoRow priority="critical" text="Sitemap.xml — generate and deploy" />
+        <TodoRow priority="high" text="Google Search Console — verify ownership and submit sitemap" />
+        <TodoRow priority="blocked" text="Facebook Page — rate limited, retry later" />
+        <TodoRow priority="medium" text="GolfNow affiliate ID — apply for affiliate program" />
+      </div>
     </div>
   );
 }
 
-function RowItem({ status, name, detail }: { status: "ok" | "warn" | "error"; name: string; detail: string }) {
+/* ── Helpers ───────────────────────────────────────────────────────────────── */
+
+const pageTitle: React.CSSProperties = {
+  fontSize: "1.75rem", fontWeight: 700, color: "var(--color-text)", letterSpacing: "-0.02em",
+};
+const pageSubtitle: React.CSSProperties = {
+  fontSize: 14, color: "var(--color-text-secondary)", marginTop: 4,
+};
+const cardBase: React.CSSProperties = {
+  background: "var(--color-card)", border: "1px solid var(--color-border)",
+  borderRadius: 12, padding: "20px 24px", boxShadow: "var(--shadow-card)",
+};
+const cardHeader: React.CSSProperties = {
+  display: "flex", alignItems: "center", gap: 8,
+  fontWeight: 600, fontSize: 15, color: "var(--color-text)",
+  paddingBottom: 16, borderBottom: "1px solid var(--color-border)", marginBottom: 4,
+};
+const sectionLabel: React.CSSProperties = {
+  fontSize: 11, fontWeight: 600, letterSpacing: "0.06em",
+  textTransform: "uppercase", color: "var(--color-text-secondary)", marginBottom: 12,
+};
+
+function InfoRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="flex items-center gap-2.5 py-2 border-b border-border last:border-b-0">
-      <StatusDot status={status} />
-      <span className="text-sm text-text">{name}</span>
-      <span className="text-text-tertiary text-xs ml-auto">{detail}</span>
+    <div style={{
+      display: "flex", alignItems: "center", justifyContent: "space-between",
+      padding: "10px 0", borderBottom: "1px solid var(--color-border)", fontSize: 14,
+    }}>
+      <span style={{ color: "var(--color-text-secondary)" }}>{label}</span>
+      <span style={{ color: "var(--color-text)" }}>{children}</span>
+    </div>
+  );
+}
+
+const PILL_STYLES = {
+  ok:      { bg: "rgba(22,163,74,0.1)", text: "var(--color-success)" },
+  warn:    { bg: "rgba(217,119,6,0.1)", text: "var(--color-warn)" },
+  error:   { bg: "rgba(220,38,38,0.1)", text: "var(--color-danger)" },
+  info:    { bg: "rgba(37,99,235,0.1)", text: "var(--color-accent)" },
+};
+
+function Pill({ type, children }: { type: keyof typeof PILL_STYLES; children: React.ReactNode }) {
+  const c = PILL_STYLES[type];
+  return (
+    <span style={{
+      display: "inline-flex", alignItems: "center", padding: "2px 10px",
+      borderRadius: 9999, fontSize: 11, fontWeight: 600, background: c.bg, color: c.text,
+    }}>
+      {children}
+    </span>
+  );
+}
+
+const PRIORITY_STYLES: Record<string, { dot: string; label: string; labelColor: string }> = {
+  critical: { dot: "var(--color-danger)", label: "CRITICAL", labelColor: "var(--color-danger)" },
+  high:     { dot: "var(--color-warn)", label: "HIGH", labelColor: "var(--color-warn)" },
+  medium:   { dot: "var(--color-accent)", label: "MEDIUM", labelColor: "var(--color-accent)" },
+  blocked:  { dot: "var(--color-text-tertiary)", label: "BLOCKED", labelColor: "var(--color-text-tertiary)" },
+};
+
+function TodoRow({ priority, text }: { priority: string; text: string }) {
+  const s = PRIORITY_STYLES[priority] || PRIORITY_STYLES.medium;
+  return (
+    <div style={{
+      display: "flex", alignItems: "center", gap: 12, padding: "14px 20px",
+      borderBottom: "1px solid var(--color-border)",
+    }}>
+      <span style={{ width: 8, height: 8, borderRadius: "50%", background: s.dot, flexShrink: 0 }} />
+      <span style={{ flex: 1, fontSize: 14, color: "var(--color-text)" }}>{text}</span>
+      <span style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.05em", color: s.labelColor }}>{s.label}</span>
     </div>
   );
 }

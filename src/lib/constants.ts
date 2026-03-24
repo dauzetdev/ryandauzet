@@ -1,12 +1,12 @@
 import type { PageDef, ProjectDef } from "../types";
 
 export const PAGES: PageDef[] = [
-  { id: "dashboard",    label: "Dashboard",    icon: "grid" },
-  { id: "openclaw",     label: "OpenClaw",     icon: "cpu" },
+  { id: "dashboard",    label: "Home",         icon: "grid" },
   { id: "hitthepin",    label: "HitThePin",    icon: "flag" },
   { id: "saturdaygame", label: "SaturdayGame", icon: "trophy" },
   { id: "golfbooker",   label: "GolfBooker",   icon: "calendar" },
   { id: "claude",       label: "Claude",       icon: "bot" },
+  { id: "openclaw",     label: "OpenClaw",     icon: "cpu" },
   { id: "settings",     label: "Settings",     icon: "settings" },
 ];
 
