@@ -1,14 +1,18 @@
+import { useState } from "react";
 import { useVitals } from "../../hooks/useVitals";
 import { useSessions, recentSessions } from "../../hooks/useSessions";
+import { useHostInfo } from "../../hooks/useHostInfo";
 
 interface Props { scrollY: number }
 
-const card: React.CSSProperties = {
+/* ── Shared styles ─────────────────────────────────────────────────────────── */
+
+const cardBase: React.CSSProperties = {
   background: "var(--color-card)",
   border: "1px solid var(--color-border)",
   borderRadius: 12,
-  boxShadow: "var(--shadow-card)",
   padding: "20px 24px",
+  boxShadow: "var(--shadow-card)",
 };
 
 const label: React.CSSProperties = {
@@ -17,16 +21,10 @@ const label: React.CSSProperties = {
   letterSpacing: "0.06em",
   textTransform: "uppercase",
   color: "var(--color-text-secondary)",
-  marginBottom: 8,
+  marginBottom: 12,
 };
 
-const kpiVal: React.CSSProperties = {
-  fontSize: "2rem",
-  fontWeight: 700,
-  lineHeight: 1,
-  color: "var(--color-text)",
-  letterSpacing: "-0.02em",
-};
+/* ── Inline components ─────────────────────────────────────────────────────── */
 
 function Pill({ children, color = "blue" }: { children: React.ReactNode; color?: "green" | "blue" | "amber" | "red" | "slate" }) {
   const map = {
@@ -44,35 +42,68 @@ function Pill({ children, color = "blue" }: { children: React.ReactNode; color?:
   );
 }
 
-function Row({ left, right, mono }: { left: React.ReactNode; right: React.ReactNode; mono?: boolean }) {
+function CopyButton({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false);
   return (
-    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "9px 0", borderBottom: "1px solid var(--color-border)" }}>
-      <span style={{ fontSize: 13, color: "var(--color-text)" }}>{left}</span>
-      <span style={{ fontSize: 13, fontFamily: mono ? "var(--font-mono, monospace)" : undefined, color: "var(--color-text-secondary)" }}>{right}</span>
-    </div>
+    <button
+      onClick={() => { navigator.clipboard.writeText(text); setCopied(true); setTimeout(() => setCopied(false), 1500); }}
+      style={{
+        background: "var(--color-surface)",
+        border: "1px solid var(--color-border)",
+        borderRadius: 6,
+        padding: "3px 8px",
+        fontSize: 11,
+        fontWeight: 500,
+        color: copied ? "var(--color-success)" : "var(--color-text-secondary)",
+        cursor: "pointer",
+        whiteSpace: "nowrap",
+        transition: "color 0.15s",
+      }}
+    >
+      {copied ? "Copied!" : "Copy"}
+    </button>
   );
 }
+
+/* ── Page ───────────────────────────────────────────────────────────────────── */
 
 export function OpenClawPage({ scrollY: _ }: Props) {
   const { data: vitals, isLoading: vLoading } = useVitals();
   const { data: sessions } = useSessions();
+  const { data: host } = useHostInfo();
+  const [updating, setUpdating] = useState(false);
+  const [updateMsg, setUpdateMsg] = useState<string | null>(null);
 
   const active = sessions ? recentSessions(sessions, 30) : [];
   const agents = vitals?.agents ?? [];
   const crons = vitals?.crons ?? [];
   const mcpServers = vitals?.mcp ?? [];
   const channels = vitals?.channels ?? {};
-
   const channelList = Object.entries(channels).map(([name, ok]) => ({ name, ok }));
 
-  const kpis = [
-    { label: "Version", value: vitals?.version ?? "—", sub: vitals?.updateAvailable ? "Update available" : "Up to date" },
-    { label: "Agents", value: String(agents.length || "—"), sub: `${agents.filter(a => a.active).length} active` },
-    { label: "Active Sessions", value: String(active.length), sub: "last 30 min" },
-    { label: "Cron Jobs", value: String(crons.length || "—"), sub: "scheduled tasks" },
-  ];
-
+  const currentVersion = host?.currentVersion ?? vitals?.version ?? "—";
+  const latestVersion = host?.latestVersion ?? vitals?.latestVersion ?? null;
+  const updateAvailable = host?.updateAvailable ?? vitals?.updateAvailable ?? false;
   const rebootSafe = active.length === 0;
+
+  async function handleUpdate() {
+    setUpdating(true);
+    setUpdateMsg(null);
+    try {
+      const res = await fetch("/api/update", { method: "POST", credentials: "same-origin" });
+      const data = await res.json();
+      setUpdateMsg(data.ok ? "Update triggered!" : (data.error ?? "Update failed"));
+    } catch {
+      setUpdateMsg("Failed to reach server");
+    } finally {
+      setUpdating(false);
+    }
+  }
+
+  const sshCmd = host ? `ssh ${host.ssh.user}@${host.ssh.host} -p ${host.ssh.port}` : "ssh dauzet@174.160.178.223 -p 2222";
+  const sshHref = host ? `ssh://${host.ssh.user}@${host.ssh.host}:${host.ssh.port}` : "ssh://dauzet@174.160.178.223:2222";
+  const vncAddr = host ? `${host.vnc.host}:${host.vnc.port}` : "174.160.178.223:15900";
+  const vncHref = host ? `vnc://${host.vnc.host}:${host.vnc.port}` : "vnc://174.160.178.223:15900";
 
   return (
     <div>
@@ -82,20 +113,105 @@ export function OpenClawPage({ scrollY: _ }: Props) {
         <p style={{ fontSize: 13, color: "var(--color-text-secondary)", marginTop: 4 }}>Gateway status, agents, channels & cron jobs</p>
       </div>
 
-      {/* KPIs */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 12, marginBottom: 20 }}>
-        {kpis.map((k) => (
-          <div key={k.label} style={card}>
-            <div style={label}>{k.label}</div>
-            <div style={kpiVal}>{vLoading ? "…" : k.value}</div>
-            <div style={{ fontSize: 12, color: "var(--color-text-secondary)", marginTop: 4 }}>{k.sub}</div>
+      {/* Version + Host cards — top row */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+        {/* Version card */}
+        <div style={cardBase}>
+          <div style={label}>Version</div>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
+            <span style={{ fontSize: "2rem", fontWeight: 700, lineHeight: 1, color: "var(--color-text)", letterSpacing: "-0.02em" }}>
+              {vLoading ? "…" : currentVersion}
+            </span>
+            <Pill color={updateAvailable ? "amber" : "green"}>
+              {updateAvailable ? "Update available" : "Up to date"}
+            </Pill>
           </div>
-        ))}
+          {latestVersion && latestVersion !== currentVersion && (
+            <div style={{ fontSize: 12, color: "var(--color-text-secondary)", marginBottom: 10 }}>
+              Latest: <span style={{ fontFamily: "monospace", fontWeight: 600 }}>{latestVersion}</span>
+            </div>
+          )}
+          <button
+            onClick={handleUpdate}
+            disabled={updating}
+            style={{
+              background: updateAvailable ? "var(--color-accent)" : "var(--color-surface)",
+              color: updateAvailable ? "#fff" : "var(--color-text-secondary)",
+              border: updateAvailable ? "none" : "1px solid var(--color-border)",
+              borderRadius: 8,
+              padding: "8px 16px",
+              fontSize: 13,
+              fontWeight: 600,
+              cursor: updating ? "wait" : "pointer",
+              opacity: updating ? 0.6 : 1,
+              transition: "opacity 0.15s",
+            }}
+          >
+            {updating ? "Updating…" : "Update Now"}
+          </button>
+          {updateMsg && (
+            <div style={{ fontSize: 12, marginTop: 8, color: updateMsg.includes("triggered") ? "var(--color-success)" : "var(--color-warn)" }}>
+              {updateMsg}
+            </div>
+          )}
+        </div>
+
+        {/* Host card */}
+        <div style={cardBase}>
+          <div style={label}>Host</div>
+          {/* Hostname + IPs */}
+          <div style={{ marginBottom: 14 }}>
+            <div style={{ fontSize: 15, fontWeight: 600, color: "var(--color-text)", marginBottom: 8 }}>
+              {host?.hostname ?? "Mac Studio"}
+            </div>
+            <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <span style={{ fontSize: 12, color: "var(--color-text-secondary)" }}>Local IP</span>
+                <span style={{ fontSize: 13, fontFamily: "monospace", color: "var(--color-text)" }}>{host?.localIp ?? "192.168.68.76"}</span>
+                <CopyButton text={host?.localIp ?? "192.168.68.76"} />
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <span style={{ fontSize: 12, color: "var(--color-text-secondary)" }}>Public IP</span>
+                <span style={{ fontSize: 13, fontFamily: "monospace", color: "var(--color-text)" }}>{host?.publicIp ?? "174.160.178.223"}</span>
+                <CopyButton text={host?.publicIp ?? "174.160.178.223"} />
+              </div>
+            </div>
+          </div>
+          {/* SSH row */}
+          <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 0", borderTop: "1px solid var(--color-border)" }}>
+            <span style={{ fontSize: 12, fontWeight: 600, color: "var(--color-text-secondary)", minWidth: 36 }}>SSH</span>
+            <code style={{ flex: 1, fontSize: 12, fontFamily: "monospace", color: "var(--color-text)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+              {sshCmd}
+            </code>
+            <CopyButton text={sshCmd} />
+            <a
+              href={sshHref}
+              style={{ fontSize: 12, fontWeight: 600, color: "var(--color-accent)", textDecoration: "none", whiteSpace: "nowrap" }}
+            >
+              Open →
+            </a>
+          </div>
+          {/* VNC row */}
+          <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 0", borderTop: "1px solid var(--color-border)" }}>
+            <span style={{ fontSize: 12, fontWeight: 600, color: "var(--color-text-secondary)", minWidth: 36 }}>VNC</span>
+            <code style={{ flex: 1, fontSize: 12, fontFamily: "monospace", color: "var(--color-text)" }}>
+              {vncAddr}
+            </code>
+            <CopyButton text={vncAddr} />
+            <a
+              href={vncHref}
+              style={{ fontSize: 12, fontWeight: 600, color: "var(--color-accent)", textDecoration: "none", whiteSpace: "nowrap" }}
+            >
+              Open →
+            </a>
+          </div>
+        </div>
       </div>
 
+      {/* Reboot Safety + Channels */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
         {/* Reboot safety */}
-        <div style={{ ...card, borderColor: rebootSafe ? "rgba(22,163,74,0.3)" : "rgba(217,119,6,0.3)" }}>
+        <div style={{ ...cardBase, borderColor: rebootSafe ? "rgba(22,163,74,0.3)" : "rgba(217,119,6,0.3)" }}>
           <div style={label}>Reboot Safety</div>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
             <span style={{ fontSize: 28 }}>{rebootSafe ? "✅" : "⚠️"}</span>
@@ -121,7 +237,7 @@ export function OpenClawPage({ scrollY: _ }: Props) {
         </div>
 
         {/* Channels */}
-        <div style={card}>
+        <div style={cardBase}>
           <div style={label}>Channels</div>
           {channelList.length === 0 ? (
             <div style={{ fontSize: 13, color: "var(--color-text-secondary)" }}>{vLoading ? "Loading…" : "No channels configured"}</div>
@@ -136,9 +252,10 @@ export function OpenClawPage({ scrollY: _ }: Props) {
         </div>
       </div>
 
+      {/* Agents + Cron Jobs */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
         {/* Agents */}
-        <div style={card}>
+        <div style={cardBase}>
           <div style={label}>Agents</div>
           {agents.length === 0 ? (
             <div style={{ fontSize: 13, color: "var(--color-text-secondary)" }}>{vLoading ? "Loading…" : "No agents"}</div>
@@ -156,7 +273,7 @@ export function OpenClawPage({ scrollY: _ }: Props) {
         </div>
 
         {/* Cron jobs */}
-        <div style={card}>
+        <div style={cardBase}>
           <div style={label}>Cron Jobs</div>
           {crons.length === 0 ? (
             <div style={{ fontSize: 13, color: "var(--color-text-secondary)" }}>{vLoading ? "Loading…" : "No cron jobs"}</div>
@@ -177,7 +294,7 @@ export function OpenClawPage({ scrollY: _ }: Props) {
 
       {/* MCP Servers */}
       {mcpServers.length > 0 && (
-        <div style={card}>
+        <div style={cardBase}>
           <div style={label}>MCP Servers</div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 12, marginTop: 4 }}>
             {mcpServers.map((m) => (
