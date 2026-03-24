@@ -2,6 +2,9 @@ import { useClaudeUsage } from "../../hooks/useClaudeUsage";
 import { useVitals } from "../../hooks/useVitals";
 import { useSessions, recentSessions } from "../../hooks/useSessions";
 
+import { useState, useEffect } from "react";
+import { marked } from "marked";
+
 interface Props { scrollY: number }
 
 export function DashboardPage({ scrollY: _ }: Props) {
@@ -88,7 +91,7 @@ export function DashboardPage({ scrollY: _ }: Props) {
 
       {/* Recent Activity */}
       <div style={sectionLabel}>Recent Activity</div>
-      <div style={{ ...cardBase, overflow: "hidden", padding: 0 }}>
+      <div style={{ ...cardBase, overflow: "hidden", padding: 0, marginBottom: 32 }}>
         {activity.map((a, i, arr) => (
           <div key={i} style={{
             display: "flex", alignItems: "center", gap: 12, padding: "14px 20px",
@@ -100,6 +103,146 @@ export function DashboardPage({ scrollY: _ }: Props) {
           </div>
         ))}
       </div>
+
+      {/* Bottom row: Daily Log + Open Todos */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+        <DailyLog />
+        <OpenTodos />
+      </div>
+    </div>
+  );
+}
+
+/* ── Daily Log ─────────────────────────────────────────────────────────────── */
+function DailyLog() {
+  const [dates, setDates] = useState<string[]>([]);
+  const [selected, setSelected] = useState<string | null>(null);
+  const [html, setHtml] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/memory", { credentials: "same-origin" })
+      .then(r => r.json())
+      .then((d: { dates?: string[] }) => {
+        const ds = d.dates ?? [];
+        setDates(ds);
+        if (ds.length > 0) setSelected(ds[0]);
+      })
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    if (!selected) return;
+    setLoading(true);
+    fetch(`/api/memory?date=${selected}`, { credentials: "same-origin" })
+      .then(r => r.json())
+      .then((d: { content?: string }) => {
+        setHtml(marked.parse(d.content ?? "") as string);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, [selected]);
+
+  return (
+    <div style={cardBase}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+        <div style={sectionLabel}>Daily Log</div>
+        {dates.length > 0 && (
+          <select
+            value={selected ?? ""}
+            onChange={e => setSelected(e.target.value)}
+            style={{
+              fontSize: 12, padding: "3px 8px", borderRadius: 6,
+              border: "1px solid var(--color-border)",
+              background: "var(--color-surface)", color: "var(--color-text)", cursor: "pointer",
+            }}
+          >
+            {dates.map(d => <option key={d} value={d}>{d}</option>)}
+          </select>
+        )}
+      </div>
+      {loading ? (
+        <div style={{ fontSize: 13, color: "var(--color-text-secondary)" }}>Loading…</div>
+      ) : html ? (
+        <div
+          style={{ fontSize: 13, lineHeight: 1.6, color: "var(--color-text)", maxHeight: 320, overflowY: "auto" }}
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      ) : (
+        <div style={{ fontSize: 13, color: "var(--color-text-secondary)" }}>No log entries yet.</div>
+      )}
+    </div>
+  );
+}
+
+/* ── Open Todos ────────────────────────────────────────────────────────────── */
+const TODOS = [
+  { project: "HitThePin", emoji: "⛳", items: [
+    { text: "Build sitemap.xml (critical for SEO)", priority: "high" },
+    { text: "Set up Google Search Console", priority: "high" },
+    { text: "Create Facebook Page (was rate limited)", priority: "medium" },
+    { text: "Add GolfNow affiliate ID to tee time links", priority: "medium" },
+  ]},
+  { project: "SaturdayGame", emoji: "🏌️", items: [
+    { text: "Universal Links — replace JS redirect with iOS native deep links", priority: "high" },
+  ]},
+  { project: "GolfBooker", emoji: "📅", items: [
+    { text: "Migrate JS automation from Swift app to browser tool", priority: "medium" },
+  ]},
+  { project: "OpenClaw", emoji: "🦞", items: [
+    { text: "Wire Update Now button to gateway exec endpoint", priority: "low" },
+  ]},
+];
+
+const PRIORITY_STYLE: Record<string, { bg: string; text: string; label: string }> = {
+  high:   { bg: "rgba(220,38,38,0.08)",  text: "var(--color-danger)",  label: "High" },
+  medium: { bg: "rgba(217,119,6,0.08)",  text: "var(--color-warn)",   label: "Med" },
+  low:    { bg: "rgba(37,99,235,0.08)", text: "var(--color-accent)",  label: "Low" },
+};
+
+function OpenTodos() {
+  const [open, setOpen] = useState<Set<string>>(new Set(["HitThePin", "SaturdayGame"]));
+  const toggle = (p: string) => setOpen(prev => {
+    const next = new Set(prev);
+    next.has(p) ? next.delete(p) : next.add(p);
+    return next;
+  });
+
+  return (
+    <div style={cardBase}>
+      <div style={sectionLabel}>Open Todos</div>
+      {TODOS.map(({ project, emoji, items }) => (
+        <div key={project} style={{ marginBottom: 12 }}>
+          <button
+            onClick={() => toggle(project)}
+            style={{
+              display: "flex", alignItems: "center", gap: 6, width: "100%",
+              background: "none", border: "none", cursor: "pointer", padding: "4px 0",
+              textAlign: "left",
+            }}
+          >
+            <span style={{ fontSize: 14 }}>{emoji}</span>
+            <span style={{ fontSize: 13, fontWeight: 600, color: "var(--color-text)", flex: 1 }}>{project}</span>
+            <span style={{ fontSize: 11, color: "var(--color-text-secondary)" }}>{items.length} todo{items.length !== 1 ? "s" : ""}</span>
+            <span style={{ fontSize: 12, color: "var(--color-text-tertiary)", marginLeft: 4 }}>{open.has(project) ? "▲" : "▼"}</span>
+          </button>
+          {open.has(project) && (
+            <div style={{ marginTop: 4, marginLeft: 4 }}>
+              {items.map((item, i) => {
+                const ps = PRIORITY_STYLE[item.priority];
+                return (
+                  <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 8, padding: "5px 0", borderBottom: "1px solid var(--color-border)" }}>
+                    <span style={{ fontSize: 11, marginTop: 2, padding: "1px 6px", borderRadius: 4, background: ps.bg, color: ps.text, fontWeight: 600, whiteSpace: "nowrap" }}>
+                      {ps.label}
+                    </span>
+                    <span style={{ fontSize: 13, color: "var(--color-text)", lineHeight: 1.5 }}>{item.text}</span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      ))}
     </div>
   );
 }
