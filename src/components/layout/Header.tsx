@@ -17,6 +17,7 @@ const PAGE_EMOJIS: Record<string, string> = {
   golfbooker:   "📅",
   claude:       "🤖",
   settings:     "⚙️",
+  log:          "📔",
 };
 
 export function Header({ activePage, onNavigate }: Props) {

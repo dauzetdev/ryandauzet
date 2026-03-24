@@ -8,6 +8,7 @@ import { SaturdayGamePage } from "../pages/SaturdayGamePage";
 import { GolfBookerPage } from "../pages/GolfBookerPage";
 import { ClaudePage } from "../pages/ClaudePage";
 import { OpenClawPage } from "../pages/OpenClawPage";
+import { LogPage } from "../pages/LogPage";
 import { SettingsPage } from "../pages/SettingsPage";
 
 function renderPage(page: PageId, scrollY: number) {
@@ -18,6 +19,7 @@ function renderPage(page: PageId, scrollY: number) {
     case "golfbooker":   return <GolfBookerPage scrollY={scrollY} />;
     case "claude":       return <ClaudePage scrollY={scrollY} />;
     case "openclaw":     return <OpenClawPage scrollY={scrollY} />;
+    case "log":          return <LogPage scrollY={scrollY} />;
     case "settings":     return <SettingsPage />;
     default:             return <DashboardPage scrollY={scrollY} />;
   }

@@ -6,6 +6,7 @@ export const PAGES: PageDef[] = [
   { id: "saturdaygame", label: "SaturdayGame", icon: "trophy" },
   { id: "golfbooker",   label: "GolfBooker",   icon: "calendar" },
   { id: "claude",       label: "Claude",       icon: "bot" },
+  { id: "log",          label: "Daily Log",    icon: "book-open" },
   { id: "openclaw",     label: "OpenClaw",     icon: "cpu" },
   { id: "settings",     label: "Settings",     icon: "settings" },
 ];

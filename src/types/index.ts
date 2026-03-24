@@ -1,4 +1,4 @@
-export type PageId = "dashboard" | "openclaw" | "hitthepin" | "saturdaygame" | "golfbooker" | "claude" | "settings";
+export type PageId = "dashboard" | "openclaw" | "hitthepin" | "saturdaygame" | "golfbooker" | "claude" | "log" | "settings";
 
 export interface PageDef {
   id: PageId;
